@@ -1,92 +1,8 @@
 {
-    "version": "1.0.1",
+    "version": "1.0.3",
     "gameVersion": "fabric-loader-0.17.2-1.21.9",
     "versionType": "custom",
     "files": [
-        {
-            "path": "mods/architectury-18.0.5-fabric.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/architectury-18.0.5-fabric.jar"
-        },
-        {
-            "path": "mods/balm-fabric-1.21.9-21.9.4.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/balm-fabric-1.21.9-21.9.4.jar"
-        },
-        {
-            "path": "mods/cloth-config-20.0.149-fabric.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/cloth-config-20.0.149-fabric.jar"
-        },
-        {
-            "path": "mods/collective-1.21.9-8.9.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/collective-1.21.9-8.9.jar"
-        },
-        {
-            "path": "mods/EuphoriaPatcher-1.7.3-r5.6.1-fabric.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/EuphoriaPatcher-1.7.3-r5.6.1-fabric.jar"
-        },
-        {
-            "path": "mods/fabric-api-0.134.0+1.21.9.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/fabric-api-0.134.0+1.21.9.jar"
-        },
-        {
-            "path": "mods/fabric-language-kotlin-1.13.7+kotlin.2.2.21.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/fabric-language-kotlin-1.13.7+kotlin.2.2.21.jar"
-        },
-        {
-            "path": "mods/ImmediatelyFast-Fabric-1.13.2+1.21.10.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/ImmediatelyFast-Fabric-1.13.2+1.21.10.jar"
-        },
-        {
-            "path": "mods/inventorymanagement-1.6.0+1.21.9.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/inventorymanagement-1.6.0+1.21.9.jar"
-        },
-        {
-            "path": "mods/iris-fabric-1.9.6+mc1.21.9.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/iris-fabric-1.9.6+mc1.21.9.jar"
-        },
-        {
-            "path": "mods/lithium-fabric-0.19.2+mc1.21.9.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/lithium-fabric-0.19.2+mc1.21.9.jar"
-        },
-        {
-            "path": "mods/malilib-fabric-1.21.10-0.26.3.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/malilib-fabric-1.21.10-0.26.3.jar"
-        },
-        {
-            "path": "mods/modmenu-16.0.0-rc.1.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/modmenu-16.0.0-rc.1.jar"
-        },
-        {
-            "path": "mods/RoughlyEnoughItems-21.9.9999-fabric.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/RoughlyEnoughItems-21.9.9999-fabric.jar"
-        },
-        {
-            "path": "mods/shulkerboxtooltip-fabric-5.2.11+1.21.9.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/shulkerboxtooltip-fabric-5.2.11+1.21.9.jar"
-        },
-        {
-            "path": "mods/sodium-fabric-0.7.2+mc1.21.10.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/sodium-fabric-0.7.2+mc1.21.10.jar"
-        },
-        {
-            "path": "mods/treeharvester-1.21.9-9.3.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/treeharvester-1.21.9-9.3.jar"
-        },
-        {
-            "path": "mods/tweakeroo-fabric-1.21.10-0.26.2.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/tweakeroo-fabric-1.21.10-0.26.2.jar"
-        },
-        {
-            "path": "mods/waystones-fabric-1.21.9-21.9.2.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/waystones-fabric-1.21.9-21.9.2.jar"
-        },
-        {
-            "path": "mods/Xaeros_Minimap_25.2.15_Fabric_1.21.9.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/Xaeros_Minimap_25.2.15_Fabric_1.21.9.jar"
-        },
-        {
-            "path": "mods/Zoomify-2.14.6+1.21.9.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/Zoomify-2.14.6+1.21.9.jar"
-        },
         {
             "path": "config/balm-client.toml",
             "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/balm-client.toml"
@@ -240,6 +156,98 @@
             "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/zoomify.json"
         },
         {
+            "path": "mods/architectury-18.0.5-fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/architectury-18.0.5-fabric.jar"
+        },
+        {
+            "path": "mods/balm-fabric-1.21.9-21.9.4.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/balm-fabric-1.21.9-21.9.4.jar"
+        },
+        {
+            "path": "mods/cloth-config-20.0.149-fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/cloth-config-20.0.149-fabric.jar"
+        },
+        {
+            "path": "mods/collective-1.21.9-8.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/collective-1.21.9-8.9.jar"
+        },
+        {
+            "path": "mods/EuphoriaPatcher-1.7.3-r5.6.1-fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/EuphoriaPatcher-1.7.3-r5.6.1-fabric.jar"
+        },
+        {
+            "path": "mods/fabric-api-0.134.0+1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/fabric-api-0.134.0+1.21.9.jar"
+        },
+        {
+            "path": "mods/fabric-language-kotlin-1.13.7+kotlin.2.2.21.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/fabric-language-kotlin-1.13.7+kotlin.2.2.21.jar"
+        },
+        {
+            "path": "mods/ImmediatelyFast-Fabric-1.13.2+1.21.10.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/ImmediatelyFast-Fabric-1.13.2+1.21.10.jar"
+        },
+        {
+            "path": "mods/inventorymanagement-1.6.0+1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/inventorymanagement-1.6.0+1.21.9.jar"
+        },
+        {
+            "path": "mods/iris-fabric-1.9.6+mc1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/iris-fabric-1.9.6+mc1.21.9.jar"
+        },
+        {
+            "path": "mods/lithium-fabric-0.19.2+mc1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/lithium-fabric-0.19.2+mc1.21.9.jar"
+        },
+        {
+            "path": "mods/malilib-fabric-1.21.10-0.26.3.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/malilib-fabric-1.21.10-0.26.3.jar"
+        },
+        {
+            "path": "mods/modmenu-16.0.0-rc.1.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/modmenu-16.0.0-rc.1.jar"
+        },
+        {
+            "path": "mods/RoughlyEnoughItems-21.9.9999-fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/RoughlyEnoughItems-21.9.9999-fabric.jar"
+        },
+        {
+            "path": "mods/shulkerboxtooltip-fabric-5.2.11+1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/shulkerboxtooltip-fabric-5.2.11+1.21.9.jar"
+        },
+        {
+            "path": "mods/sodium-fabric-0.7.2+mc1.21.10.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/sodium-fabric-0.7.2+mc1.21.10.jar"
+        },
+        {
+            "path": "mods/treeharvester-1.21.9-9.3.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/treeharvester-1.21.9-9.3.jar"
+        },
+        {
+            "path": "mods/tweakeroo-fabric-1.21.10-0.26.2.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/tweakeroo-fabric-1.21.10-0.26.2.jar"
+        },
+        {
+            "path": "mods/waystones-fabric-1.21.9-21.9.2.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/waystones-fabric-1.21.9-21.9.2.jar"
+        },
+        {
+            "path": "mods/Xaeros_Minimap_25.2.15_Fabric_1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/Xaeros_Minimap_25.2.15_Fabric_1.21.9.jar"
+        },
+        {
+            "path": "mods/Zoomify-2.14.6+1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/Zoomify-2.14.6+1.21.9.jar"
+        },
+        {
+            "path": "options.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/options.txt"
+        },
+        {
+            "path": "servers.dat",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/servers.dat"
+        },
+        {
             "path": "xaero/minimap/Multiplayer_mc.ombi.es/config.txt",
             "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/xaero/minimap/Multiplayer_mc.ombi.es/config.txt"
         },
@@ -254,14 +262,6 @@
         {
             "path": "xaero/minimap/Multiplayer_mc.ombi.es/dim%1/mw$1096149336_1.txt",
             "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/xaero/minimap/Multiplayer_mc.ombi.es/dim%1/mw$1096149336_1.txt"
-        },
-        {
-            "path": "options.txt",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/options.txt"
-        },
-        {
-            "path": "servers.dat",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/servers.dat"
         }
     ]
 }
