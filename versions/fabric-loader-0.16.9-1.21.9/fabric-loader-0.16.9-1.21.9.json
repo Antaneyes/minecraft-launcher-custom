@@ -74,5 +74,25 @@
             "name": "net.fabricmc:fabric-loader:0.16.9",
             "url": "https://maven.fabricmc.net/"
         }
-    ]
+    ],
+    "downloads": {
+        "client": {
+            "sha1": "ce92fd8d1b2460c41ceda07ae7b3fe863a80d045",
+            "size": 30591861,
+            "url": "https://piston-data.mojang.com/v1/objects/ce92fd8d1b2460c41ceda07ae7b3fe863a80d045/client.jar"
+        },
+        "client_mappings": {
+            "sha1": "3641ccb54eac2153c7e8274823c5a8e046beaba0",
+            "size": 11510637,
+            "url": "https://piston-data.mojang.com/v1/objects/3641ccb54eac2153c7e8274823c5a8e046beaba0/client.txt"
+        }
+    },
+    "assetIndex": {
+        "id": "27",
+        "sha1": "4a667d8cb576e16de8197074c978531c01cd6544",
+        "size": 507362,
+        "totalSize": 435439577,
+        "url": "https://piston-meta.mojang.com/v1/packages/4a667d8cb576e16de8197074c978531c01cd6544/27.json"
+    },
+    "assets": "27"
 }

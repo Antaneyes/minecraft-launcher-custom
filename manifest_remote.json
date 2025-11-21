@@ -1,0 +1,266 @@
+{
+    "version": "1.0.1",
+    "gameVersion": "fabric-loader-0.17.2-1.21.9",
+    "versionType": "custom",
+    "files": [
+        {
+            "path": "mods/architectury-18.0.5-fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/architectury-18.0.5-fabric.jar"
+        },
+        {
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/balm-fabric-1.21.9-21.9.4.jar"
+        },
+        {
+            "path": "mods/cloth-config-20.0.149-fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/cloth-config-20.0.149-fabric.jar"
+        },
+        {
+            "path": "mods/collective-1.21.9-8.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/collective-1.21.9-8.9.jar"
+        },
+        {
+            "path": "mods/EuphoriaPatcher-1.7.3-r5.6.1-fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/EuphoriaPatcher-1.7.3-r5.6.1-fabric.jar"
+        },
+        {
+            "path": "mods/fabric-api-0.134.0+1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/fabric-api-0.134.0+1.21.9.jar"
+        },
+        {
+            "path": "mods/fabric-language-kotlin-1.13.7+kotlin.2.2.21.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/fabric-language-kotlin-1.13.7+kotlin.2.2.21.jar"
+        },
+        {
+            "path": "mods/ImmediatelyFast-Fabric-1.13.2+1.21.10.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/ImmediatelyFast-Fabric-1.13.2+1.21.10.jar"
+        },
+        {
+            "path": "mods/inventorymanagement-1.6.0+1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/inventorymanagement-1.6.0+1.21.9.jar"
+        },
+        {
+            "path": "mods/iris-fabric-1.9.6+mc1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/iris-fabric-1.9.6+mc1.21.9.jar"
+        },
+        {
+            "path": "mods/lithium-fabric-0.19.2+mc1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/lithium-fabric-0.19.2+mc1.21.9.jar"
+        },
+        {
+            "path": "mods/malilib-fabric-1.21.10-0.26.3.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/malilib-fabric-1.21.10-0.26.3.jar"
+        },
+        {
+            "path": "mods/modmenu-16.0.0-rc.1.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/modmenu-16.0.0-rc.1.jar"
+        },
+        {
+            "path": "mods/RoughlyEnoughItems-21.9.9999-fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/RoughlyEnoughItems-21.9.9999-fabric.jar"
+        },
+        {
+            "path": "mods/shulkerboxtooltip-fabric-5.2.11+1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/shulkerboxtooltip-fabric-5.2.11+1.21.9.jar"
+        },
+        {
+            "path": "mods/sodium-fabric-0.7.2+mc1.21.10.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/sodium-fabric-0.7.2+mc1.21.10.jar"
+        },
+        {
+            "path": "mods/treeharvester-1.21.9-9.3.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/treeharvester-1.21.9-9.3.jar"
+        },
+        {
+            "path": "mods/tweakeroo-fabric-1.21.10-0.26.2.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/tweakeroo-fabric-1.21.10-0.26.2.jar"
+        },
+        {
+            "path": "mods/waystones-fabric-1.21.9-21.9.2.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/waystones-fabric-1.21.9-21.9.2.jar"
+        },
+        {
+            "path": "mods/Xaeros_Minimap_25.2.15_Fabric_1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/Xaeros_Minimap_25.2.15_Fabric_1.21.9.jar"
+        },
+        {
+            "path": "mods/Zoomify-2.14.6+1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/mods/Zoomify-2.14.6+1.21.9.jar"
+        },
+        {
+            "path": "config/balm-client.toml",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/balm-client.toml"
+        },
+        {
+            "path": "config/balm-common.toml",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/balm-common.toml"
+        },
+        {
+            "path": "config/collective.json5",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/collective.json5"
+        },
+        {
+            "path": "config/euphoria_patcher.properties",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/euphoria_patcher.properties"
+        },
+        {
+            "path": "config/fabric/indigo-renderer.properties",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/fabric/indigo-renderer.properties"
+        },
+        {
+            "path": "config/immediatelyfast.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/immediatelyfast.json"
+        },
+        {
+            "path": "config/installedByCompInstaller.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/installedByCompInstaller.txt"
+        },
+        {
+            "path": "config/inventorymanagement.toml",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/inventorymanagement.toml"
+        },
+        {
+            "path": "config/iris-excluded.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/iris-excluded.json"
+        },
+        {
+            "path": "config/iris.properties",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/iris.properties"
+        },
+        {
+            "path": "config/litematica/litematica_mc.ombi.es.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/litematica/litematica_mc.ombi.es.json"
+        },
+        {
+            "path": "config/litematica/litematica_mc.ombi.es_dim_minecraft_overworld.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/litematica/litematica_mc.ombi.es_dim_minecraft_overworld.json"
+        },
+        {
+            "path": "config/litematica/raw_material_list_recipe_details_2025-10-14_21.29.00.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/litematica/raw_material_list_recipe_details_2025-10-14_21.29.00.json"
+        },
+        {
+            "path": "config/litematica/raw_material_list_recipe_steps_2025-10-14_21.29.00.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/litematica/raw_material_list_recipe_steps_2025-10-14_21.29.00.json"
+        },
+        {
+            "path": "config/litematica/raw_material_list_simplified_2025-10-14_21.29.00.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/litematica/raw_material_list_simplified_2025-10-14_21.29.00.json"
+        },
+        {
+            "path": "config/litematica.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/litematica.json"
+        },
+        {
+            "path": "config/lithium.properties",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/lithium.properties"
+        },
+        {
+            "path": "config/malilib.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/malilib.json"
+        },
+        {
+            "path": "config/modmenu.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/modmenu.json"
+        },
+        {
+            "path": "config/roughlyenoughitems/collapsible.json5",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/roughlyenoughitems/collapsible.json5"
+        },
+        {
+            "path": "config/roughlyenoughitems/config.json5",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/roughlyenoughitems/config.json5"
+        },
+        {
+            "path": "config/roughlyenoughitems/favorites.json5",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/roughlyenoughitems/favorites.json5"
+        },
+        {
+            "path": "config/roughlyenoughitems/hints.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/roughlyenoughitems/hints.json"
+        },
+        {
+            "path": "config/roughlyenoughitems/pinyin.properties",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/roughlyenoughitems/pinyin.properties"
+        },
+        {
+            "path": "config/roughlyenoughitems/pinyin_double.properties",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/roughlyenoughitems/pinyin_double.properties"
+        },
+        {
+            "path": "config/sodium-fingerprint.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/sodium-fingerprint.json"
+        },
+        {
+            "path": "config/sodium-mixins.properties",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/sodium-mixins.properties"
+        },
+        {
+            "path": "config/sodium-options.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/sodium-options.json"
+        },
+        {
+            "path": "config/treeharvester/harvestable_axe_blacklist.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/treeharvester/harvestable_axe_blacklist.txt"
+        },
+        {
+            "path": "config/treeharvester.json5",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/treeharvester.json5"
+        },
+        {
+            "path": "config/tweakeroo.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/tweakeroo.json"
+        },
+        {
+            "path": "config/waystones-common.toml",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/waystones-common.toml"
+        },
+        {
+            "path": "config/xaerominimap-common.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/xaerominimap-common.txt"
+        },
+        {
+            "path": "config/xaerominimap.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/xaerominimap.txt"
+        },
+        {
+            "path": "config/xaerominimap_entities.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/xaerominimap_entities.json"
+        },
+        {
+            "path": "config/xaeropatreon.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/xaeropatreon.txt"
+        },
+        {
+            "path": "config/yacl.json5",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/yacl.json5"
+        },
+        {
+            "path": "config/zoomify.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/zoomify.json"
+        },
+        {
+            "path": "xaero/minimap/Multiplayer_mc.ombi.es/config.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/xaero/minimap/Multiplayer_mc.ombi.es/config.txt"
+        },
+        {
+            "path": "xaero/minimap/Multiplayer_mc.ombi.es/dim%-1/mw$1096149336_1.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/xaero/minimap/Multiplayer_mc.ombi.es/dim%-1/mw$1096149336_1.txt"
+        },
+        {
+            "path": "xaero/minimap/Multiplayer_mc.ombi.es/dim%0/mw$1096149336_1.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/xaero/minimap/Multiplayer_mc.ombi.es/dim%0/mw$1096149336_1.txt"
+        },
+        {
+            "path": "xaero/minimap/Multiplayer_mc.ombi.es/dim%1/mw$1096149336_1.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/xaero/minimap/Multiplayer_mc.ombi.es/dim%1/mw$1096149336_1.txt"
+        },
+        {
+            "path": "options.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/options.txt"
+        },
+        {
+            "path": "servers.dat",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/servers.dat"
+        }
+    ]
+}
