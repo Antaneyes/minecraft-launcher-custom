@@ -29,6 +29,23 @@ async function checkAndDownloadUpdates(sender) {
 
         // Process files
         if (manifest.files && Array.isArray(manifest.files)) {
+            // 1. CLEANUP PHASE: Remove old mods
+            const modsDir = path.join(GAME_ROOT, 'mods');
+            if (await fs.pathExists(modsDir)) {
+                const localMods = await fs.readdir(modsDir);
+                const manifestModNames = manifest.files
+                    .filter(f => f.path.startsWith('mods/'))
+                    .map(f => path.basename(f.path));
+
+                for (const file of localMods) {
+                    if (!manifestModNames.includes(file)) {
+                        sender.send('log', `Removing old mod: ${file}`);
+                        await fs.remove(path.join(modsDir, file));
+                    }
+                }
+            }
+
+            // 2. DOWNLOAD PHASE
             let processed = 0;
             const total = manifest.files.length;
 
