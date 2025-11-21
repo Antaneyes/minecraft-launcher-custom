@@ -4,7 +4,7 @@ const path = require('path');
 
 // CONFIGURATION
 // The user MUST change this URL to their hosted manifest.json
-const UPDATE_URL = 'http://localhost:8080/manifest.json';
+const UPDATE_URL = 'https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/manifest.json';
 const GAME_ROOT = path.join(process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Application Support' : process.env.HOME + "/.local/share"), '.my-custom-server');
 
 async function checkAndDownloadUpdates(sender) {

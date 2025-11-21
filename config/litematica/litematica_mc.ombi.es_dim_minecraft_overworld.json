@@ -1,0 +1,173 @@
+{
+  "selections": {
+    "mode": "SIMPLE"
+  },
+  "placements": {
+    "placements": [
+      {
+        "schematic": "C:\\Users\\joshu\\AppData\\Roaming\\PrismLauncher\\instances\\1.21.9 mods\\minecraft\\schematics\\Large_Farmhouse-from-abfielder.litematic",
+        "name": "Unnamed",
+        "origin": [
+          -126,
+          77,
+          -1078
+        ],
+        "rotation": "CLOCKWISE_90",
+        "mirror": "NONE",
+        "ignore_entities": false,
+        "enabled": false,
+        "enable_render": true,
+        "render_enclosing_box": false,
+        "locked": false,
+        "locked_coords": 0,
+        "bb_color": 16757504,
+        "verifier_type": "all",
+        "hash_code": "1dd8f2c4-fea6-4503-988a-9e21044b7d9c",
+        "placements": [
+          {
+            "name": "Unnamed",
+            "placement": {
+              "pos": [
+                0,
+                16,
+                0
+              ],
+              "name": "Unnamed",
+              "rotation": "NONE",
+              "mirror": "NONE",
+              "locked_coords": 0,
+              "enabled": true,
+              "rendering_enabled": true,
+              "ignore_entities": false
+            }
+          }
+        ]
+      },
+      {
+        "schematic": "C:\\Users\\joshu\\AppData\\Roaming\\PrismLauncher\\instances\\1.21.9 mods\\minecraft\\schematics\\NotBlackhawks Fanasty Wide House-from-abfielder.litematic",
+        "name": "Unnamed",
+        "origin": [
+          -137,
+          79,
+          -1065
+        ],
+        "rotation": "NONE",
+        "mirror": "NONE",
+        "ignore_entities": false,
+        "enabled": false,
+        "enable_render": true,
+        "render_enclosing_box": false,
+        "locked": false,
+        "locked_coords": 0,
+        "bb_color": 8404597,
+        "verifier_type": "all",
+        "hash_code": "ed145d6f-ce72-4f75-9674-651293f56ab2",
+        "placements": [
+          {
+            "name": "Unnamed",
+            "placement": {
+              "pos": [
+                0,
+                0,
+                0
+              ],
+              "name": "Unnamed",
+              "rotation": "NONE",
+              "mirror": "NONE",
+              "locked_coords": 0,
+              "enabled": true,
+              "rendering_enabled": true,
+              "ignore_entities": false
+            }
+          }
+        ]
+      },
+      {
+        "schematic": "C:\\Users\\joshu\\AppData\\Roaming\\PrismLauncher\\instances\\1.21.9 mods\\minecraft\\schematics\\Ivys_House_2-from-abfielder.litematic",
+        "name": "Ivy\u0027s House",
+        "origin": [
+          -108,
+          78,
+          -1078
+        ],
+        "rotation": "CLOCKWISE_90",
+        "mirror": "NONE",
+        "ignore_entities": false,
+        "enabled": false,
+        "enable_render": true,
+        "render_enclosing_box": false,
+        "locked": false,
+        "locked_coords": 0,
+        "bb_color": 16738304,
+        "verifier_type": "all",
+        "hash_code": "020c99e1-d346-42b0-b8a7-707be58c272d",
+        "material_list": {
+          "type": "all",
+          "sort_criteria": "COUNT_TOTAL",
+          "sort_reverse": false,
+          "hide_available": false,
+          "multiplier": 1
+        },
+        "placements": [
+          {
+            "name": "Ivy\u0027s House",
+            "placement": {
+              "pos": [
+                0,
+                0,
+                0
+              ],
+              "name": "Ivy\u0027s House",
+              "rotation": "NONE",
+              "mirror": "NONE",
+              "locked_coords": 0,
+              "enabled": true,
+              "rendering_enabled": true,
+              "ignore_entities": false
+            }
+          }
+        ]
+      }
+    ],
+    "selected": 2,
+    "origin_selected": true
+  },
+  "schematic_projects_manager": {},
+  "operation_mode": "REBUILD",
+  "render_range": {
+    "mode": "ALL_ABOVE",
+    "axis": "Y",
+    "layer_single": 0,
+    "layer_above": 0,
+    "layer_below": 0,
+    "layer_range_min": 0,
+    "layer_range_max": 0,
+    "hotkey_range_min": false,
+    "hotkey_range_max": false
+  },
+  "area_simple": {
+    "name": "Unnamed",
+    "current": "Unnamed",
+    "boxes": [
+      {
+        "pos1": [
+          0,
+          0,
+          0
+        ],
+        "pos2": [
+          0,
+          0,
+          0
+        ],
+        "name": "Unnamed"
+      }
+    ]
+  },
+  "tool_mode_data": {
+    "delete": {
+      "use_placement": false
+    }
+  },
+  "block_entities": {}
+}

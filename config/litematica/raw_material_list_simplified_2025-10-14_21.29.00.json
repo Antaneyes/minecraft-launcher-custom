@@ -1,0 +1,640 @@
+[
+  {
+    "RawItem": "minecraft:spruce_fence",
+    "TotalEstimate": 4,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:spruce_fence",
+        "ResultTotal": 4
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:iron_block",
+    "TotalEstimate": 7,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:blast_furnace",
+        "ResultTotal": 4
+      },
+      {
+        "ResultItem": "minecraft:smithing_table",
+        "ResultTotal": 1
+      },
+      {
+        "ResultItem": "minecraft:anvil",
+        "ResultTotal": 2
+      },
+      {
+        "ResultItem": "minecraft:lantern",
+        "ResultTotal": 30
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:iron_ingot",
+    "TotalEstimate": 16,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:blast_furnace",
+        "ResultTotal": 4
+      },
+      {
+        "ResultItem": "minecraft:smithing_table",
+        "ResultTotal": 1
+      },
+      {
+        "ResultItem": "minecraft:anvil",
+        "ResultTotal": 2
+      },
+      {
+        "ResultItem": "minecraft:lantern",
+        "ResultTotal": 30
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:iron_nugget",
+    "TotalEstimate": 6,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:lantern",
+        "ResultTotal": 30
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:oak_log",
+    "TotalEstimate": 334,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:jukebox",
+        "ResultTotal": 1
+      },
+      {
+        "ResultItem": "minecraft:oak_planks",
+        "ResultTotal": 289
+      },
+      {
+        "ResultItem": "minecraft:smithing_table",
+        "ResultTotal": 1
+      },
+      {
+        "ResultItem": "minecraft:crafting_table",
+        "ResultTotal": 1
+      },
+      {
+        "ResultItem": "minecraft:oak_stairs",
+        "ResultTotal": 11
+      },
+      {
+        "ResultItem": "minecraft:barrel",
+        "ResultTotal": 62
+      },
+      {
+        "ResultItem": "minecraft:oak_button",
+        "ResultTotal": 6
+      },
+      {
+        "ResultItem": "minecraft:oak_log",
+        "ResultTotal": 112
+      },
+      {
+        "ResultItem": "minecraft:chest",
+        "ResultTotal": 37
+      },
+      {
+        "ResultItem": "minecraft:bookshelf",
+        "ResultTotal": 4
+      },
+      {
+        "ResultItem": "minecraft:loom",
+        "ResultTotal": 1
+      },
+      {
+        "ResultItem": "minecraft:lantern",
+        "ResultTotal": 30
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:coal",
+    "TotalEstimate": 8,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:lantern",
+        "ResultTotal": 30
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:bamboo",
+    "TotalEstimate": 12,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:scaffolding",
+        "ResultTotal": 10
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:string",
+    "TotalEstimate": 4,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:loom",
+        "ResultTotal": 1
+      },
+      {
+        "ResultItem": "minecraft:scaffolding",
+        "ResultTotal": 10
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:bricks",
+    "TotalEstimate": 86,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:bricks",
+        "ResultTotal": 86
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:red_tulip",
+    "TotalEstimate": 1,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:red_tulip",
+        "ResultTotal": 1
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:verdant_froglight",
+    "TotalEstimate": 2,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:verdant_froglight",
+        "ResultTotal": 2
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:large_amethyst_bud",
+    "TotalEstimate": 2,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:large_amethyst_bud",
+        "ResultTotal": 2
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:flower_pot",
+    "TotalEstimate": 12,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:flower_pot",
+        "ResultTotal": 12
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:brick_wall",
+    "TotalEstimate": 24,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:brick_wall",
+        "ResultTotal": 24
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:yellow_terracotta",
+    "TotalEstimate": 12,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:yellow_terracotta",
+        "ResultTotal": 12
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:dandelion",
+    "TotalEstimate": 1,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:dandelion",
+        "ResultTotal": 1
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:cartography_table",
+    "TotalEstimate": 1,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:cartography_table",
+        "ResultTotal": 1
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:spruce_button",
+    "TotalEstimate": 16,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:spruce_button",
+        "ResultTotal": 16
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:spruce_stairs",
+    "TotalEstimate": 26,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:spruce_stairs",
+        "ResultTotal": 26
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:cobblestone",
+    "TotalEstimate": 88,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:blast_furnace",
+        "ResultTotal": 4
+      },
+      {
+        "ResultItem": "minecraft:polished_granite",
+        "ResultTotal": 12
+      },
+      {
+        "ResultItem": "minecraft:granite",
+        "ResultTotal": 12
+      },
+      {
+        "ResultItem": "minecraft:furnace",
+        "ResultTotal": 4
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:oxeye_daisy",
+    "TotalEstimate": 4,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:oxeye_daisy",
+        "ResultTotal": 4
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:book",
+    "TotalEstimate": 12,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:bookshelf",
+        "ResultTotal": 4
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:waxed_exposed_cut_copper",
+    "TotalEstimate": 9,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:waxed_exposed_cut_copper",
+        "ResultTotal": 9
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:grindstone",
+    "TotalEstimate": 1,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:grindstone",
+        "ResultTotal": 1
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:spruce_sign",
+    "TotalEstimate": 20,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:spruce_sign",
+        "ResultTotal": 20
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:terracotta",
+    "TotalEstimate": 12,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:terracotta",
+        "ResultTotal": 12
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:stonecutter",
+    "TotalEstimate": 1,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:stonecutter",
+        "ResultTotal": 1
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:hanging_roots",
+    "TotalEstimate": 7,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:hanging_roots",
+        "ResultTotal": 7
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:flowering_azalea",
+    "TotalEstimate": 5,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:flowering_azalea",
+        "ResultTotal": 5
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:dirt",
+    "TotalEstimate": 63,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:dirt",
+        "ResultTotal": 63
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:glow_berries",
+    "TotalEstimate": 6,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:glow_berries",
+        "ResultTotal": 6
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:stripped_oak_wood",
+    "TotalEstimate": 66,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:stripped_oak_wood",
+        "ResultTotal": 66
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:sand",
+    "TotalEstimate": 6,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:glass_pane",
+        "ResultTotal": 12
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:quartz",
+    "TotalEstimate": 48,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:polished_granite",
+        "ResultTotal": 24
+      },
+      {
+        "ResultItem": "minecraft:granite",
+        "ResultTotal": 24
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:azalea",
+    "TotalEstimate": 6,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:azalea",
+        "ResultTotal": 6
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:grass_block",
+    "TotalEstimate": 173,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:grass_block",
+        "ResultTotal": 173
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:amethyst_cluster",
+    "TotalEstimate": 1,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:amethyst_cluster",
+        "ResultTotal": 1
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:spruce_door",
+    "TotalEstimate": 1,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:spruce_door",
+        "ResultTotal": 1
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:ender_chest",
+    "TotalEstimate": 1,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:ender_chest",
+        "ResultTotal": 1
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:petrified_oak_slab",
+    "TotalEstimate": 56,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:petrified_oak_slab",
+        "ResultTotal": 56
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:brewing_stand",
+    "TotalEstimate": 2,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:brewing_stand",
+        "ResultTotal": 2
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:azure_bluet",
+    "TotalEstimate": 8,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:azure_bluet",
+        "ResultTotal": 8
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:yellow_bed",
+    "TotalEstimate": 1,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:yellow_bed",
+        "ResultTotal": 1
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:smooth_stone",
+    "TotalEstimate": 12,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:blast_furnace",
+        "ResultTotal": 4
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:allium",
+    "TotalEstimate": 2,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:allium",
+        "ResultTotal": 2
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:spruce_trapdoor",
+    "TotalEstimate": 52,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:spruce_trapdoor",
+        "ResultTotal": 52
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:waxed_exposed_cut_copper_stairs",
+    "TotalEstimate": 2,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:waxed_exposed_cut_copper_stairs",
+        "ResultTotal": 2
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:diamond",
+    "TotalEstimate": 1,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:jukebox",
+        "ResultTotal": 1
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:yellow_glazed_terracotta",
+    "TotalEstimate": 24,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:yellow_glazed_terracotta",
+        "ResultTotal": 24
+      }
+    ]
+  },
+  {
+    "RawItem": "minecraft:brick_slab",
+    "TotalEstimate": 98,
+    "Steps": [],
+    "Results": [
+      {
+        "ResultItem": "minecraft:brick_slab",
+        "ResultTotal": 98
+      }
+    ]
+  }
+]

@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // CONFIGURATION
-const BASE_URL = 'http://tuservidor.com/files'; // Change this to your hosting URL
+const BASE_URL = 'https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master'; // Change this to your hosting URL
 const OUTPUT_FILE = 'manifest.json';
 const GAME_VERSION = 'fabric-loader-0.16.9-1.21.9'; // Change to your actual fabric version folder name
 
