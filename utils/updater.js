@@ -55,13 +55,18 @@ async function checkAndDownloadUpdates(sender) {
 
                 sender.send('log', `Downloading: ${file.path}`);
 
-                // Ensure directory exists
-                await fs.ensureDir(path.dirname(destPath));
+                const dirName = path.dirname(destPath);
+                try {
+                    await fs.ensureDir(dirName);
+                } catch (err) {
+                    sender.send('log', `Error creating dir ${dirName}: ${err.message}`);
+                    throw err;
+                }
 
                 // Download file
                 const writer = fs.createWriteStream(destPath);
                 const response = await axios({
-                    url: fileUrl,
+                    url: encodeURI(fileUrl),
                     method: 'GET',
                     responseType: 'stream'
                 });

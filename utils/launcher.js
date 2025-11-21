@@ -20,12 +20,19 @@ async function launchGame(username, sender) {
     // For Fabric, the versionNumber should be the folder name of the fabric version
     // e.g., "fabric-loader-0.14.22-1.20.1"
 
+    const customPath = versionType === 'custom' ? path.join(GAME_ROOT, 'versions', versionNumber, `${versionNumber}.json`) : undefined;
+
+    if (customPath) {
+        sender.send('log', `Custom JSON path: ${customPath}`);
+        sender.send('log', `File exists: ${await fs.pathExists(customPath)}`);
+    }
+
     const opts = {
         clientPackage: null,
         version: {
             number: versionNumber,
             type: versionType,
-            custom: versionType === 'custom' ? path.join(GAME_ROOT, 'versions', versionNumber, `${versionNumber}.json`) : undefined
+            custom: customPath
         },
         root: GAME_ROOT,
         authorization: {

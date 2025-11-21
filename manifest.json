@@ -262,6 +262,10 @@
     {
       "path": "servers.dat",
       "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/servers.dat"
+    },
+    {
+      "path": "versions/fabric-loader-0.16.9-1.21.9/fabric-loader-0.16.9-1.21.9.json",
+      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/versions/fabric-loader-0.16.9-1.21.9/fabric-loader-0.16.9-1.21.9.json"
     }
   ]
 }
