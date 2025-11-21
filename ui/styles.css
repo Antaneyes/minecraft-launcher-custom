@@ -1,0 +1,205 @@
+:root {
+    --bg-color: #121212;
+    --surface-color: #1e1e1e;
+    --primary-color: #4caf50;
+    --primary-hover: #43a047;
+    --text-color: #ffffff;
+    --text-secondary: #aaaaaa;
+    --accent-color: #7c4dff;
+    --font-family: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background: radial-gradient(circle at top right, #2c2c2c 0%, var(--bg-color) 60%);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.05em;
+    background: linear-gradient(45deg, #fff, #aaa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.badge {
+    background-color: var(--surface-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    border: 1px solid #333;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.hero-section {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1607988795691-3d0147b43231?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80'); /* Placeholder Minecraft-y image */
+    background-size: cover;
+    background-position: center;
+    height: 150px;
+    border-radius: 1rem;
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 1px solid #333;
+}
+
+.server-info h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.server-info p {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.8);
+}
+
+.console-output {
+    flex: 1;
+    background-color: #000;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-family: 'Consolas', monospace;
+    font-size: 0.8rem;
+    color: #ccc;
+    overflow-y: auto;
+    border: 1px solid #333;
+    max-height: 200px;
+}
+
+.log-line {
+    margin-bottom: 0.25rem;
+    word-break: break-all;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.user-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.user-input label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.user-input input {
+    background-color: var(--surface-color);
+    border: 1px solid #333;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    color: white;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.user-input input:focus {
+    border-color: var(--primary-color);
+}
+
+.launch-btn {
+    position: relative;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.1s, background-color 0.2s;
+}
+
+.launch-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.launch-btn:active {
+    transform: translateY(1px);
+}
+
+.launch-btn:disabled {
+    background-color: #333;
+    cursor: not-allowed;
+    color: #777;
+}
+
+.progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-color: rgba(255,255,255,0.5);
+    width: 0%;
+    transition: width 0.2s;
+}
+
+footer {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

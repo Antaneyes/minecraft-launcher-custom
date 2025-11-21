@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Minecraft Launcher</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts for premium look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Server Launcher</h1>
+            <div id="status-badge" class="badge">Ready</div>
+        </header>
+
+        <main>
+            <div class="hero-section">
+                <div class="server-info">
+                    <h2>Private Server</h2>
+                    <p>Auto-updating modpack & configs</p>
+                </div>
+            </div>
+
+            <div class="console-output" id="console-output">
+                <p class="log-line">Initializing launcher...</p>
+            </div>
+
+            <div class="controls">
+                <div class="user-input">
+                    <label for="username">Username (Offline/Microsoft)</label>
+                    <input type="text" id="username" placeholder="PlayerName" value="Player">
+                </div>
+                
+                <!-- In a real production app, we'd handle auth tokens securely. 
+                     For this simple version, we'll support offline mode or basic auth flows 
+                     supported by minecraft-launcher-core -->
+                
+                <button id="launch-btn" class="launch-btn">
+                    <span class="btn-text">PLAY</span>
+                    <div class="progress-bar" id="progress-bar"></div>
+                </button>
+            </div>
+        </main>
+
+        <footer>
+            <p id="version-text">v1.0.0</p>
+        </footer>
+    </div>
+    <script src="renderer.js"></script>
+</body>
+</html>

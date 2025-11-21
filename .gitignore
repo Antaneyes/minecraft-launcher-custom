@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+.DS_Store
+thumbs.db
+mock_server.js
+build_log.txt
+build_log_2.txt
