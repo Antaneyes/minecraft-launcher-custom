@@ -184,10 +184,6 @@
       "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/roughlyenoughitems/pinyin.properties"
     },
     {
-      "path": "config/shulkerboxtooltip/config.toml",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/shulkerboxtooltip/config.toml"
-    },
-    {
       "path": "config/sodium-options.json",
       "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/sodium-options.json"
     },
