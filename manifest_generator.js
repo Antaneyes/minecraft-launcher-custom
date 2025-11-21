@@ -4,16 +4,8 @@ const path = require('path');
 // CONFIGURATION
 const BASE_URL = 'https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master'; // Change this to your hosting URL
 const OUTPUT_FILE = 'manifest.json';
-const GAME_VERSION = 'fabric-loader-0.16.9-1.21.9'; // Change to your actual fabric version folder name
-
-// Folders/Files to include
-const INCLUDES = [
-    'mods',
-    'config',
-    'xaero',
-    'options.txt',
-    'servers.dat'
-];
+const GAME_VERSION = 'fabric-loader-0.17.2-1.21.9';
+const UPDATE_DIR = 'update_files';
 
 // Helper to walk directory
 function walk(dir, fileList = []) {
@@ -32,7 +24,7 @@ function walk(dir, fileList = []) {
 }
 
 const manifest = {
-    version: "1.0.0",
+    version: "1.0.2",
     gameVersion: GAME_VERSION,
     versionType: "custom",
     files: []
@@ -40,46 +32,27 @@ const manifest = {
 
 console.log("Generating manifest...");
 
-INCLUDES.forEach(item => {
-    if (fs.existsSync(item)) {
-        const stat = fs.statSync(item);
-        if (stat.isDirectory()) {
-            const files = walk(item);
-            files.forEach(f => {
-                // Normalize path to forward slashes
-                const relativePath = f.replace(/\\/g, '/');
-                manifest.files.push({
-                    path: relativePath,
-                    url: `${BASE_URL}/${relativePath}`
-                });
-            });
-        } else {
-            manifest.files.push({
-                path: item,
-                url: `${BASE_URL}/${item}`
-            });
-        }
-    } else {
-        console.warn(`Warning: ${item} not found in current directory.`);
-    }
-});
-
-// Also try to find the fabric version json if possible
-// This assumes the script is run in the .minecraft root
-const versionsDir = 'versions';
-if (fs.existsSync(versionsDir)) {
-    const files = walk(versionsDir);
+if (fs.existsSync(UPDATE_DIR)) {
+    const files = walk(UPDATE_DIR);
     files.forEach(f => {
-        if (f.includes(GAME_VERSION) && f.endsWith('.json')) {
-            const relativePath = f.replace(/\\/g, '/');
-            manifest.files.push({
-                path: relativePath,
-                url: `${BASE_URL}/${relativePath}`
-            });
-        }
+        // Normalize path to forward slashes
+        const fullPath = f.replace(/\\/g, '/');
+
+        // Path for the game (relative to game root, so strip 'update_files/')
+        const relativePath = fullPath.replace(`${UPDATE_DIR}/`, '');
+
+        // URL for download (includes 'update_files/')
+        const url = `${BASE_URL}/${fullPath}`;
+
+        manifest.files.push({
+            path: relativePath,
+            url: url
+        });
     });
+} else {
+    console.error(`Error: Directory '${UPDATE_DIR}' not found.`);
 }
 
-fs.writeFileSync(OUTPUT_FILE, JSON.stringify(manifest, null, 2));
+fs.writeFileSync(OUTPUT_FILE, JSON.stringify(manifest, null, 4));
 console.log(`Done! Manifest saved to ${OUTPUT_FILE}`);
 console.log(`Total files: ${manifest.files.length}`);
