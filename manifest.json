@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "gameVersion": "fabric-loader-0.16.9-1.21.9",
+  "version": "1.0.1",
+  "gameVersion": "fabric-loader-0.17.2-1.21.9",
   "versionType": "custom",
   "files": [
     {
@@ -184,88 +184,36 @@
       "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/roughlyenoughitems/pinyin.properties"
     },
     {
-      "path": "config/roughlyenoughitems/pinyin_double.properties",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/roughlyenoughitems/pinyin_double.properties"
-    },
-    {
-      "path": "config/sodium-fingerprint.json",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/sodium-fingerprint.json"
-    },
-    {
-      "path": "config/sodium-mixins.properties",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/sodium-mixins.properties"
+      "path": "config/shulkerboxtooltip/config.toml",
+      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/shulkerboxtooltip/config.toml"
     },
     {
       "path": "config/sodium-options.json",
       "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/sodium-options.json"
     },
     {
-      "path": "config/treeharvester/harvestable_axe_blacklist.txt",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/treeharvester/harvestable_axe_blacklist.txt"
+      "path": "config/treeharvester-client.toml",
+      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/treeharvester-client.toml"
     },
     {
-      "path": "config/treeharvester.json5",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/treeharvester.json5"
+      "path": "config/treeharvester-common.toml",
+      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/treeharvester-common.toml"
     },
     {
       "path": "config/tweakeroo.json",
       "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/tweakeroo.json"
     },
     {
-      "path": "config/waystones-common.toml",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/waystones-common.toml"
-    },
-    {
-      "path": "config/xaerominimap-common.txt",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/xaerominimap-common.txt"
-    },
-    {
       "path": "config/xaerominimap.txt",
       "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/xaerominimap.txt"
     },
     {
-      "path": "config/xaerominimap_entities.json",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/xaerominimap_entities.json"
+      "path": "config/xaeroworldmap.txt",
+      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/xaeroworldmap.txt"
     },
     {
-      "path": "config/xaeropatreon.txt",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/xaeropatreon.txt"
-    },
-    {
-      "path": "config/yacl.json5",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/yacl.json5"
-    },
-    {
-      "path": "config/zoomify.json",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/zoomify.json"
-    },
-    {
-      "path": "xaero/minimap/Multiplayer_mc.ombi.es/config.txt",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/xaero/minimap/Multiplayer_mc.ombi.es/config.txt"
-    },
-    {
-      "path": "xaero/minimap/Multiplayer_mc.ombi.es/dim%-1/mw$1096149336_1.txt",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/xaero/minimap/Multiplayer_mc.ombi.es/dim%-1/mw$1096149336_1.txt"
-    },
-    {
-      "path": "xaero/minimap/Multiplayer_mc.ombi.es/dim%0/mw$1096149336_1.txt",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/xaero/minimap/Multiplayer_mc.ombi.es/dim%0/mw$1096149336_1.txt"
-    },
-    {
-      "path": "xaero/minimap/Multiplayer_mc.ombi.es/dim%1/mw$1096149336_1.txt",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/xaero/minimap/Multiplayer_mc.ombi.es/dim%1/mw$1096149336_1.txt"
-    },
-    {
-      "path": "options.txt",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/options.txt"
-    },
-    {
-      "path": "servers.dat",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/servers.dat"
-    },
-    {
-      "path": "versions/fabric-loader-0.16.9-1.21.9/fabric-loader-0.16.9-1.21.9.json",
-      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/versions/fabric-loader-0.16.9-1.21.9/fabric-loader-0.16.9-1.21.9.json"
+      "path": "config/zoomify/config.json5",
+      "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/config/zoomify/config.json5"
     }
   ]
 }
