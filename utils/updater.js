@@ -77,6 +77,9 @@ async function checkAndDownloadUpdates(sender) {
 
         sender.send('log', 'All updates downloaded.');
 
+        // Save the manifest locally so the launcher knows what version to play
+        await fs.writeJson(path.join(GAME_ROOT, 'client-manifest.json'), manifest);
+
     } catch (error) {
         throw new Error(`Update failed: ${error.message}`);
     }
