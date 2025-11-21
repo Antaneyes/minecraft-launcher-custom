@@ -1,12 +1,15 @@
 {
     "version": "1.0.0",
-    "gameVersion": "fabric-loader-0.15.11-1.21.9",
+    "gameVersion": "fabric-loader-0.16.9-1.21.9",
     "versionType": "custom",
-    "maxMemory": "6G",
     "files": [
         {
-            "path": "versions/fabric-loader-0.15.11-1.21.9/fabric-loader-0.15.11-1.21.9.json",
-            "url": "http://tuservidor.com/files/versions/fabric-loader-0.15.11-1.21.9.json"
+            "path": "options.txt",
+            "url": "http://tuservidor.com/files/options.txt"
+        },
+        {
+            "path": "servers.dat",
+            "url": "http://tuservidor.com/files/servers.dat"
         },
         {
             "path": "mods/fabric-api.jar",
@@ -15,6 +18,18 @@
         {
             "path": "mods/sodium.jar",
             "url": "http://tuservidor.com/files/mods/sodium.jar"
+        },
+        {
+            "path": "config/mod-config.toml",
+            "url": "http://tuservidor.com/files/config/mod-config.toml"
+        },
+        {
+            "path": "xaero/common.txt",
+            "url": "http://tuservidor.com/files/xaero/common.txt"
+        },
+        {
+            "path": "versions/fabric-loader-0.16.9-1.21.9/fabric-loader-0.16.9-1.21.9.json",
+            "url": "http://tuservidor.com/files/versions/fabric-loader-0.16.9-1.21.9.json"
         }
     ]
 }
