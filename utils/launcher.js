@@ -24,7 +24,8 @@ async function launchGame(username, sender) {
         clientPackage: null,
         version: {
             number: versionNumber,
-            type: versionType
+            type: versionType,
+            custom: versionType === 'custom' ? path.join(GAME_ROOT, 'versions', versionNumber, `${versionNumber}.json`) : undefined
         },
         root: GAME_ROOT,
         authorization: {
