@@ -27,6 +27,15 @@ async function checkAndDownloadUpdates(sender) {
 
         sender.send('log', `Versión remota: ${manifest.version}`);
 
+        // CHECK FOR LAUNCHER UPDATE
+        const appVersion = require('electron').app.getVersion();
+        if (manifest.launcherVersion && manifest.launcherVersion !== appVersion) {
+            // Simple string comparison. For robust semver, use 'semver' package.
+            // Assuming manifest.launcherVersion > appVersion if they differ for now.
+            sender.send('log', `¡Nueva versión del launcher disponible: ${manifest.launcherVersion}!`);
+            sender.send('launcher-update-available', manifest.launcherUrl);
+        }
+
         // Process files
         if (manifest.files && Array.isArray(manifest.files)) {
             // 1. CLEANUP PHASE: Remove old mods

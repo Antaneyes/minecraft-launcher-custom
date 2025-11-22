@@ -133,6 +133,15 @@ ipcRenderer.on('update-complete', () => {
     btnText.textContent = 'JUGAR';
 });
 
+ipcRenderer.on('launcher-update-available', (event, url) => {
+    const updateBtn = document.getElementById('update-launcher-btn');
+    updateBtn.classList.remove('hidden');
+    updateBtn.onclick = () => {
+        require('electron').shell.openExternal(url);
+    };
+    log('¡Nueva versión del launcher disponible! Haz clic en el botón amarillo para descargarla.');
+});
+
 // Start updates immediately
 launchBtn.disabled = true;
 btnText.textContent = 'ACTUALIZANDO...';
