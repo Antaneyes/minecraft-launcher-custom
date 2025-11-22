@@ -191,9 +191,14 @@ ipcRenderer.on('launcher-update-available', () => {
     const updateBtn = document.getElementById('update-launcher-btn');
     const btnSpan = updateBtn.querySelector('span');
     updateBtn.classList.remove('hidden');
-    btnSpan.textContent = '⬇️ Descargando actualización del launcher...';
-    log('Nueva versión del launcher detectada. Descargando...');
-    ipcRenderer.send('start-launcher-update');
+    btnSpan.textContent = '⬇️ Descargando actualización...';
+    log('Nueva versión detectada. Iniciando descarga...');
+});
+
+ipcRenderer.on('launcher-download-progress', (event, percent) => {
+    const updateBtn = document.getElementById('update-launcher-btn');
+    const btnSpan = updateBtn.querySelector('span');
+    btnSpan.textContent = `⬇️ Descargando: ${Math.round(percent)}%`;
 });
 
 ipcRenderer.on('launcher-update-ready', () => {
