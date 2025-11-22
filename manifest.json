@@ -1,6 +1,6 @@
 {
     "version": "2025.11.22",
-    "gameVersion": "1.20.1",
+    "gameVersion": "fabric-loader-0.17.2-1.21.9",
     "files": [
         {
             "path": "config/balm-client.toml",
