@@ -1,7 +1,7 @@
 {
   "name": "ombicraft-launcher",
   "productName": "OmbiCraft Launcher",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "OmbiCraft Launcher",
   "author": "josalro",
   "scripts": {
@@ -18,7 +18,8 @@
       }
     ],
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "artifactName": "OmbiCraft-Launcher-Setup-${version}.${ext}"
     },
     "files": [
       "ui/**/*",

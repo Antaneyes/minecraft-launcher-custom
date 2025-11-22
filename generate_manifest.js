@@ -58,13 +58,13 @@ if (!fs.existsSync(UPDATE_DIR)) {
 
 const files = scanDirectory(UPDATE_DIR);
 
-const LAUNCHER_VERSION = "1.0.5"; // UPDATE THIS when releasing a new launcher exe
+const LAUNCHER_VERSION = "1.0.6";
 
 const manifest = {
     version: MANIFEST_VERSION,
     gameVersion: GAME_VERSION,
     launcherVersion: LAUNCHER_VERSION,
-    launcherUrl: `https://github.com/${REPO_USER}/${REPO_NAME}/releases/download/v${LAUNCHER_VERSION}/OmbiCraft-Launcher-Setup.exe`,
+    launcherUrl: `https://github.com/${REPO_USER}/${REPO_NAME}/releases/download/v${LAUNCHER_VERSION}/OmbiCraft-Launcher-Setup-${LAUNCHER_VERSION}.exe`,
     files: files
 };
 

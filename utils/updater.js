@@ -96,10 +96,20 @@ async function checkAndDownloadUpdates(sender) {
             let processed = 0;
             const total = manifest.files.length;
             const CONCURRENCY_LIMIT = 5;
+            const PRESERVED_FILES = ['options.txt', 'optionsof.txt', 'optionsshaders.txt', 'servers.dat'];
 
             const downloadFile = async (file) => {
                 const destPath = path.join(GAME_ROOT, file.path);
                 const fileUrl = file.url;
+                const fileName = path.basename(file.path);
+
+                // Check if file is a user config file and exists -> SKIP
+                if (PRESERVED_FILES.includes(fileName) && await fs.pathExists(destPath)) {
+                    sender.send('log', `Conservando archivo de usuario: ${fileName}`);
+                    processed++;
+                    sender.send('progress', { current: processed, total: total, type: 'update' });
+                    return;
+                }
 
                 // Check if file exists and hash matches (if provided)
                 if (await fs.pathExists(destPath)) {

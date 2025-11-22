@@ -7,9 +7,10 @@ autoUpdater.autoDownload = true;
 autoUpdater.logger = require("electron-log");
 autoUpdater.logger.transports.file.level = "info";
 
-const { checkAndDownloadUpdates } = require('./utils/updater');
+const { checkAndDownloadUpdates, GAME_ROOT } = require('./utils/updater');
 const { launchGame } = require('./utils/launcher');
 const { loginMicrosoft } = require('./utils/auth');
+const { importSettings } = require('./utils/importer');
 
 let mainWindow;
 
@@ -56,6 +57,9 @@ ipcMain.on('check-updates', async (event) => {
     try {
         sender.send('status', 'Buscando Actualizaciones');
         sender.send('log', 'Buscando actualizaciones...');
+
+        // Try to import settings from TLauncher if this is a fresh install
+        await importSettings(GAME_ROOT, sender);
 
         await checkAndDownloadUpdates(sender);
 
