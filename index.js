@@ -1,5 +1,11 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const { autoUpdater } = require('electron-updater');
+
+// Configure autoUpdater
+autoUpdater.autoDownload = false;
+autoUpdater.logger = require("electron-log");
+autoUpdater.logger.transports.file.level = "info";
 const { checkAndDownloadUpdates } = require('./utils/updater');
 const { launchGame } = require('./utils/launcher');
 const { loginMicrosoft } = require('./utils/auth');

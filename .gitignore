@@ -4,3 +4,4 @@ dist
 auth_cache.json
 launcher-config.json
 OmbiCraft-Launcher-Setup.exe
+token.txt

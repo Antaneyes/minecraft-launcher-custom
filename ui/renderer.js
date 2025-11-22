@@ -187,13 +187,24 @@ ipcRenderer.on('update-complete', () => {
     btnText.textContent = 'JUGAR';
 });
 
-ipcRenderer.on('launcher-update-available', (event, url) => {
+ipcRenderer.on('launcher-update-available', () => {
     const updateBtn = document.getElementById('update-launcher-btn');
+    const btnSpan = updateBtn.querySelector('span');
     updateBtn.classList.remove('hidden');
+    btnSpan.textContent = '⬇️ Descargando actualización del launcher...';
+    log('Nueva versión del launcher detectada. Descargando...');
+    ipcRenderer.send('start-launcher-update');
+});
+
+ipcRenderer.on('launcher-update-ready', () => {
+    const updateBtn = document.getElementById('update-launcher-btn');
+    const btnSpan = updateBtn.querySelector('span');
+    updateBtn.classList.remove('hidden');
+    btnSpan.textContent = '🚀 Reiniciar y Actualizar Launcher';
     updateBtn.onclick = () => {
-        require('electron').shell.openExternal(url);
+        ipcRenderer.send('install-launcher-update');
     };
-    log('¡Nueva versión del launcher disponible! Haz clic en el botón amarillo para descargarla.');
+    log('Actualización del launcher lista. Haz clic en el botón para reiniciar.');
 });
 
 // Start updates immediately
