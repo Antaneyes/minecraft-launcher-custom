@@ -38,11 +38,23 @@ const toggleConsoleBtn = document.getElementById('toggle-console-btn');
 const consoleContainer = document.getElementById('console-container');
 
 toggleConsoleBtn.addEventListener('click', () => {
-    consoleContainer.classList.toggle('hidden');
-    if (consoleContainer.classList.contains('hidden')) {
-        toggleConsoleBtn.textContent = 'Mostrar Consola ▼';
-    } else {
-        toggleConsoleBtn.textContent = 'Ocultar Consola ▲';
+    consoleContainer.classList.toggle('visible');
+    // Optional: Change icon or state if needed
+});
+
+const closeConsoleBtn = document.getElementById('close-console-btn');
+if (closeConsoleBtn) {
+    closeConsoleBtn.addEventListener('click', () => {
+        consoleContainer.classList.remove('visible');
+    });
+}
+
+// Close console when clicking outside (optional, but nice for overlays)
+document.addEventListener('click', (e) => {
+    if (consoleContainer.classList.contains('visible') &&
+        !consoleContainer.contains(e.target) &&
+        !toggleConsoleBtn.contains(e.target)) {
+        consoleContainer.classList.remove('visible');
     }
 });
 
