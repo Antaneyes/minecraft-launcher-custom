@@ -68,8 +68,8 @@ async function importSettings(targetRoot, sender) {
         // 2. Files/Folders to copy
         const itemsToCopy = [
             'options.txt',
-            'XaeroWaypoints',
-            'XaeroWorldMap'
+            'xaero',
+            'config'
         ];
 
         for (const item of itemsToCopy) {
