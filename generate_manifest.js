@@ -61,7 +61,7 @@ const files = scanDirectory(UPDATE_DIR);
 const manifest = {
     version: MANIFEST_VERSION,
     gameVersion: GAME_VERSION,
-    launcherVersion: "1.0.1", // UPDATE THIS when releasing a new launcher exe
+    launcherVersion: "1.0.0", // UPDATE THIS when releasing a new launcher exe
     launcherUrl: `${BASE_URL.replace('/update_files', '')}/OmbiCraft-Launcher-Setup.exe`, // Assumes exe is at root of repo or release
     files: files
 };
