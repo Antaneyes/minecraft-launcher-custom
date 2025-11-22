@@ -2,12 +2,20 @@
 setlocal enabledelayedexpansion
 
 echo Generando manifesto de actualizacion...
-for /f "delims=" %%i in ('node generate_manifest.js') do (
-    echo %%i
-    set "line=%%i"
-    if "!line:~0,17!"=="LAUNCHER_VERSION=" (
-        set "LAUNCHER_VERSION=!line:~17!"
-    )
+node generate_manifest.js > temp_manifest_output.txt
+type temp_manifest_output.txt
+
+REM Extract LAUNCHER_VERSION using findstr
+set "LAUNCHER_VERSION="
+for /f "tokens=2 delims==" %%a in ('findstr "LAUNCHER_VERSION=" temp_manifest_output.txt') do set LAUNCHER_VERSION=%%a
+
+del temp_manifest_output.txt
+
+if "%LAUNCHER_VERSION%"=="" (
+    echo ERROR: No se pudo detectar la version del launcher.
+    echo Asegurate de que generate_manifest.js imprime 'LAUNCHER_VERSION=x.y.z'
+    pause
+    exit /b 1
 )
 
 echo.
