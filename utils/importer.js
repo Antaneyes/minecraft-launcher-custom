@@ -101,17 +101,6 @@ async function importSettings(targetRoot, sender) {
                 await fs.copy(sourcePath, targetPath, { overwrite: false });
             }
 
-            // 3. Special Copy: Custom Fabric Version
-            // The user uses a custom version that doesn't exist online: fabric-loader-0.17.2-1.21.9
-            // We must copy it from TLauncher's versions folder if it exists.
-            const customVersionName = 'fabric-loader-0.17.2-1.21.9';
-            const sourceVersionPath = path.join(TLAUNCHER_ROOT, 'versions', customVersionName);
-            const targetVersionPath = path.join(targetRoot, 'versions', customVersionName);
-
-            if (await fs.pathExists(sourceVersionPath) && !await fs.pathExists(targetVersionPath)) {
-                sender.send('log', `Importando versión personalizada: ${customVersionName}...`);
-                await fs.copy(sourceVersionPath, targetVersionPath);
-            }
         }
 
         sender.send('log', 'Importación completada con éxito.');

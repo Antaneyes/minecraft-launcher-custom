@@ -1,9 +1,21 @@
 {
     "version": "2025.11.22",
     "gameVersion": "fabric-loader-0.17.2-1.21.9",
-    "launcherVersion": "1.0.7",
-    "launcherUrl": "https://github.com/Antaneyes/minecraft-launcher-custom/releases/download/v1.0.7/OmbiCraft-Launcher-Setup-1.0.7.exe",
+    "launcherVersion": "1.0.11",
+    "launcherUrl": "https://github.com/Antaneyes/minecraft-launcher-custom/releases/download/v1.0.11/OmbiCraft-Launcher-Setup-1.0.11.exe",
     "files": [
+        {
+            "path": "libraries/net/fabricmc/fabric-loader/0.17.2/fabric-loader-0.17.2.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/libraries/net/fabricmc/fabric-loader/0.17.2/fabric-loader-0.17.2.jar",
+            "sha1": "0647622ac4163aad5ed5f79ccb532e31225562aa",
+            "size": 1915305
+        },
+        {
+            "path": "libraries/net/fabricmc/intermediary/1.21.9/intermediary-1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/libraries/net/fabricmc/intermediary/1.21.9/intermediary-1.21.9.jar",
+            "sha1": "3cfb7c78ab0854323268568565d565d48d52cb10",
+            "size": 778632
+        },
         {
             "path": "mods/architectury-18.0.5-fabric.jar",
             "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/architectury-18.0.5-fabric.jar",
@@ -123,6 +135,24 @@
             "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/servers.dat",
             "sha1": "be8cfc3f0472bdfd5dd8ac4f09f7bac12383b992",
             "size": 77
+        },
+        {
+            "path": "versions/fabric-loader-0.17.2-1.21.9/fabric-loader-0.17.2-1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/versions/fabric-loader-0.17.2-1.21.9/fabric-loader-0.17.2-1.21.9.jar",
+            "sha1": "ce92fd8d1b2460c41ceda07ae7b3fe863a80d045",
+            "size": 30591861
+        },
+        {
+            "path": "versions/fabric-loader-0.17.2-1.21.9/fabric-loader-0.17.2-1.21.9.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/versions/fabric-loader-0.17.2-1.21.9/fabric-loader-0.17.2-1.21.9.json",
+            "sha1": "fb2d5eceef15057e9756406e1404d73d91ce71fe",
+            "size": 1676
+        },
+        {
+            "path": "versions/fabric-loader-0.17.2-1.21.9/TLauncherAdditional.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/versions/fabric-loader-0.17.2-1.21.9/TLauncherAdditional.json",
+            "sha1": "5377ec1207f54b2b40b0b9f9f6e60c0defc9d5d4",
+            "size": 181
         }
     ]
 }
