@@ -12,7 +12,7 @@ const UPDATE_DIR = path.join(__dirname, 'update_files');
 const MANIFEST_PATH = path.join(__dirname, 'manifest.json');
 
 // Game version to enforce
-const GAME_VERSION = 'fabric-loader-0.18.1-1.21.10';
+const GAME_VERSION = 'fabric-loader-0.17.2-1.21.9';
 const MANIFEST_VERSION = new Date().toISOString().split('T')[0].replace(/-/g, '.'); // e.g., 2023.11.22
 
 function getFileHash(filePath) {

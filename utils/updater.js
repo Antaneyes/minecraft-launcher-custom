@@ -99,13 +99,21 @@ async function checkAndDownloadUpdates(sender) {
             if (!await fs.pathExists(targetVersionDir)) {
                 sender.send('log', `Versión objetivo ${targetVersion} no encontrada. Intentando auto-instalación...`);
 
-                // Parse versions from string like "fabric-loader-0.18.1-1.21.10"
-                // Format: fabric-loader-<LOADER_VERSION>-<GAME_VERSION>
-                const parts = manifest.gameVersion.split('-');
-                const gameVer = parts.pop(); // 1.21.10
-                const loaderVer = parts[2];  // 0.18.1 (assuming format is consistent)
+                // Parse versions from string: "fabric-loader-{loader}-{mc}"
+                // Example: "fabric-loader-0.17.2-1.21.9"
+                const versionParts = manifest.gameVersion.split('-');
+                // Assuming format: fabric-loader-[loaderVersion]-[mcVersion]
+                // parts[0] = fabric, parts[1] = loader, parts[2] = loaderVersion, parts[3] = mcVersion
 
-                const fabricMetaUrl = `https://meta.fabricmc.net/v2/versions/loader/${gameVer}/${loaderVer}/profile/json`;
+                let mcVersion = manifest.gameVersion.split('-').pop(); // Fallback
+                let loaderVersion = '0.17.2'; // Fallback
+
+                if (versionParts.length >= 4) {
+                    loaderVersion = versionParts[2];
+                    mcVersion = versionParts.slice(3).join('-'); // Join rest in case MC version has dashes
+                }
+
+                const fabricMetaUrl = `https://meta.fabricmc.net/v2/versions/loader/${mcVersion}/${loaderVersion}/profile/json`;
                 try {
                     await fs.ensureDir(targetVersionDir);
                     const response = await axios.get(fabricMetaUrl);

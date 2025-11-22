@@ -1,7 +1,319 @@
 {
     "version": "2025.11.22",
-    "gameVersion": "fabric-loader-0.18.1-1.21.10",
+    "gameVersion": "fabric-loader-0.17.2-1.21.9",
     "files": [
+        {
+            "path": "config/balm-client.toml",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/balm-client.toml",
+            "sha1": "b966f687c9235435cb03c89a1913bcca1527c211",
+            "size": 786
+        },
+        {
+            "path": "config/balm-common.toml",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/balm-common.toml",
+            "sha1": "b966f687c9235435cb03c89a1913bcca1527c211",
+            "size": 786
+        },
+        {
+            "path": "config/collective.json5",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/collective.json5",
+            "sha1": "dd275eba23d25c50bea5ca96f5243ec1782fc435",
+            "size": 827
+        },
+        {
+            "path": "config/euphoria_patcher.properties",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/euphoria_patcher.properties",
+            "sha1": "f5cc16b0e68fcf6416673ae65e280d610faf4f33",
+            "size": 1703
+        },
+        {
+            "path": "config/fabric/indigo-renderer.properties",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/fabric/indigo-renderer.properties",
+            "sha1": "a61c0bd4ec7f5f3bd50985ee39873176bf9e3a0c",
+            "size": 260
+        },
+        {
+            "path": "config/immediatelyfast.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/immediatelyfast.json",
+            "sha1": "3492e909d13f44dead838abfb9df1ceb8ee59460",
+            "size": 929
+        },
+        {
+            "path": "config/installedByCompInstaller.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/installedByCompInstaller.txt",
+            "sha1": "b5d4ee29417e6c9cbbfba348d04196855ab04667",
+            "size": 70
+        },
+        {
+            "path": "config/inventorymanagement.toml",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/inventorymanagement.toml",
+            "sha1": "c74f9f659e9b1528d17a7eeabcb6bdec48b079b7",
+            "size": 487
+        },
+        {
+            "path": "config/iris-excluded.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/iris-excluded.json",
+            "sha1": "20bd3420b5c911402ac289c154b56ac1dd8f84ba",
+            "size": 31
+        },
+        {
+            "path": "config/iris.properties",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/iris.properties",
+            "sha1": "74b33ee140d26b257a605dc7c67fc0e3f6fc455e",
+            "size": 332
+        },
+        {
+            "path": "config/litematica.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/litematica.json",
+            "sha1": "2c74e0689386bc2d981c1579f0f5795de3ef8dbc",
+            "size": 10631
+        },
+        {
+            "path": "config/lithium.properties",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/lithium.properties",
+            "sha1": "38f2993a7d80d0a6a25eb6182bd6898af24a16eb",
+            "size": 267
+        },
+        {
+            "path": "config/malilib.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/malilib.json",
+            "sha1": "da6d77fa8b23b8df95ad2c5fe71b321f6b0f5c25",
+            "size": 677
+        },
+        {
+            "path": "config/modmenu.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/modmenu.json",
+            "sha1": "d1f10fbacb91be7ec9b84ad261059c9fb4e5d62f",
+            "size": 840
+        },
+        {
+            "path": "config/roughlyenoughitems/collapsible.json5",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/roughlyenoughitems/collapsible.json5",
+            "sha1": "d3ddda466e4e5fb9048711c0424c8970d474fc7c",
+            "size": 46
+        },
+        {
+            "path": "config/roughlyenoughitems/config.json5",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/roughlyenoughitems/config.json5",
+            "sha1": "380d77da0d37bc782ce59dbd72283cd6ac4260ca",
+            "size": 6378
+        },
+        {
+            "path": "config/roughlyenoughitems/favorites.json5",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/roughlyenoughitems/favorites.json5",
+            "sha1": "1c40261c92dd1f1dd8733b258734152ddf97a6f2",
+            "size": 1115
+        },
+        {
+            "path": "config/roughlyenoughitems/hints.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/roughlyenoughitems/hints.json",
+            "sha1": "fd2afbaf1054a24d2f9b5d7f97cd8bcb768c93f1",
+            "size": 63
+        },
+        {
+            "path": "config/roughlyenoughitems/pinyin.properties",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/roughlyenoughitems/pinyin.properties",
+            "sha1": "6b768381d3336b055fa85a35ada37acd5291a111",
+            "size": 48
+        },
+        {
+            "path": "config/roughlyenoughitems/pinyin_double.properties",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/roughlyenoughitems/pinyin_double.properties",
+            "sha1": "f69796af8594730ae47b79ea6e9bdc053a5cd976",
+            "size": 73
+        },
+        {
+            "path": "config/sodium-fingerprint.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/sodium-fingerprint.json",
+            "sha1": "5902ae3f9aaeee3a536bfdea26fba0515dec87b6",
+            "size": 427
+        },
+        {
+            "path": "config/sodium-mixins.properties",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/sodium-mixins.properties",
+            "sha1": "5455463ee999b945c1cff8ae90f2b705e19fb86c",
+            "size": 258
+        },
+        {
+            "path": "config/sodium-options.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/sodium-options.json",
+            "sha1": "45908b250c9aef95b80d071f338d04933d5a9959",
+            "size": 717
+        },
+        {
+            "path": "config/treeharvester/harvestable_axe_blacklist.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/treeharvester/harvestable_axe_blacklist.txt",
+            "sha1": "a4eee556037cd1e2878535be7cb7549f8613ad06",
+            "size": 275
+        },
+        {
+            "path": "config/treeharvester.json5",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/treeharvester.json5",
+            "sha1": "a140dc8b2aec5c64eddc79d9724ac1834a334e8f",
+            "size": 2687
+        },
+        {
+            "path": "config/tweakeroo.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/tweakeroo.json",
+            "sha1": "150e2f09db7000090dc23dd5e0f649f3991aedf2",
+            "size": 27500
+        },
+        {
+            "path": "config/waystones-common.toml",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/waystones-common.toml",
+            "sha1": "6951a9a8ceb922a3b43044095f8e99cf94f1d1da",
+            "size": 5163
+        },
+        {
+            "path": "config/xaerominimap-common.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/xaerominimap-common.txt",
+            "sha1": "9dfa008f15d138e34b337e8e67122ea0364b67c0",
+            "size": 145
+        },
+        {
+            "path": "config/xaerominimap.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/xaerominimap.txt",
+            "sha1": "525aa50fa8178a2093ddacfbb79d1f3cd2b6e2cb",
+            "size": 3644
+        },
+        {
+            "path": "config/xaerominimap_entities.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/xaerominimap_entities.json",
+            "sha1": "e3e2634df12bfaf51db1784415ce27450e517876",
+            "size": 5531
+        },
+        {
+            "path": "config/xaeropatreon.txt",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/xaeropatreon.txt",
+            "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+            "size": 0
+        },
+        {
+            "path": "config/yacl.json5",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/yacl.json5",
+            "sha1": "622920f29084efcd3a8d0b2a0ea0756fece182d2",
+            "size": 250
+        },
+        {
+            "path": "config/zoomify.json",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/config/zoomify.json",
+            "sha1": "fb9013aeb5b0e75d0afae7719d822091a0e70892",
+            "size": 713
+        },
+        {
+            "path": "mods/architectury-18.0.5-fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/architectury-18.0.5-fabric.jar",
+            "sha1": "4c6797e93bb13d4e9ad60af554b69512e96a2014",
+            "size": 577577
+        },
+        {
+            "path": "mods/balm-fabric-1.21.9-21.9.4.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/balm-fabric-1.21.9-21.9.4.jar",
+            "sha1": "03ea93709f6678dc871ecf86db537744fe66d1d6",
+            "size": 528915
+        },
+        {
+            "path": "mods/cloth-config-20.0.149-fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/cloth-config-20.0.149-fabric.jar",
+            "sha1": "c86e380bdac24e4ecdd148558e9d4ddf32c86059",
+            "size": 1150288
+        },
+        {
+            "path": "mods/collective-1.21.9-8.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/collective-1.21.9-8.9.jar",
+            "sha1": "4818f14f27256ffde5c1face4282837bc667bffa",
+            "size": 960518
+        },
+        {
+            "path": "mods/fabric-api-0.134.0+1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/fabric-api-0.134.0+1.21.9.jar",
+            "sha1": "1f5ba40f85c96c4f8b661097d3e3f8906cc55c4f",
+            "size": 2290691
+        },
+        {
+            "path": "mods/fabric-language-kotlin-1.13.7+kotlin.2.2.21.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/fabric-language-kotlin-1.13.7+kotlin.2.2.21.jar",
+            "sha1": "ab71e8daf9a2d529204b5c28b3801713d22f3d46",
+            "size": 7479608
+        },
+        {
+            "path": "mods/ImmediatelyFast-Fabric-1.13.2+1.21.10.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/ImmediatelyFast-Fabric-1.13.2+1.21.10.jar",
+            "sha1": "e3f487736064ccd6c94e110cbaa057cf72eea2aa",
+            "size": 196440
+        },
+        {
+            "path": "mods/inventorymanagement-1.6.0+1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/inventorymanagement-1.6.0+1.21.9.jar",
+            "sha1": "5128be37eac134a79b813063c0549a90fc637afa",
+            "size": 832944
+        },
+        {
+            "path": "mods/lithium-fabric-0.19.2+mc1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/lithium-fabric-0.19.2+mc1.21.9.jar",
+            "sha1": "0f9b70bd70c14f293b76e90917dd7de78c47c073",
+            "size": 830020
+        },
+        {
+            "path": "mods/malilib-fabric-1.21.10-0.26.3.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/malilib-fabric-1.21.10-0.26.3.jar",
+            "sha1": "11488594330f0e83fa4368739e4bbdb5ba792baa",
+            "size": 1467389
+        },
+        {
+            "path": "mods/modmenu-16.0.0-rc.1.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/modmenu-16.0.0-rc.1.jar",
+            "sha1": "c927187d11cb6db2d3daad2a24899f1a70a1618f",
+            "size": 1077403
+        },
+        {
+            "path": "mods/RoughlyEnoughItems-21.9.9999-fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/RoughlyEnoughItems-21.9.9999-fabric.jar",
+            "sha1": "e420e7e74f41962cec5e8a4800b54c8f14c4e12a",
+            "size": 2463650
+        },
+        {
+            "path": "mods/shulkerboxtooltip-fabric-5.2.11+1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/shulkerboxtooltip-fabric-5.2.11+1.21.9.jar",
+            "sha1": "7e67065f03e54ea574b6e6dd41c8bc9927a2a35b",
+            "size": 389374
+        },
+        {
+            "path": "mods/sodium-fabric-0.7.2+mc1.21.10.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/sodium-fabric-0.7.2+mc1.21.10.jar",
+            "sha1": "3ade491ca5fc3074d332ff8eba2dbf0e294cc04e",
+            "size": 1675639
+        },
+        {
+            "path": "mods/treeharvester-1.21.9-9.3.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/treeharvester-1.21.9-9.3.jar",
+            "sha1": "b8cdae9245375537146a2bec0605ef0d5ec367c9",
+            "size": 120515
+        },
+        {
+            "path": "mods/tweakeroo-fabric-1.21.10-0.26.2.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/tweakeroo-fabric-1.21.10-0.26.2.jar",
+            "sha1": "12b1c41872fea2287793bbcae3b1f73c212d76eb",
+            "size": 594129
+        },
+        {
+            "path": "mods/waystones-fabric-1.21.9-21.9.2.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/waystones-fabric-1.21.9-21.9.2.jar",
+            "sha1": "f72945a7fb812a8891cf225c5ee789cd671cbeaf",
+            "size": 918189
+        },
+        {
+            "path": "mods/Xaeros_Minimap_25.2.15_Fabric_1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/Xaeros_Minimap_25.2.15_Fabric_1.21.9.jar",
+            "sha1": "a775d65bd89004839caf7d6e6f49b9ab1def2458",
+            "size": 1695560
+        },
+        {
+            "path": "mods/Zoomify-2.14.6+1.21.9.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/Zoomify-2.14.6+1.21.9.jar",
+            "sha1": "6a07d3b45d02e86ed5184dfd1309803f777a1a5e",
+            "size": 1869193
+        },
         {
             "path": "options.txt",
             "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/options.txt",
