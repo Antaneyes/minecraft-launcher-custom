@@ -62,7 +62,7 @@ const manifest = {
     version: MANIFEST_VERSION,
     gameVersion: GAME_VERSION,
     launcherVersion: "1.0.1", // UPDATE THIS when releasing a new launcher exe
-    launcherUrl: `${BASE_URL.replace('/update_files', '')}/OmbiCraft-Launcher-Setup.exe`, // Assumes exe is at root of repo or release
+    launcherUrl: `https://github.com/${REPO_USER}/${REPO_NAME}/releases/download/v${manifest.launcherVersion}/OmbiCraft-Launcher-Setup.exe`,
     files: files
 };
 
@@ -71,3 +71,4 @@ fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 4));
 console.log(`Manifest generated at ${MANIFEST_PATH}`);
 console.log(`Total files: ${files.length}`);
 console.log(`Version: ${MANIFEST_VERSION}`);
+console.log(`LAUNCHER_VERSION=${manifest.launcherVersion}`);
