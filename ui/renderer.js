@@ -13,6 +13,47 @@ if (savedUsername) {
     usernameInput.value = savedUsername;
 }
 
+// Set Version dynamically
+try {
+    const packageJson = require('../package.json');
+    document.getElementById('version-text').textContent = `v${packageJson.version}`;
+} catch (e) {
+    console.error('Error loading version:', e);
+}
+
+// Settings Logic
+const settingsBtn = document.getElementById('settings-btn');
+const closeSettingsBtn = document.getElementById('close-settings-btn');
+const settingsOverlay = document.getElementById('settings-overlay');
+const ramSlider = document.getElementById('ram-slider');
+const ramValue = document.getElementById('ram-value');
+
+// Load saved RAM
+const savedRam = localStorage.getItem('savedRam') || '4';
+ramSlider.value = savedRam;
+ramValue.textContent = `${savedRam} GB`;
+
+settingsBtn.addEventListener('click', () => {
+    settingsOverlay.classList.remove('hidden');
+});
+
+closeSettingsBtn.addEventListener('click', () => {
+    settingsOverlay.classList.add('hidden');
+});
+
+ramSlider.addEventListener('input', (e) => {
+    const val = e.target.value;
+    ramValue.textContent = `${val} GB`;
+    localStorage.setItem('savedRam', val);
+});
+
+// Close settings on outside click
+settingsOverlay.addEventListener('click', (e) => {
+    if (e.target === settingsOverlay) {
+        settingsOverlay.classList.add('hidden');
+    }
+});
+
 function log(message) {
     const p = document.createElement('p');
     p.className = 'log-line';
@@ -100,7 +141,8 @@ launchBtn.addEventListener('click', () => {
     btnText.textContent = loginMode === 'microsoft' ? 'INICIANDO SESIÓN...' : 'INICIANDO...';
 
     // Send launch request to main process
-    ipcRenderer.send('launch-game', { username, mode: loginMode });
+    const memory = localStorage.getItem('savedRam') || '4';
+    ipcRenderer.send('launch-game', { username, mode: loginMode, memory: `${memory}G` });
 });
 
 ipcRenderer.on('log', (event, message) => {

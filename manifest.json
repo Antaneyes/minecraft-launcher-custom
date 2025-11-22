@@ -1,8 +1,8 @@
 {
     "version": "2025.11.22",
     "gameVersion": "fabric-loader-0.17.2-1.21.9",
-    "launcherVersion": "1.0.2",
-    "launcherUrl": "https://github.com/Antaneyes/minecraft-launcher-custom/releases/download/v1.0.2/OmbiCraft-Launcher-Setup.exe",
+    "launcherVersion": "1.0.3",
+    "launcherUrl": "https://github.com/Antaneyes/minecraft-launcher-custom/releases/download/v1.0.3/OmbiCraft-Launcher-Setup.exe",
     "files": [
         {
             "path": "config/balm-client.toml",

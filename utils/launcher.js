@@ -4,7 +4,7 @@ const { Client, Authenticator } = require('minecraft-launcher-core');
 const { GAME_ROOT } = require('./updater');
 const launcher = new Client();
 
-async function launchGame(username, sender, auth = null) {
+async function launchGame(username, sender, auth = null, memory = "4G") {
     // Load configuration from the manifest we just downloaded
     let manifest = {};
     try {
@@ -16,7 +16,7 @@ async function launchGame(username, sender, auth = null) {
     // Default to 1.20.1 if not specified
     const gameVersion = manifest.gameVersion || "1.20.1";
     const versionType = manifest.versionType || "release"; // 'release' or 'custom'
-    const maxMemory = manifest.maxMemory || "4G";
+    const maxMemory = memory || manifest.maxMemory || "4G";
     const minMemory = manifest.minMemory || "2G";
 
     // Authorization (offline mode for now, or passed username)

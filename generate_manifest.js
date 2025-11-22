@@ -58,7 +58,7 @@ if (!fs.existsSync(UPDATE_DIR)) {
 
 const files = scanDirectory(UPDATE_DIR);
 
-const LAUNCHER_VERSION = "1.0.2"; // UPDATE THIS when releasing a new launcher exe
+const LAUNCHER_VERSION = "1.0.3"; // UPDATE THIS when releasing a new launcher exe
 
 const manifest = {
     version: MANIFEST_VERSION,

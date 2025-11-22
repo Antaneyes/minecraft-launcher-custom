@@ -56,7 +56,7 @@ ipcMain.on('check-updates', async (event) => {
     }
 });
 
-ipcMain.on('launch-game', async (event, { username, mode }) => {
+ipcMain.on('launch-game', async (event, { username, mode, memory }) => {
     const sender = event.sender;
 
     try {
@@ -73,7 +73,7 @@ ipcMain.on('launch-game', async (event, { username, mode }) => {
         sender.send('log', 'Iniciando juego...');
 
         // Launch Game (updates are assumed to be done)
-        await launchGame(username, sender, auth);
+        await launchGame(username, sender, auth, memory);
 
         sender.send('status', 'Jugando');
 

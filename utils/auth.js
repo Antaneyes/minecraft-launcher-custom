@@ -1,13 +1,37 @@
 const msmc = require('msmc');
 const path = require('path');
+const fs = require('fs-extra');
+const { GAME_ROOT } = require('./updater');
+
+const AUTH_CACHE = path.join(GAME_ROOT, 'auth_cache.json');
 
 async function loginMicrosoft(sender) {
     try {
         const authManager = new msmc.Auth("select_account");
+        let xboxManager;
 
-        // Launch the login window
-        // We use the 'electron' framework option which is standard for msmc in electron
-        const xboxManager = await authManager.launch("electron");
+        // 1. Try to refresh
+        try {
+            if (await fs.pathExists(AUTH_CACHE)) {
+                sender.send('log', 'Intentando restaurar sesión...');
+                const cache = await fs.readJson(AUTH_CACHE);
+                xboxManager = await authManager.refresh(cache);
+                sender.send('log', 'Sesión restaurada correctamente.');
+            }
+        } catch (e) {
+            sender.send('log', 'Sesión expirada o inválida. Iniciando login...');
+        }
+
+        // 2. If no valid session, launch login
+        if (!xboxManager) {
+            // Launch the login window
+            xboxManager = await authManager.launch("electron");
+
+            // Save the refresh token/profile
+            // msmc 5: xboxManager.save() returns the object needed for refresh
+            const profile = xboxManager.save();
+            await fs.writeJson(AUTH_CACHE, profile);
+        }
 
         // Get the Minecraft token
         const token = await xboxManager.getMinecraft();
