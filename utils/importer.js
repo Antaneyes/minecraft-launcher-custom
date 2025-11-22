@@ -77,7 +77,8 @@ async function importSettings(targetRoot, sender) {
             const targetPath = path.join(targetRoot, item);
 
             // Special handling for Xaero: Check root .minecraft if not found in instance folder
-            if (item.startsWith('Xaero') && !await fs.pathExists(sourcePath)) {
+            // Also handle case-insensitive check if needed, but for now we trust the list
+            if (item.toLowerCase().includes('xaero') && !await fs.pathExists(sourcePath)) {
                 // If sourceRoot is inside 'versions', check the parent (.minecraft)
                 if (sourceRoot.includes('versions')) {
                     const parentRoot = path.dirname(path.dirname(sourceRoot)); // .minecraft/versions/aaa -> .minecraft
@@ -98,6 +99,18 @@ async function importSettings(targetRoot, sender) {
             if (await fs.pathExists(sourcePath)) {
                 sender.send('log', `Copiando ${item}...`);
                 await fs.copy(sourcePath, targetPath, { overwrite: false });
+            }
+
+            // 3. Special Copy: Custom Fabric Version
+            // The user uses a custom version that doesn't exist online: fabric-loader-0.17.2-1.21.9
+            // We must copy it from TLauncher's versions folder if it exists.
+            const customVersionName = 'fabric-loader-0.17.2-1.21.9';
+            const sourceVersionPath = path.join(TLAUNCHER_ROOT, 'versions', customVersionName);
+            const targetVersionPath = path.join(targetRoot, 'versions', customVersionName);
+
+            if (await fs.pathExists(sourceVersionPath) && !await fs.pathExists(targetVersionPath)) {
+                sender.send('log', `Importando versión personalizada: ${customVersionName}...`);
+                await fs.copy(sourceVersionPath, targetVersionPath);
             }
         }
 
