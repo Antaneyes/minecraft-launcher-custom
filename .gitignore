@@ -6,3 +6,4 @@ thumbs.db
 mock_server.js
 build_log.txt
 build_log_2.txt
+*.exe
