@@ -1,10 +1,10 @@
 const fs = require('fs-extra');
 const path = require('path');
-const { Client } = require('minecraft-launcher-core');
+const { Client, Authenticator } = require('minecraft-launcher-core');
 const { GAME_ROOT } = require('./updater');
 const launcher = new Client();
 
-async function launchGame(username, sender) {
+async function launchGame(username, sender, auth = null) {
     // Load configuration from the manifest we just downloaded
     let manifest = {};
     try {
@@ -34,7 +34,7 @@ async function launchGame(username, sender) {
 
     const opts = {
         clientPackage: null,
-        authorization: Promise.resolve(token),
+        authorization: auth || Promise.resolve(token),
         root: GAME_ROOT,
         version: {
             number: gameVersion,
@@ -45,7 +45,9 @@ async function launchGame(username, sender) {
             min: minMemory
         },
         overrides: {
-            detached: false
+            detached: false,
+            checkFiles: true,
+            checkHash: true
         }
     };
 
@@ -53,35 +55,49 @@ async function launchGame(username, sender) {
     // MCLC should find it automatically at versions/{number}/{number}.json
     if (versionType === 'custom') {
         const standardPath = path.join(GAME_ROOT, 'versions', gameVersion, `${gameVersion}.json`);
-        sender.send('log', `Checking for custom JSON at standard path: ${standardPath}`);
+        sender.send('log', `Buscando JSON personalizado en ruta estándar: ${standardPath}`);
 
         if (fs.existsSync(standardPath)) {
-            sender.send('log', `File exists: true. Letting MCLC find it automatically.`);
+            sender.send('log', `Archivo existe: true. Dejando que MCLC lo encuentre automáticamente.`);
             // We do NOT set opts.version.custom here.
         } else {
-            sender.send('log', `WARNING: Custom JSON file NOT found at: ${standardPath}`);
+            sender.send('log', `ADVERTENCIA: Archivo JSON personalizado NO encontrado en: ${standardPath}`);
         }
     }
 
-    sender.send('log', `Launching Minecraft ${gameVersion} (${versionType})...`);
-    sender.send('log', `Launch options: ${JSON.stringify(opts, null, 2)}`);
+    // Helper to safely send IPC messages
+    const safeSend = (channel, ...args) => {
+        if (!sender.isDestroyed()) {
+            sender.send(channel, ...args);
+        }
+    };
+
+    sender.send('log', `Lanzando Minecraft ${gameVersion} (${versionType})...`);
+    sender.send('log', `Opciones de lanzamiento: ${JSON.stringify(opts, null, 2)}`);
 
     // Progress of game files downloading (assets, jar, etc.)
     launcher.on('progress', (e) => {
-        sender.send('progress', { current: e.task, total: e.total, type: 'game-download' });
+        safeSend('progress', { current: e.task, total: e.total, type: 'game-download' });
     });
 
-    launcher.on('debug', (e) => sender.send('log', `[MC Debug] ${e}`));
-    launcher.on('data', (e) => sender.send('log', `[MC Output] ${e}`));
+    launcher.on('debug', (e) => {
+        safeSend('log', `[MC Debug] ${e}`);
+        fs.appendFileSync(path.join(GAME_ROOT, 'debug_log.txt'), e + '\n');
+        if (e.includes('Launching with arguments')) {
+            fs.writeFileSync(path.join(GAME_ROOT, 'launch_cmd.txt'), e);
+        }
+    });
+    launcher.on('data', (e) => safeSend('log', `[MC Salida] ${e}`));
     launcher.on('error', (e) => {
-        sender.send('log', `[MC Error] ${e}`);
-        sender.send('launch-error', e.message);
+        safeSend('log', `[MC Error] ${e}`);
+        safeSend('launch-error', e.message);
     });
     launcher.on('close', (e) => {
-        sender.send('log', `[MC Close] ${e}`);
-        sender.send('launch-close', e);
+        safeSend('log', `[MC Cerrado] ${e}`);
+        safeSend('launch-close', e);
     });
 
+    await fs.writeJson(path.join(GAME_ROOT, 'launch_args.json'), opts, { spaces: 4 });
     await launcher.launch(opts);
 }
 

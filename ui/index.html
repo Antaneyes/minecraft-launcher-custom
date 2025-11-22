@@ -1,46 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Minecraft Launcher</title>
+    <title>OmbiCraft Launcher</title>
     <link rel="stylesheet" href="styles.css">
     <!-- Google Fonts for premium look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
         <header>
-            <h1>Server Launcher</h1>
-            <div id="status-badge" class="badge">Ready</div>
+            <h1>OmbiCraft</h1>
+            <div id="status-badge" class="badge">Listo</div>
         </header>
 
         <main>
             <div class="hero-section">
                 <div class="server-info">
-                    <h2>Private Server</h2>
-                    <p>Auto-updating modpack & configs</p>
+                    <h2>Actualizador automático del servidor</h2>
+                    <p>Modpack y configuraciones auto-actualizables</p>
                 </div>
             </div>
 
-            <div class="console-output" id="console-output">
-                <p class="log-line">Initializing launcher...</p>
+            <div class="console-controls" style="margin-bottom: 10px;">
+                <button id="toggle-console-btn" class="secondary-btn">Mostrar Consola ▼</button>
+            </div>
+
+            <div id="console-container" class="console-container hidden">
+                <div class="console-header"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                    <span>Consola</span>
+                    <button id="copy-logs-btn" style="padding: 2px 8px; font-size: 0.8rem; cursor: pointer;">Copiar
+                        Logs</button>
+                </div>
+                <div class="console-output" id="console-output">
+                    <p class="log-line">Inicializando OmbiCraft...</p>
+                </div>
             </div>
 
             <div class="controls">
-                <div class="user-input">
-                    <label for="username">Username (Offline/Microsoft)</label>
-                    <input type="text" id="username" placeholder="PlayerName" value="Player">
+                <div class="login-mode-switch" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <button id="mode-offline" class="mode-btn active">Offline</button>
+                    <button id="mode-microsoft" class="mode-btn">Microsoft</button>
                 </div>
-                
-                <!-- In a real production app, we'd handle auth tokens securely. 
-                     For this simple version, we'll support offline mode or basic auth flows 
-                     supported by minecraft-launcher-core -->
-                
+
+                <div class="user-input" id="offline-input-container">
+                    <label for="username">Nombre de usuario</label>
+                    <input type="text" id="username" placeholder="Tu Usuario" value="">
+                </div>
+
+                <div id="microsoft-info" class="hidden"
+                    style="text-align: center; color: #aaa; font-size: 0.9rem; margin-bottom: 10px;">
+                    <p>Inicia sesión con tu cuenta de Microsoft</p>
+                </div>
+
                 <button id="launch-btn" class="launch-btn">
-                    <span class="btn-text">PLAY</span>
+                    <span class="btn-text">Jugar</span>
                     <div class="progress-bar" id="progress-bar"></div>
                 </button>
             </div>
@@ -52,4 +72,5 @@
     </div>
     <script src="renderer.js"></script>
 </body>
+
 </html>

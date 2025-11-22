@@ -1,14 +1,15 @@
 {
-  "name": "launcher-minecraft",
+  "name": "ombicraft-launcher",
+  "productName": "OmbiCraft Launcher",
   "version": "1.0.0",
-  "description": "Custom Minecraft Launcher",
-  "author": "Admin",
+  "description": "OmbiCraft Launcher",
+  "author": "josalro",
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder"
   },
   "build": {
-    "appId": "com.admin.launcher",
+    "appId": "com.josalro.ombicraft",
     "win": {
       "target": "nsis"
     },
@@ -25,7 +26,8 @@
   "dependencies": {
     "axios": "^1.13.2",
     "fs-extra": "^11.3.2",
-    "minecraft-launcher-core": "^3.18.2"
+    "minecraft-launcher-core": "^3.18.2",
+    "msmc": "^5.0.5"
   },
   "devDependencies": {
     "electron": "^39.2.3",

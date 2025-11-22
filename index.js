@@ -2,20 +2,23 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { checkAndDownloadUpdates } = require('./utils/updater');
 const { launchGame } = require('./utils/launcher');
+const { loginMicrosoft } = require('./utils/auth');
 
 let mainWindow;
 
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 900,
-        height: 600,
-        frame: true, // Set to false for frameless custom window if desired
+        height: 750,
+        minWidth: 800,
+        minHeight: 600,
+        frame: true,
         webPreferences: {
             nodeIntegration: true,
-            contextIsolation: false // For simple IPC in this demo
+            contextIsolation: false
         },
         backgroundColor: '#121212',
-        resizable: false
+        resizable: true
     });
 
     mainWindow.loadFile(path.join(__dirname, 'ui', 'index.html'));
@@ -37,26 +40,42 @@ app.on('activate', () => {
 });
 
 // IPC Handlers
-ipcMain.on('launch-game', async (event, { username }) => {
+ipcMain.on('check-updates', async (event) => {
+    const sender = event.sender;
+    try {
+        sender.send('status', 'Buscando Actualizaciones');
+        sender.send('log', 'Buscando actualizaciones...');
+
+        await checkAndDownloadUpdates(sender);
+
+        sender.send('update-complete');
+        sender.send('status', 'Listo');
+    } catch (error) {
+        console.error(error);
+        sender.send('error', error.message);
+    }
+});
+
+ipcMain.on('launch-game', async (event, { username, mode }) => {
     const sender = event.sender;
 
     try {
-        sender.send('status', 'Checking Updates');
-        sender.send('log', 'Checking for updates...');
+        let auth = null;
 
-        // 1. Check for updates
-        await checkAndDownloadUpdates(sender);
+        if (mode === 'microsoft') {
+            sender.send('status', 'Iniciando Sesión');
+            sender.send('log', 'Iniciando sesión con Microsoft...');
+            auth = await loginMicrosoft(sender);
+            sender.send('log', `Sesión iniciada como: ${auth.name}`);
+        }
 
-        sender.send('status', 'Launching');
-        sender.send('log', 'Starting game...');
+        sender.send('status', 'Iniciando');
+        sender.send('log', 'Iniciando juego...');
 
-        // 2. Launch Game
-        await launchGame(username, sender);
+        // Launch Game (updates are assumed to be done)
+        await launchGame(username, sender, auth);
 
-        sender.send('status', 'Playing');
-
-        // Optional: Close launcher when game starts
-        // mainWindow.close();
+        sender.send('status', 'Jugando');
 
     } catch (error) {
         console.error(error);
