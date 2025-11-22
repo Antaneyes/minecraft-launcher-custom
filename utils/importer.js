@@ -68,12 +68,8 @@ async function importSettings(targetRoot, sender) {
         // 2. Files/Folders to copy
         const itemsToCopy = [
             'options.txt',
-            'optionsof.txt', // OptiFine
-            'optionsshaders.txt', // Iris/Shaders
-            'servers.dat',
             'XaeroWaypoints',
-            'XaeroWorldMap',
-            'screenshots' // Maybe? User didn't ask but it's nice. Let's stick to settings/waypoints for now to save space/time.
+            'XaeroWorldMap'
         ];
 
         for (const item of itemsToCopy) {
