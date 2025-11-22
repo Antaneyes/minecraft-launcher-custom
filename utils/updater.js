@@ -178,10 +178,6 @@ async function checkAndDownloadUpdates(sender) {
             const targetVersionDir = path.join(versionsDir, targetVersion);
             const targetJsonPath = path.join(targetVersionDir, `${targetVersion}.json`);
 
-            // AUTO-INSTALL logic (simplified for brevity, assuming it works or is handled above)
-            // ... (Keep existing auto-install logic if possible, or re-include it)
-            // Actually, I need to include the auto-install logic here because I am replacing the block.
-
             if (!await fs.pathExists(targetVersionDir)) {
                 sender.send('log', `Versión objetivo ${targetVersion} no encontrada. Intentando auto-instalación...`);
 
@@ -321,6 +317,11 @@ async function checkAndDownloadUpdates(sender) {
                                     "size": 0
                                 }
                             };
+
+                            // Fix for ASM and other libraries not on Fabric Maven
+                            if (lib.name.startsWith('org.ow2.asm') || lib.name.startsWith('org.jetbrains.kotlin')) {
+                                lib.downloads.artifact.url = "https://repo1.maven.org/maven2/" + relPath;
+                            }
                         }
                         // Natives fix
                         if (lib.name.includes('natives-windows')) {

@@ -77,8 +77,7 @@ async function importSettings(targetRoot, sender) {
             const targetPath = path.join(targetRoot, item);
 
             // Special handling for Xaero: Check root .minecraft if not found in instance folder
-            // Also handle case-insensitive check if needed, but for now we trust the list
-            if (item.toLowerCase().includes('xaero') && !await fs.pathExists(sourcePath)) {
+            if (item.toLowerCase().startsWith('xaero') && !await fs.pathExists(sourcePath)) {
                 // If sourceRoot is inside 'versions', check the parent (.minecraft)
                 if (sourceRoot.includes('versions')) {
                     const parentRoot = path.dirname(path.dirname(sourceRoot)); // .minecraft/versions/aaa -> .minecraft
@@ -100,7 +99,6 @@ async function importSettings(targetRoot, sender) {
                 sender.send('log', `Copiando ${item}...`);
                 await fs.copy(sourcePath, targetPath, { overwrite: false });
             }
-
         }
 
         sender.send('log', 'Importación completada con éxito.');
