@@ -77,8 +77,27 @@ async function importSettings(targetRoot, sender) {
         ];
 
         for (const item of itemsToCopy) {
-            const sourcePath = path.join(sourceRoot, item);
+            let sourcePath = path.join(sourceRoot, item);
             const targetPath = path.join(targetRoot, item);
+
+            // Special handling for Xaero: Check root .minecraft if not found in instance folder
+            if (item.startsWith('Xaero') && !await fs.pathExists(sourcePath)) {
+                // If sourceRoot is inside 'versions', check the parent (.minecraft)
+                if (sourceRoot.includes('versions')) {
+                    const parentRoot = path.dirname(path.dirname(sourceRoot)); // .minecraft/versions/aaa -> .minecraft
+                    // Actually, usually it's .minecraft/versions/aaa, so dirname is versions, dirname(dirname) is .minecraft
+                    // Let's be safer: check if 'versions' is the parent
+                    const upOne = path.dirname(sourceRoot);
+                    if (path.basename(upOne) === 'versions') {
+                        const rootMinecraft = path.dirname(upOne);
+                        const rootPath = path.join(rootMinecraft, item);
+                        if (await fs.pathExists(rootPath)) {
+                            sourcePath = rootPath;
+                            sender.send('log', `Encontrado ${item} en la carpeta raíz (.minecraft)`);
+                        }
+                    }
+                }
+            }
 
             if (await fs.pathExists(sourcePath)) {
                 sender.send('log', `Copiando ${item}...`);
