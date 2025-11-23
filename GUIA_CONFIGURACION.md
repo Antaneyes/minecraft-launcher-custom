@@ -2,45 +2,60 @@
 
 Esta guía explica cómo configurar el launcher y gestionar las actualizaciones para tus jugadores de la forma más sencilla posible.
 
-## 1. Configuración Inicial
+## 1. Configuración del Servidor y Versiones
 
-### Enlazar con tu Repositorio
-Para que el auto-updater del launcher funcione, asegúrate de que el `package.json` apunte a tu repositorio de GitHub correcto.
+Ahora todo se controla desde un único archivo en la raíz del proyecto: **`launcher_builder_config.json`**.
 
-### Configurar la URL de Actualización (Juego)
-El launcher descarga los mods desde una URL que tú defines.
-1.  Abre `utils/updater.js`.
-2.  Edita la constante `UPDATE_URL` con la dirección donde alojarás tu `manifest.json` (puede ser un servidor web, S3, o incluso GitHub Pages/Raw).
+```json
+{
+    "gameVersion": "1.21.10",
+    "fabricLoaderVersion": "0.18.1",
+    "repoUser": "Antaneyes",
+    "repoName": "minecraft-launcher-custom",
+    "branch": "master"
+}
+```
+
+- **Cambiar versión de Minecraft**: Edita `gameVersion`.
+- **Cambiar versión de Fabric**: Edita `fabricLoaderVersion`.
+- **Repositorio**: Configura tu usuario y nombre de repo de GitHub.
+
+El launcher se encargará automáticamente de descargar las librerías y versiones correctas (Vanilla + Fabric) sin que tú tengas que subir nada.
 
 ## 2. Gestión de Archivos del Juego (Mods/Configs)
 
-En lugar de editar el `manifest.json` a mano, el launcher lo genera por ti.
+1.  Coloca los archivos **personalizados** que quieres que tengan los jugadores en la carpeta `update_files` (en la raíz del proyecto).
+    - `mods/` -> Tus mods.
+    - `config/` -> Tus configuraciones.
+    - `servers.dat` -> Lista de servidores.
+    - `options.txt` -> Opciones gráficas forzadas (opcional).
 
-1.  Coloca **todos** los archivos que quieres que tengan los jugadores (mods, configs, resourcepacks) en la carpeta:
-    `update_files` (está en la raíz del proyecto).
-2.  Mantén esa carpeta limpia. **Lo que haya ahí es lo que tendrán los jugadores.**
-    - Si añades un mod ahí, se descargará.
-    - Si borras un mod de ahí, se les borrará a ellos.
+2.  **IMPORTANTE**: Ya **NO** necesitas subir las carpetas `libraries` ni `versions`. El launcher las gestiona solo. Mantén `update_files` limpia, solo con lo tuyo.
 
-## 3. Publicar una Actualización
+## 3. Modo Desarrollo (Pruebas Locales)
 
-Cuando quieras lanzar una nueva versión (ya sea del launcher o nuevos mods):
+Para probar cambios sin subirlos a Internet:
 
-1.  Abre una terminal en la carpeta del proyecto.
+1.  Ejecuta `npm start`.
+2.  El launcher detectará que estás en modo desarrollo y usará tu `manifest.json` **local**.
+3.  Copiará los archivos de tu carpeta `update_files` **al instante**, sin descargarlos.
+
+Esto te permite probar nuevos mods o versiones en segundos.
+
+## 4. Publicar una Actualización
+
+Cuando todo funcione bien y quieras enviárselo a los jugadores:
+
+1.  Abre una terminal.
 2.  Ejecuta:
     ```bash
     node release.js
     ```
 
-**¿Qué hace este comando mágico?**
-1.  **Versión**: Sube la versión del proyecto automáticamente (ej. 1.0.14 -> 1.0.15).
-2.  **Manifiesto**: Escanea tu carpeta `update_files`, calcula los hashes y actualiza `manifest.json`.
-3.  **Compilación**: Crea el nuevo instalador `.exe`.
-4.  **GitHub**: Sube todo el código y crea una nueva **Release** en GitHub con el instalador listo para descargar.
+**¿Qué hace este comando?**
+1.  **Lee tu config**: Usa la versión que pusiste en `launcher_builder_config.json`.
+2.  **Manifiesto**: Genera el `manifest.json` escaneando tu carpeta `update_files`.
+3.  **Versión**: Sube la versión del launcher (ej. 1.0.15 -> 1.0.16).
+4.  **GitHub**: Sube el código, el manifiesto y crea una **Release** con el instalador `.exe`.
 
-## 4. Para los Jugadores
-
-- **Primera vez**: Pásales el instalador `.exe` de la última Release de GitHub.
-- **Actualizaciones**:
-    - **Mods**: Si cambiaste archivos en `update_files` y lanzaste release, el launcher los descargará al abrirse.
-    - **Launcher**: Si hay una nueva versión del programa, les saldrá un aviso para actualizarse automáticamente.
+Los jugadores recibirán la actualización automáticamente al abrir el launcher.
