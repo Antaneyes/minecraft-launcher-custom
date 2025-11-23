@@ -47,6 +47,12 @@
             "size": 7479608
         },
         {
+            "path": "mods/ForgeConfigAPIPort-v21.9.8+mc1.21.9-Fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/ForgeConfigAPIPort-v21.9.8+mc1.21.9-Fabric.jar",
+            "sha1": "f1031ee5f1a6f978a886277f4c0e34063426aebd",
+            "size": 615421
+        },
+        {
             "path": "mods/ImmediatelyFast-Fabric-1.13.2+1.21.10.jar",
             "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/ImmediatelyFast-Fabric-1.13.2+1.21.10.jar",
             "sha1": "e3f487736064ccd6c94e110cbaa057cf72eea2aa",
