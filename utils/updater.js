@@ -90,17 +90,24 @@ async function checkAndDownloadUpdates(sender) {
         // Process files
         if (manifest.files && Array.isArray(manifest.files)) {
             // 1. CLEANUP PHASE: Remove old mods
-            const modsDir = path.join(GAME_ROOT, 'mods');
-            if (await fs.pathExists(modsDir)) {
-                const localMods = await fs.readdir(modsDir);
-                const manifestModNames = manifest.files
-                    .filter(f => f.path.startsWith('mods/'))
-                    .map(f => path.basename(f.path));
+            const adminFile = path.join(GAME_ROOT, '.admin');
+            const isAdmin = await fs.pathExists(adminFile);
 
-                for (const file of localMods) {
-                    if (!manifestModNames.includes(file)) {
-                        sender.send('log', `Eliminando mod antiguo: ${file}`);
-                        await fs.remove(path.join(modsDir, file));
+            if (isAdmin) {
+                sender.send('log', 'MODO ADMIN DETECTADO: Saltando limpieza de mods antiguos.');
+            } else {
+                const modsDir = path.join(GAME_ROOT, 'mods');
+                if (await fs.pathExists(modsDir)) {
+                    const localMods = await fs.readdir(modsDir);
+                    const manifestModNames = manifest.files
+                        .filter(f => f.path.startsWith('mods/'))
+                        .map(f => path.basename(f.path));
+
+                    for (const file of localMods) {
+                        if (!manifestModNames.includes(file)) {
+                            sender.send('log', `Eliminando mod antiguo: ${file}`);
+                            await fs.remove(path.join(modsDir, file));
+                        }
                     }
                 }
             }
