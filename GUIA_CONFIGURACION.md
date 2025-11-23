@@ -44,18 +44,32 @@ Esto te permite probar nuevos mods o versiones en segundos.
 
 ## 4. Publicar una Actualización
 
-Cuando todo funcione bien y quieras enviárselo a los jugadores:
+Tienes dos opciones, dependiendo de qué quieras actualizar:
 
-1.  Abre una terminal.
-2.  Ejecuta:
+### Opción A: Actualizar MODS o VERSIÓN DEL JUEGO (Lo habitual)
+Si has añadido mods, cambiado configs o cambiado la versión en `launcher_builder_config.json`:
+
+1.  Ejecuta:
+    ```bash
+    node update_server.js
+    ```
+    
+**Esto:**
+- Regenera el `manifest.json`.
+- Sube los cambios a GitHub.
+- **NO** obliga a los jugadores a bajar un nuevo `.exe`.
+- Los jugadores recibirán los cambios automáticamente al abrir el launcher.
+
+### Opción B: Actualizar el PROGRAMA LAUNCHER (Raro)
+Si has tocado código del propio launcher (ej. `index.js`, `utils/updater.js`) y necesitas que todos se bajen el nuevo `.exe`:
+
+1.  Ejecuta:
     ```bash
     node release.js
     ```
 
-**¿Qué hace este comando?**
-1.  **Lee tu config**: Usa la versión que pusiste en `launcher_builder_config.json`.
-2.  **Manifiesto**: Genera el `manifest.json` escaneando tu carpeta `update_files`.
-3.  **Versión**: Sube la versión del launcher (ej. 1.0.15 -> 1.0.16).
-4.  **GitHub**: Sube el código, el manifiesto y crea una **Release** con el instalador `.exe`.
-
-Los jugadores recibirán la actualización automáticamente al abrir el launcher.
+**Esto:**
+- Sube la versión del launcher (ej. 1.0.16 -> 1.0.17).
+- Compila el nuevo `.exe`.
+- Crea una Release en GitHub.
+- El launcher avisará a los jugadores de que hay una nueva versión de la aplicación.

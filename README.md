@@ -21,23 +21,20 @@ Un launcher personalizado para servidores de Minecraft con actualizaciones autom
     npm start
     ```
 
-## Crear una Nueva Versión (Release)
+## Publicar Actualizaciones
 
-Este proyecto incluye un script de automatización para facilitar el despliegue.
+### Actualizar Contenido (Mods/Configs)
+Para actualizar los archivos del juego sin cambiar la versión del launcher:
+```bash
+node update_server.js
+```
 
-1.  Asegúrate de tener **GitHub CLI (`gh`)** instalado y autenticado.
-2.  Coloca los mods/configs actualizados en la carpeta `update_files`.
-3.  Ejecuta el script de release:
-    ```bash
-    node release.js
-    ```
-
-Este script automáticamente:
-- Sube la versión en `package.json` y `package-lock.json`.
-- Regenera el `manifest.json` basado en la carpeta `update_files`.
-- Compila el instalador (`.exe`).
-- Sube los cambios a GitHub.
-- Crea una **Release** en GitHub con todos los archivos necesarios (`.exe`, `latest.yml`, etc.).
+### Actualizar el Launcher (Nueva Versión)
+Para lanzar una nueva versión del ejecutable (`.exe`):
+```bash
+node release.js
+```
+Este script automatiza el versionado, compilación y creación de la Release en GitHub.
 
 ## Estructura del Proyecto
 - `index.js`: Proceso principal de Electron.
