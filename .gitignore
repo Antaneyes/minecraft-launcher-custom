@@ -5,3 +5,9 @@ auth_cache.json
 launcher-config.json
 OmbiCraft-Launcher-Setup.exe
 token.txt
+logs/
+*.log
+debug_log.txt
+launch_cmd.txt
+launch_args.json
+versions/
