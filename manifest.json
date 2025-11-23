@@ -1,8 +1,8 @@
 {
     "version": "2025.11.23",
     "gameVersion": "fabric-loader-0.17.2-1.21.9",
-    "launcherVersion": "1.0.19",
-    "launcherUrl": "https://github.com/Antaneyes/minecraft-launcher-custom/releases/download/v1.0.19/OmbiCraft-Launcher-Setup-1.0.19.exe",
+    "launcherVersion": "1.0.20",
+    "launcherUrl": "https://github.com/Antaneyes/minecraft-launcher-custom/releases/download/v1.0.20/OmbiCraft-Launcher-Setup-1.0.20.exe",
     "files": [
         {
             "path": "mods/architectury-18.0.5-fabric.jar",
