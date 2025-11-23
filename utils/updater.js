@@ -124,6 +124,19 @@ async function checkAndDownloadUpdates(sender) {
                     return;
                 }
 
+                // DEV MODE: Copy from local update_files if available
+                if (!app.isPackaged) {
+                    const localSourcePath = path.join(__dirname, '..', 'update_files', file.path);
+                    if (await fs.pathExists(localSourcePath)) {
+                        sender.send('log', `[DEV] Copiando localmente: ${file.path}`);
+                        await fs.ensureDir(path.dirname(destPath));
+                        await fs.copy(localSourcePath, destPath);
+                        processed++;
+                        sender.send('progress', { current: processed, total: total, type: 'update' });
+                        return;
+                    }
+                }
+
                 // Check if file exists and hash matches (if provided)
                 if (await fs.pathExists(destPath)) {
                     if (file.sha1) {
