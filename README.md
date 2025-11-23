@@ -38,4 +38,4 @@ Este script automatiza el versionado, compilación y creación de la Release en 
 
 ## Documentación
 
-Para una guía detallada sobre cómo configurar y desplegar actualizaciones, visita la [Wiki del Proyecto]([https://github.com/Antaneyes/minecraft-launcher-custom/wiki](https://github.com/Antaneyes/minecraft-launcher-custom/wiki/Gu%C3%ADa-de-Configuraci%C3%B3n-y-Despliegue)).
+Para una guía detallada sobre cómo configurar y desplegar actualizaciones, visita la [Wiki del Proyecto]([https://github.com/Antaneyes/minecraft-launcher-custom/wiki](https://github.com/Antaneyes/minecraft-launcher-custom/wiki/Gu%C3%ADa-de-Configuraci%C3%B3n-y-Despliegue).
