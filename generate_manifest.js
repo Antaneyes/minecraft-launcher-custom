@@ -3,16 +3,19 @@ const path = require('path');
 const crypto = require('crypto');
 
 // CONFIGURATION
-const REPO_USER = 'Antaneyes';
-const REPO_NAME = 'minecraft-launcher-custom';
-const BRANCH = 'master'; // or 'main'
+// CONFIGURATION
+const config = require('./launcher_builder_config.json');
+
+const REPO_USER = config.repoUser;
+const REPO_NAME = config.repoName;
+const BRANCH = config.branch;
 const BASE_URL = `https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/${BRANCH}/update_files`;
 
 const UPDATE_DIR = path.join(__dirname, 'update_files');
 const MANIFEST_PATH = path.join(__dirname, 'manifest.json');
 
 // Game version to enforce
-const GAME_VERSION = 'fabric-loader-0.17.2-1.21.9';
+const GAME_VERSION = `fabric-loader-${config.fabricLoaderVersion}-${config.gameVersion}`;
 const MANIFEST_VERSION = new Date().toISOString().split('T')[0].replace(/-/g, '.'); // e.g., 2023.11.22
 
 function getFileHash(filePath) {

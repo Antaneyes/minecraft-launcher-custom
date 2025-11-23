@@ -1,6 +1,7 @@
 const axios = require('axios');
 const fs = require('fs-extra');
 const path = require('path');
+const { app } = require('electron');
 
 const crypto = require('crypto');
 
@@ -56,10 +57,25 @@ async function checkAndDownloadUpdates(sender) {
 
         // Fetch manifest
         let manifest;
+        const { app } = require('electron'); // Ensure app is imported if not already, or pass it in. 
+        // Actually app is in main process, but this is renderer/updater logic? 
+        // Wait, updater.js is used in main process (ipcMain). Yes.
+
         try {
-            // Add cache busting to ensure we get the latest manifest
-            const response = await axios.get(`${updateUrl}?t=${Date.now()}`);
-            manifest = response.data;
+            if (!app.isPackaged) {
+                // DEV MODE: Read local manifest
+                const localManifestPath = path.join(__dirname, '..', 'manifest.json');
+                if (await fs.pathExists(localManifestPath)) {
+                    sender.send('log', 'MODO DEV: Usando manifest.json local.');
+                    manifest = await fs.readJson(localManifestPath);
+                }
+            }
+
+            if (!manifest) {
+                // Add cache busting to ensure we get the latest manifest
+                const response = await axios.get(`${updateUrl}?t=${Date.now()}`);
+                manifest = response.data;
+            }
         } catch (e) {
             sender.send('log', 'No se pudo obtener el manifiesto de actualización. Saltando actualización (¿Modo Offline?).');
             return; // Skip updates if server is down
@@ -175,165 +191,118 @@ async function checkAndDownloadUpdates(sender) {
             const targetVersionDir = path.join(versionsDir, targetVersion);
             const targetJsonPath = path.join(targetVersionDir, `${targetVersion}.json`);
 
-            if (!await fs.pathExists(targetVersionDir)) {
-                sender.send('log', `Versión objetivo ${targetVersion} no encontrada. Intentando auto-instalación...`);
+            // Parse version string: "fabric-loader-{loader}-{mc}"
+            const versionParts = manifest.gameVersion.split('-');
+            let mcVersion, loaderVersion;
 
-                // Parse versions from string: "fabric-loader-{loader}-{mc}"
-                // Example: "fabric-loader-0.17.2-1.21.9"
-                const versionParts = manifest.gameVersion.split('-');
-                // Assuming format: fabric-loader-[loaderVersion]-[mcVersion]
-                // parts[0] = fabric, parts[1] = loader, parts[2] = loaderVersion, parts[3] = mcVersion
+            if (versionParts.length >= 4) {
+                // Format: fabric-loader-0.17.2-1.21.9
+                loaderVersion = versionParts[2];
+                mcVersion = versionParts.slice(3).join('-');
+            } else {
+                // Fallback/Error handling
+                sender.send('log', `Error: Formato de versión desconocido: ${manifest.gameVersion}`);
+                throw new Error("Formato de versión inválido. Debe ser 'fabric-loader-LOADER-MC'");
+            }
 
-                let mcVersion = manifest.gameVersion.split('-').pop(); // Fallback
-                let loaderVersion = '0.17.2'; // Fallback
-
-                if (versionParts.length >= 4) {
-                    loaderVersion = versionParts[2];
-                    mcVersion = versionParts.slice(3).join('-'); // Join rest in case MC version has dashes
-                }
+            // Always try to ensure the JSON exists or is valid
+            if (!await fs.pathExists(targetJsonPath)) {
+                sender.send('log', `Versión ${targetVersion} no detectada. Instalando...`);
 
                 const fabricMetaUrl = `https://meta.fabricmc.net/v2/versions/loader/${mcVersion}/${loaderVersion}/profile/json`;
+
                 try {
                     await fs.ensureDir(targetVersionDir);
                     const response = await axios.get(fabricMetaUrl);
-                    const json = response.data;
-                    json.id = targetVersion;
-                    json.downloads = {
-                        "client": {
-                            "sha1": "ce92fd8d1b2460c41ceda07ae7b3fe863a80d045",
-                            "size": 30591861,
-                            "url": "https://piston-data.mojang.com/v1/objects/ce92fd8d1b2460c41ceda07ae7b3fe863a80d045/client.jar"
-                        },
-                        "client_mappings": {
-                            "sha1": "3641ccb54eac2153c7e8274823c5a8e046beaba0",
-                            "size": 11510637,
-                            "url": "https://piston-data.mojang.com/v1/objects/3641ccb54eac2153c7e8274823c5a8e046beaba0/client.txt"
-                        }
-                    };
-                    json.assetIndex = {
-                        "id": "27",
-                        "sha1": "4a667d8cb576e16de8197074c978531c01cd6544",
-                        "size": 507362,
-                        "totalSize": 435439577,
-                        "url": "https://piston-meta.mojang.com/v1/packages/4a667d8cb576e16de8197074c978531c01cd6544/27.json"
-                    };
-                    json.assets = "27";
-                    await fs.writeJson(targetJsonPath, json, { spaces: 4 });
-                    sender.send('log', `Descargado ${targetVersion}.`);
-                } catch (e) {
-                    sender.send('log', `Auto-instalación fallida: ${e.message}`);
-                }
-            }
+                    const fabricJson = response.data;
+                    fabricJson.id = targetVersion;
 
-            if (await fs.pathExists(targetJsonPath)) {
-                sender.send('log', `Parcheando JSON de Fabric...`);
-                try {
-                    const fabricJson = await fs.readJson(targetJsonPath);
+                    // --- MERGE WITH VANILLA LOGIC ---
+                    // We manually merge to ensure MCLC has a complete, standalone JSON to work with.
 
-                    // 1. Inject Downloads (redundant if auto-installed, but good for safety)
-                    fabricJson.downloads = {
-                        "client": {
-                            "sha1": "ce92fd8d1b2460c41ceda07ae7b3fe863a80d045",
-                            "size": 30591861,
-                            "url": "https://piston-data.mojang.com/v1/objects/ce92fd8d1b2460c41ceda07ae7b3fe863a80d045/client.jar"
-                        },
-                        "client_mappings": {
-                            "sha1": "3641ccb54eac2153c7e8274823c5a8e046beaba0",
-                            "size": 11510637,
-                            "url": "https://piston-data.mojang.com/v1/objects/3641ccb54eac2153c7e8274823c5a8e046beaba0/client.txt"
-                        }
-                    };
+                    // 1. Get Vanilla JSON
+                    const vanillaMetaUrl = 'https://piston-meta.mojang.com/mc/game/version_manifest_v2.json';
+                    const vmResponse = await axios.get(vanillaMetaUrl);
+                    const vanillaVersionInfo = vmResponse.data.versions.find(v => v.id === mcVersion);
 
-                    // 2. Merge Libraries & Arguments from Vanilla
-                    const parentVersion = targetVersion.split('-').pop();
-                    const parentDir = path.join(GAME_ROOT, 'versions', parentVersion);
-                    const parentJsonPath = path.join(parentDir, `${parentVersion}.json`);
+                    if (!vanillaVersionInfo) throw new Error(`Versión Vanilla ${mcVersion} no encontrada.`);
 
-                    if (!await fs.pathExists(parentJsonPath)) {
-                        // Download Vanilla JSON
-                        try {
-                            await fs.ensureDir(parentDir);
-                            const vm = await axios.get('https://piston-meta.mojang.com/mc/game/version_manifest_v2.json');
-                            const v = vm.data.versions.find(v => v.id === parentVersion);
-                            if (v) {
-                                const vRes = await axios.get(v.url);
-                                await fs.writeJson(parentJsonPath, vRes.data, { spaces: 4 });
-                            }
-                        } catch (e) {
-                            sender.send('log', `Error descargando JSON Vanilla: ${e.message}`);
-                        }
-                    }
+                    const vResponse = await axios.get(vanillaVersionInfo.url);
+                    const vanillaJson = vResponse.data;
 
-                    if (await fs.pathExists(parentJsonPath)) {
-                        const parentJson = await fs.readJson(parentJsonPath);
+                    // 2. Merge Libraries
+                    // We keep all Fabric libraries. We add Vanilla libraries that are NOT already present (by name).
+                    // Fabric usually handles this via 'inheritsFrom', but MCLC sometimes needs a flat file for custom versions.
+                    const existingLibs = new Set(fabricJson.libraries.map(l => l.name.split(':')[0] + ':' + l.name.split(':')[1]));
 
-                        // Merge Libraries
-                        const existingLibMap = new Map();
-                        fabricJson.libraries.forEach(lib => {
-                            const parts = lib.name.split(':');
-                            existingLibMap.set(`${parts[0]}:${parts[1]}`, lib);
-                        });
-
-                        parentJson.libraries.forEach(lib => {
-                            if (lib.name.includes('natives-')) {
-                                // Always add natives
-                                fabricJson.libraries.push(lib);
-                            } else {
-                                const parts = lib.name.split(':');
-                                const key = `${parts[0]}:${parts[1]}`;
-                                if (!existingLibMap.has(key)) {
-                                    fabricJson.libraries.push(lib);
-                                }
-                            }
-                        });
-
-                        // Inject Arguments (CRITICAL)
-                        if (parentJson.arguments) {
-                            fabricJson.arguments = parentJson.arguments;
-                        }
-
-                        // Inject Asset Index
-                        if (parentJson.assetIndex) {
-                            fabricJson.assetIndex = parentJson.assetIndex;
-                            fabricJson.assets = parentJson.assets;
-                        }
-                    }
-
-                    // 3. Fix Natives & Downloads
-                    delete fabricJson.inheritsFrom;
-
-                    fabricJson.libraries.forEach(lib => {
-                        // Generic download fix
-                        if (!lib.downloads && lib.name) {
-                            const parts = lib.name.split(':');
-                            const relPath = `${parts[0].replace(/\./g, '/')}/${parts[1]}/${parts[2]}/${parts[1]}-${parts[2]}.jar`;
-                            lib.downloads = {
-                                "artifact": {
-                                    "path": relPath,
-                                    "url": (lib.url || "https://maven.fabricmc.net/") + relPath,
-                                    "size": 0
-                                }
-                            };
-
-                            // Fix for ASM and other libraries not on Fabric Maven
-                            if (lib.name.startsWith('org.ow2.asm') || lib.name.startsWith('org.jetbrains.kotlin')) {
-                                lib.downloads.artifact.url = "https://repo1.maven.org/maven2/" + relPath;
-                            }
-                        }
-                        // Natives fix
-                        if (lib.name.includes('natives-windows')) {
-                            if (!lib.downloads.classifiers) {
-                                lib.downloads.classifiers = { "natives-windows": lib.downloads.artifact };
-                                lib.natives = { "windows": "natives-windows" };
-                            }
+                    vanillaJson.libraries.forEach(lib => {
+                        const libName = lib.name.split(':')[0] + ':' + lib.name.split(':')[1];
+                        if (!existingLibs.has(libName)) {
+                            fabricJson.libraries.push(lib);
                         }
                     });
 
+                    // 3. Merge Arguments
+                    if (!fabricJson.arguments) fabricJson.arguments = {};
+                    if (vanillaJson.arguments) {
+                        // Merge game args
+                        const fabricGameArgs = fabricJson.arguments.game || [];
+                        const vanillaGameArgs = vanillaJson.arguments.game || [];
+                        fabricJson.arguments.game = [...vanillaGameArgs, ...fabricGameArgs];
+
+                        // Merge jvm args
+                        const fabricJvmArgs = fabricJson.arguments.jvm || [];
+                        const vanillaJvmArgs = vanillaJson.arguments.jvm || [];
+                        fabricJson.arguments.jvm = [...vanillaJvmArgs, ...fabricJvmArgs];
+                    }
+
+                    // 4. Set Assets
+                    fabricJson.assets = vanillaJson.assets;
+                    fabricJson.assetIndex = vanillaJson.assetIndex;
+                    fabricJson.downloads = vanillaJson.downloads; // Client jar, etc.
+
+                    // 5. Fix Library URLs (The common failure point)
+                    fabricJson.libraries.forEach(lib => {
+                        try {
+                            if (!lib.downloads) lib.downloads = {};
+                            if (!lib.downloads.artifact) {
+                                const parts = lib.name.split(':');
+                                if (parts.length < 3) {
+                                    console.warn(`Skipping malformed library name: ${lib.name}`);
+                                    return;
+                                }
+                                const domain = parts[0].replace(/\./g, '/');
+                                const name = parts[1];
+                                const version = parts[2];
+                                const path = `${domain}/${name}/${version}/${name}-${version}.jar`;
+
+                                // Determine Base URL
+                                let baseUrl = "https://libraries.minecraft.net/"; // Default Vanilla
+                                if (lib.url) baseUrl = lib.url; // Explicit override
+                                else if (parts[0].includes('fabricmc') || parts[0].includes('ow2') || parts[0].includes('jetbrains')) {
+                                    baseUrl = "https://maven.fabricmc.net/"; // Fabric/Common deps
+                                }
+
+                                lib.downloads.artifact = {
+                                    path: path,
+                                    url: baseUrl + path,
+                                    size: 0 // Unknown, but required by some parsers
+                                };
+                            }
+                        } catch (err) {
+                            console.error(`Error fixing library ${lib.name}:`, err);
+                        }
+                    });
+
+                    // Remove 'inheritsFrom' to force MCLC to use our fully merged JSON
+                    delete fabricJson.inheritsFrom;
+
                     await fs.writeJson(targetJsonPath, fabricJson, { spaces: 4 });
-                    sender.send('log', 'JSON de Fabric parcheado correctamente.');
+                    sender.send('log', `Instalación de ${targetVersion} completada.`);
 
                 } catch (e) {
-                    sender.send('log', `Error parcheando JSON: ${e.message}`);
+                    sender.send('log', `ERROR CRÍTICO instalando versión: ${e.message}`);
+                    throw e;
                 }
             }
 

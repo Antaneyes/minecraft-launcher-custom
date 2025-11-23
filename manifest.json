@@ -1,6 +1,6 @@
 {
     "version": "2025.11.23",
-    "gameVersion": "fabric-loader-0.17.2-1.21.9",
+    "gameVersion": "fabric-loader-0.18.1-1.21.10",
     "launcherVersion": "1.0.15",
     "launcherUrl": "https://github.com/Antaneyes/minecraft-launcher-custom/releases/download/v1.0.15/OmbiCraft-Launcher-Setup-1.0.15.exe",
     "files": [
