@@ -29,6 +29,12 @@
             "size": 960518
         },
         {
+            "path": "mods/EasyShulkerBoxes-v21.9.0+mc1.21.9-Fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/EasyShulkerBoxes-v21.9.0+mc1.21.9-Fabric.jar",
+            "sha1": "e8c387909c6bcc03d033744a66fa0fdfea1ec999",
+            "size": 203575
+        },
+        {
             "path": "mods/fabric-api-0.134.0+1.21.9.jar",
             "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/fabric-api-0.134.0+1.21.9.jar",
             "sha1": "1f5ba40f85c96c4f8b661097d3e3f8906cc55c4f",
@@ -75,12 +81,6 @@
             "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/RoughlyEnoughItems-21.9.9999-fabric.jar",
             "sha1": "e420e7e74f41962cec5e8a4800b54c8f14c4e12a",
             "size": 2463650
-        },
-        {
-            "path": "mods/shulkerboxtooltip-fabric-5.2.12+1.21.9.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/shulkerboxtooltip-fabric-5.2.12+1.21.9.jar",
-            "sha1": "3a4746b9e70d3dc6fddbe1e3c72f53a2661feb31",
-            "size": 389733
         },
         {
             "path": "mods/sodium-fabric-0.7.3+mc1.21.10.jar",
