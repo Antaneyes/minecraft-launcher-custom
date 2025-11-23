@@ -4,8 +4,14 @@ const { autoUpdater } = require('electron-updater');
 
 // Configure autoUpdater
 autoUpdater.autoDownload = true;
-autoUpdater.logger = require("electron-log");
+const log = require("electron-log");
+autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = "info";
+
+// In development, write logs to project directory for easier access
+if (!app.isPackaged) {
+    log.transports.file.resolvePathFn = () => path.join(__dirname, 'logs', 'main.log');
+}
 
 const { checkAndDownloadUpdates, GAME_ROOT } = require('./utils/updater');
 const { launchGame } = require('./utils/launcher');

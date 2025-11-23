@@ -68,8 +68,11 @@ async function checkAndDownloadUpdates(sender) {
         sender.send('log', `Versión remota: ${manifest.version}`);
 
         // CHECK FOR LAUNCHER UPDATE
-        const appVersion = require('electron').app.getVersion();
-        if (manifest.launcherVersion && compareVersions(manifest.launcherVersion, appVersion) > 0) {
+        // CHECK FOR LAUNCHER UPDATE
+        const { app } = require('electron');
+        const appVersion = app.getVersion();
+        // Only check for launcher updates if packaged (production)
+        if (app.isPackaged && manifest.launcherVersion && compareVersions(manifest.launcherVersion, appVersion) > 0) {
             sender.send('log', `¡Nueva versión del launcher disponible: ${manifest.launcherVersion}!`);
             sender.send('launcher-update-available', manifest.launcherUrl);
         }
@@ -351,4 +354,4 @@ async function checkAndDownloadUpdates(sender) {
     }
 }
 
-module.exports = { checkAndDownloadUpdates, GAME_ROOT };
+module.exports = { checkAndDownloadUpdates, GAME_ROOT, compareVersions, calculateHash };
