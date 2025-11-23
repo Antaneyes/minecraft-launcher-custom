@@ -1,65 +1,48 @@
-# Custom Minecraft Server Launcher
+# OmbiCraft Launcher
 
-This is a custom launcher built for your private Minecraft server. It automatically checks for updates (mods, configs) from a web server you control before launching the game.
+Un launcher personalizado para servidores de Minecraft con actualizaciones automáticas, soporte para cuentas autenticas y gestión de mods.
 
-## Setup for the Admin (You)
+## Características
+- 🔄 **Auto-actualización de Mods/Configs**: Sincroniza automáticamente los archivos del cliente con tu servidor.
+- 🚀 **Auto-actualización del Launcher**: Se actualiza a sí mismo usando GitHub Releases.
+- 🔑 **Login de Microsoft**: Soporte nativo para cuentas autenticas.
+- ⚙️ **Configuración**: Selector de RAM y opciones de lanzamiento.
+- 🛠️ **Modo Desarrollador**: Logs detallados y herramientas de depuración.
 
-### 1. Hosting the Updates
-You need a place to host your mod files and a `manifest.json` file. This can be:
-- A simple web server (Apache/Nginx/IIS).
-- A public GitHub repository (using raw.githubusercontent.com links).
-- A static file host.
+## Instalación (Desarrollo)
 
-### 2. Creating the Manifest
-Create a file named `manifest.json` on your server. It should look like this:
-
-```json
-{
-  "version": "1.0.0",
-  "files": [
-    {
-      "path": "mods/jei.jar",
-      "url": "http://your-server.com/files/mods/jei.jar"
-    },
-    {
-      "path": "config/some-mod.cfg",
-      "url": "http://your-server.com/files/config/some-mod.cfg"
-    }
-  ]
-}
-```
-
-- `path`: Where the file should go inside the Minecraft folder (relative to the game root).
-- `url`: Direct download link to the file.
-
-### 3. Configuring the Launcher
-Open `src/utils/updater.js` and change the `UPDATE_URL` constant to point to your `manifest.json`:
-
-```javascript
-const UPDATE_URL = 'http://your-server.com/manifest.json';
-```
-
-### 4. Building for Friends
-To create the `.exe` for your friends:
-
-1.  Run `npm install` (if you haven't already).
-2.  Run `npm install electron-builder --save-dev`.
-3.  Add a build script to `package.json`:
-    ```json
-    "scripts": {
-      "start": "electron .",
-      "dist": "electron-builder"
-    }
+1.  Clonar el repositorio.
+2.  Instalar dependencias:
+    ```bash
+    npm install
     ```
-4.  Run `npm run dist`.
-5.  Send the generated `.exe` (in the `dist` folder) to your friends.
+3.  Iniciar en modo desarrollo:
+    ```bash
+    npm start
+    ```
 
-## How it Works
-1.  Friend opens launcher.
-2.  Launcher checks your `manifest.json`.
-3.  It downloads any files listed there to their `%APPDATA%/.my-custom-server` folder.
-4.  It launches Minecraft with those files.
+## Crear una Nueva Versión (Release)
 
-## Customization
-- **UI**: Edit `src/ui/index.html` and `src/ui/styles.css`.
-- **Minecraft Version**: Edit `src/utils/launcher.js` to change the version (e.g., "1.20.1").
+Este proyecto incluye un script de automatización para facilitar el despliegue.
+
+1.  Asegúrate de tener **GitHub CLI (`gh`)** instalado y autenticado.
+2.  Coloca los mods/configs actualizados en la carpeta `update_files`.
+3.  Ejecuta el script de release:
+    ```bash
+    node release.js
+    ```
+
+Este script automáticamente:
+- Sube la versión en `package.json` y `package-lock.json`.
+- Regenera el `manifest.json` basado en la carpeta `update_files`.
+- Compila el instalador (`.exe`).
+- Sube los cambios a GitHub.
+- Crea una **Release** en GitHub con todos los archivos necesarios (`.exe`, `latest.yml`, etc.).
+
+## Estructura del Proyecto
+- `index.js`: Proceso principal de Electron.
+- `ui/`: Interfaz de usuario (HTML/CSS/JS).
+- `utils/`: Lógica de actualización, lanzamiento y autenticación.
+- `update_files/`: Carpeta fuente para generar el manifiesto de mods.
+- `dist/`: Carpeta de salida de la compilación.
+- `logs/`: Logs de la aplicación (en modo dev).
