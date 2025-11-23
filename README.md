@@ -36,11 +36,6 @@ node release.js
 ```
 Este script automatiza el versionado, compilación y creación de la Release en GitHub.
 
-## Estructura del Proyecto
-- `index.js`: Proceso principal de Electron.
-- `ui/`: Interfaz de usuario (HTML/CSS/JS).
-- `utils/`: Lógica de actualización, lanzamiento y autenticación.
-- `launcher_builder_config.json`: Configuración centralizada de versiones y repositorio.
-- `update_files/`: Carpeta fuente para generar el manifiesto de mods.
-- `dist/`: Carpeta de salida de la compilación.
-- `logs/`: Logs de la aplicación (en modo dev).
+## Documentación
+
+Para una guía detallada sobre cómo configurar y desplegar actualizaciones, visita la [Wiki del Proyecto](https://github.com/Antaneyes/minecraft-launcher-custom/wiki).
