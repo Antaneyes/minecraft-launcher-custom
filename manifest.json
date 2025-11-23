@@ -77,6 +77,12 @@
             "size": 1077403
         },
         {
+            "path": "mods/PuzzlesLib-v21.9.5+mc1.21.9-Fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/PuzzlesLib-v21.9.5+mc1.21.9-Fabric.jar",
+            "sha1": "e52149f737f545f3d6ff195f3ea3c47f6760ed8d",
+            "size": 1075938
+        },
+        {
             "path": "mods/RoughlyEnoughItems-21.9.9999-fabric.jar",
             "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/RoughlyEnoughItems-21.9.9999-fabric.jar",
             "sha1": "e420e7e74f41962cec5e8a4800b54c8f14c4e12a",
