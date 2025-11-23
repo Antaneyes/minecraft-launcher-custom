@@ -58,7 +58,7 @@ if (!fs.existsSync(UPDATE_DIR)) {
 
 const files = scanDirectory(UPDATE_DIR);
 
-const LAUNCHER_VERSION = "1.0.14";
+const LAUNCHER_VERSION = "1.0.15";
 
 const manifest = {
     version: MANIFEST_VERSION,

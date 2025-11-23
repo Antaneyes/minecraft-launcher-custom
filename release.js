@@ -1,16 +1,17 @@
 const fs = require('fs-extra');
 const path = require('path');
 const { execSync } = require('child_process');
-const packageJsonPath = path.join(__dirname, 'package.json');
 const generateManifestPath = path.join(__dirname, 'generate_manifest.js');
 
 // Helper to run commands
 function run(command) {
     console.log(`\n> ${command}`);
     try {
-        execSync(command, { stdio: 'inherit', cwd: __dirname });
+        return execSync(command, { cwd: __dirname, encoding: 'utf8' }).trim();
     } catch (e) {
         console.error(`Command failed: ${command}`);
+        console.error(e.stdout);
+        console.error(e.stderr);
         process.exit(1);
     }
 }
@@ -18,20 +19,15 @@ function run(command) {
 async function main() {
     console.log('🚀 Starting Automated Release Process...');
 
-    // 1. Read current version and increment
-    const pkg = await fs.readJson(packageJsonPath);
-    const oldVersion = pkg.version;
-    const versionParts = oldVersion.split('.').map(Number);
-    versionParts[2]++; // Increment patch
-    const newVersion = versionParts.join('.');
+    // 1. Bump Version using npm (updates package.json AND package-lock.json)
+    console.log('ℹ️  Bumping version...');
+    // --no-git-tag-version because we handle tagging/releasing via gh cli later
+    const newVersionTag = run('npm version patch --no-git-tag-version');
+    const newVersion = newVersionTag.replace('v', ''); // e.g. "1.0.15"
 
-    console.log(`ℹ️  Upgrading from v${oldVersion} to v${newVersion}`);
+    console.log(`✅ Version bumped to ${newVersion}`);
 
-    // 2. Update package.json
-    pkg.version = newVersion;
-    await fs.writeJson(packageJsonPath, pkg, { spaces: 2 });
-
-    // 3. Update generate_manifest.js
+    // 2. Update generate_manifest.js
     let genManifestContent = await fs.readFile(generateManifestPath, 'utf8');
     genManifestContent = genManifestContent.replace(
         /const LAUNCHER_VERSION = ".*";/,
@@ -39,15 +35,15 @@ async function main() {
     );
     await fs.writeFile(generateManifestPath, genManifestContent);
 
-    // 4. Regenerate Manifest
+    // 3. Regenerate Manifest
     console.log('📦 Regenerating manifest...');
     run('node generate_manifest.js');
 
-    // 5. Build
+    // 4. Build
     console.log('🔨 Building application...');
     run('npm run dist');
 
-    // 6. Git Operations
+    // 5. Git Operations
     console.log('Git: Adding changes...');
     run('git add .');
 
@@ -57,7 +53,7 @@ async function main() {
     console.log('Git: Pushing to remote...');
     run('git push origin master');
 
-    // 7. GitHub Release
+    // 6. GitHub Release
     console.log(`☁️  Creating GitHub Release v${newVersion}...`);
 
     const distDir = path.join(__dirname, 'dist');
