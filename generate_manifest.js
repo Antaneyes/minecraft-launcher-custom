@@ -11,6 +11,20 @@ const REPO_NAME = config.repoName;
 const BRANCH = config.branch;
 const BASE_URL = `https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/${BRANCH}/update_files`;
 
+const UPDATE_DIR = path.join(__dirname, 'update_files');
+const MANIFEST_PATH = path.join(__dirname, 'manifest.json');
+
+// Game version to enforce
+const GAME_VERSION = `fabric-loader-${config.fabricLoaderVersion}-${config.gameVersion}`;
+const MANIFEST_VERSION = new Date().toISOString().split('T')[0].replace(/-/g, '.'); // e.g., 2023.11.22
+
+function getFileHash(filePath) {
+    const fileBuffer = fs.readFileSync(filePath);
+    const hashSum = crypto.createHash('sha1');
+    hashSum.update(fileBuffer);
+    return hashSum.digest('hex');
+}
+
 function scanDirectory(dir, fileList = []) {
     const files = fs.readdirSync(dir);
 
@@ -47,7 +61,7 @@ if (!fs.existsSync(UPDATE_DIR)) {
 
 const files = scanDirectory(UPDATE_DIR);
 
-const LAUNCHER_VERSION = "1.0.15";
+const LAUNCHER_VERSION = "1.0.19";
 
 const manifest = {
     version: MANIFEST_VERSION,
