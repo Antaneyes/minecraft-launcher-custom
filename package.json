@@ -7,6 +7,7 @@
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder",
+    "promote": "node promote_stable.js",
     "test": "jest",
     "lint": "eslint ."
   },
