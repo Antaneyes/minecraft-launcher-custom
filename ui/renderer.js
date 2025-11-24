@@ -224,11 +224,11 @@ ipcRenderer.on('update-complete', () => {
     launchBtn.classList.remove('hidden');
 });
 
-ipcRenderer.on('launcher-update-available', () => {
+ipcRenderer.on('launcher-update-available', (event, version) => {
     const updateBtn = document.getElementById('update-launcher-btn');
     const btnSpan = updateBtn.querySelector('span');
     updateBtn.classList.remove('hidden');
-    btnSpan.textContent = '⚡ Nueva versión disponible (Clic para descargar)';
+    btnSpan.textContent = `⚡ Nueva versión v${version} disponible (Clic para descargar)`;
 
     // Remove previous listeners to avoid duplicates
     const newBtn = updateBtn.cloneNode(true);

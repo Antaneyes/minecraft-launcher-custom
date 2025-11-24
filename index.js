@@ -59,121 +59,20 @@ function createWindow() {
     mainWindow.loadFile(path.join(__dirname, 'ui', 'index.html'));
     mainWindow.removeMenu();
 
-    mainWindow.once('ready-to-show', () => {
+    mainWindow.once('ready-to-show', async () => {
+        const channel = await gameUpdater.getChannel();
+        autoUpdater.allowPrerelease = (channel === 'beta');
+        log(`Configurando AutoUpdater: Canal=${channel}, AllowPrerelease=${autoUpdater.allowPrerelease}`);
         autoUpdater.checkForUpdates();
     });
 }
 
-app.whenReady().then(createWindow);
-
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
-
-app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow();
-    }
-});
-
-// IPC Handlers
-ipcMain.handle('get-update-channel', async () => {
-    return await gameUpdater.getChannel();
-});
-
-ipcMain.handle('set-update-channel', async (event, channel) => {
-    await gameUpdater.setChannel(channel);
-    return true;
-});
-
-ipcMain.on('check-updates', async (event) => {
-    const sender = event.sender;
-
-    // Setup listeners for this update session
-    const onLog = (msg) => {
-        sender.send('log', msg);
-        consoleLog.info(msg);
-    };
-    const onProgress = (data) => sender.send('progress', data);
-    const onError = (msg) => {
-        sender.send('error', msg);
-        consoleLog.error(msg);
-    };
-
-    gameUpdater.on('log', onLog);
-    gameUpdater.on('progress', onProgress);
-    gameUpdater.on('error', onError);
-
-    try {
-        sender.send('status', 'Buscando Actualizaciones');
-        const currentChannel = await gameUpdater.getChannel();
-        sender.send('log', `Buscando actualizaciones (Canal: ${currentChannel})...`);
-
-        // Try to import settings from TLauncher if this is a fresh install
-        await importSettings(gameUpdater.gameRoot, sender);
-
-        await gameUpdater.checkAndDownloadUpdates();
-
-        sender.send('update-complete');
-        sender.send('status', 'Listo');
-    } catch (error) {
-        console.error(error);
-        sender.send('error', error.message);
-    } finally {
-        // Cleanup listeners to avoid memory leaks or duplicate events
-        gameUpdater.off('log', onLog);
-        gameUpdater.off('progress', onProgress);
-        gameUpdater.off('error', onError);
-    }
-});
-
-ipcMain.on('launch-game', async (event, { username, mode, memory }) => {
-    const sender = event.sender;
-
-    // Helper for logging
-    const logToConsole = (msg) => {
-        sender.send('log', msg);
-        consoleLog.info(msg);
-    };
-
-    try {
-        let auth = null;
-
-        if (mode === 'microsoft') {
-            sender.send('status', 'Iniciando Sesión');
-            logToConsole('Iniciando sesión con Microsoft...');
-            auth = await loginMicrosoft(sender);
-            logToConsole(`Sesión iniciada como: ${auth.name}`);
-        }
-
-        sender.send('status', 'Iniciando');
-        logToConsole('Iniciando juego...');
-
-        // Launch Game (updates are assumed to be done)
-        // We pass a custom logger object to capture internal launcher logs if possible,
-        // but launchGame mainly uses sender.send.
-        // For now, we just log the high-level steps here.
-        await launchGame(username, sender, auth, memory, (msg) => consoleLog.info(msg));
-
-        sender.send('status', 'Jugando');
-    } catch (error) {
-        console.error(error);
-        sender.send('error', error.message);
-        consoleLog.error(error.message);
-    }
-});
-
-// AutoUpdater Events
-autoUpdater.on('checking-for-update', () => {
-    if (mainWindow) mainWindow.webContents.send('log', 'Buscando actualizaciones del launcher...');
-});
+// ...
 
 autoUpdater.on('update-available', (info) => {
     if (mainWindow) {
         mainWindow.webContents.send('log', `Actualización disponible: v${info.version}`);
-        mainWindow.webContents.send('launcher-update-available');
+        mainWindow.webContents.send('launcher-update-available', info.version);
     }
 });
 
