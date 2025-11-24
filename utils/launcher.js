@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const { Client, Authenticator } = require('minecraft-launcher-core');
-const { GAME_ROOT } = require('./updater');
+const { GAME_ROOT } = require('./constants');
 const launcher = new Client();
 
 async function launchGame(username, sender, auth = null, memory = "4G") {

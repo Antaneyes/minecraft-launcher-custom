@@ -13,12 +13,15 @@ if (!app.isPackaged) {
     log.transports.file.resolvePathFn = () => path.join(__dirname, 'logs', 'main.log');
 }
 
-const { checkAndDownloadUpdates, GAME_ROOT } = require('./utils/updater');
+const GameUpdater = require('./utils/GameUpdater');
 const { launchGame } = require('./utils/launcher');
 const { loginMicrosoft } = require('./utils/auth');
 const { importSettings } = require('./utils/importer');
 
 let mainWindow;
+
+// Initialize GameUpdater
+const gameUpdater = new GameUpdater();
 
 function createWindow() {
     mainWindow = new BrowserWindow({
@@ -60,20 +63,35 @@ app.on('activate', () => {
 // IPC Handlers
 ipcMain.on('check-updates', async (event) => {
     const sender = event.sender;
+
+    // Setup listeners for this update session
+    const onLog = (msg) => sender.send('log', msg);
+    const onProgress = (data) => sender.send('progress', data);
+    const onError = (msg) => sender.send('error', msg);
+
+    gameUpdater.on('log', onLog);
+    gameUpdater.on('progress', onProgress);
+    gameUpdater.on('error', onError);
+
     try {
         sender.send('status', 'Buscando Actualizaciones');
         sender.send('log', 'Buscando actualizaciones...');
 
         // Try to import settings from TLauncher if this is a fresh install
-        await importSettings(GAME_ROOT, sender);
+        await importSettings(gameUpdater.gameRoot, sender);
 
-        await checkAndDownloadUpdates(sender);
+        await gameUpdater.checkAndDownloadUpdates();
 
         sender.send('update-complete');
         sender.send('status', 'Listo');
     } catch (error) {
         console.error(error);
         sender.send('error', error.message);
+    } finally {
+        // Cleanup listeners to avoid memory leaks or duplicate events
+        gameUpdater.off('log', onLog);
+        gameUpdater.off('progress', onProgress);
+        gameUpdater.off('error', onError);
     }
 });
 
@@ -146,3 +164,4 @@ ipcMain.on('start-launcher-update', () => {
 ipcMain.on('install-launcher-update', () => {
     autoUpdater.quitAndInstall();
 });
+
