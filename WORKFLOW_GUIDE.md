@@ -88,3 +88,42 @@ Cuando una versión beta está lista para ser pública:
 *   **Canales en el Launcher**: Los usuarios pueden cambiar entre "Estable" y "Beta" en la configuración del launcher. Este cambio requiere reiniciar el launcher.
 *   **Autenticación**: Si `release.js` falla al crear la release en GitHub, ejecuta `gh auth login` para renovar tus credenciales.
 *   **Dry Run**: Añade `--dry-run` a cualquier comando para simular lo que pasaría sin hacer cambios reales (ej. `node release.js --beta --dry-run`).
+
+## 6. Comandos Útiles de Git
+
+Aquí tienes una lista rápida de comandos comunes que necesitarás:
+
+### Cambiar de Rama
+*   Ir a la rama de desarrollo (Beta):
+    ```powershell
+    git checkout dev
+    ```
+*   Ir a la rama estable (Master):
+    ```powershell
+    git checkout master
+    ```
+
+### Actualizar Proyecto
+*   Traer los últimos cambios de la nube (GitHub) a tu ordenador:
+    ```powershell
+    git pull
+    ```
+
+### Deshacer Cambios
+*   **Deshacer el último `git push`** (Cuidado: esto borra el último commit de la historia remota):
+    ```powershell
+    git reset --hard HEAD~1
+    git push origin <rama> --force
+    ```
+    *(Reemplaza `<rama>` por `dev` o `master`)*
+
+*   **Descartar cambios locales** (volver al estado del último commit):
+    ```powershell
+    git reset --hard
+    ```
+
+### Ver Estado
+*   Ver en qué rama estás y si hay archivos modificados:
+    ```powershell
+    git status
+    ```
