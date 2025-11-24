@@ -7,7 +7,8 @@ Un launcher personalizado para servidores de Minecraft con actualizaciones autom
 - 🚀 **Auto-actualización del Launcher**: Se actualiza a sí mismo usando GitHub Releases.
 - 🔑 **Login de Microsoft**: Soporte nativo para cuentas autenticas.
 - ⚙️ **Configuración**: Selector de RAM y opciones de lanzamiento.
-- 🛠️ **Modo Desarrollador**: Logs detallados y herramientas de depuración.
+- 🛠️ **Modo Desarrollador**: Logs detallados en `logs/console.log` y herramientas de depuración.
+- 🔄 **Resiliencia**: Botón de reintento automático en caso de fallos de actualización.
 
 ## Instalación (Desarrollo)
 

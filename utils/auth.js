@@ -1,13 +1,13 @@
 const msmc = require('msmc');
 const path = require('path');
 const fs = require('fs-extra');
-const { GAME_ROOT } = require('./updater');
+const { GAME_ROOT } = require('./constants');
 
 const AUTH_CACHE = path.join(GAME_ROOT, 'auth_cache.json');
 
 async function loginMicrosoft(sender) {
     try {
-        const authManager = new msmc.Auth("select_account");
+        const authManager = new msmc.Auth('select_account');
         let xboxManager;
 
         // 1. Try to refresh
@@ -25,7 +25,7 @@ async function loginMicrosoft(sender) {
         // 2. If no valid session, launch login
         if (!xboxManager) {
             // Launch the login window
-            xboxManager = await authManager.launch("electron");
+            xboxManager = await authManager.launch('electron');
 
             // Save the refresh token/profile
             // msmc 5: xboxManager.save() returns the object needed for refresh
@@ -41,10 +41,10 @@ async function loginMicrosoft(sender) {
             // Return the mclc-compatible auth object
             return token.mclc();
         } else {
-            throw new Error("Token validation failed");
+            throw new Error('Token validation failed');
         }
     } catch (error) {
-        console.error("Microsoft Login Error:", error);
+        console.error('Microsoft Login Error:', error);
         throw error;
     }
 }

@@ -12,20 +12,6 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400&display=swap"
         rel="stylesheet">
 </head>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmbiCraft Launcher</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400&display=swap"
-        rel="stylesheet">
-</head>
 
 <body>
     <div class="container">
@@ -86,6 +72,10 @@
                     <span class="btn-text">JUGAR</span>
                     <div class="progress-bar" id="progress-bar"></div>
                 </button>
+
+                <button id="retry-btn" class="launch-btn hidden" style="background: var(--error); margin-top: 10px;">
+                    <span class="btn-text">REINTENTAR ACTUALIZACIÓN</span>
+                </button>
             </div>
         </main>
 
@@ -124,6 +114,14 @@
                     <button id="close-settings-btn" class="close-btn">✕</button>
                 </div>
                 <div class="settings-content">
+                    <div class="setting-item">
+                        <label for="channel-select">Canal de Actualización</label>
+                        <select id="channel-select" style="width: 100%; padding: 8px; background: #2a2a2a; color: #e0e0e0; border: 1px solid #444; border-radius: 4px; margin-top: 5px; margin-bottom: 5px;">
+                            <option value="master">Estable (Master)</option>
+                            <option value="beta">Beta (Dev)</option>
+                        </select>
+                        <p class="setting-desc">Selecciona 'Beta' para probar nuevas funciones.</p>
+                    </div>
                     <div class="setting-item">
                         <label for="ram-slider">Memoria RAM (Java)</label>
                         <div class="range-container">

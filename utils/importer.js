@@ -1,9 +1,9 @@
+const { dialog, BrowserWindow } = require('electron');
 const fs = require('fs-extra');
 const path = require('path');
-const os = require('os');
 
 // Standard TLauncher/Minecraft path
-const TLAUNCHER_ROOT = path.join(process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Application Support' : process.env.HOME + "/.local/share"), '.minecraft');
+const TLAUNCHER_ROOT = path.join(process.env.APPDATA || (process.platform === 'darwin' ? process.env.HOME + '/Library/Application Support' : process.env.HOME + '/.local/share'), '.minecraft');
 
 async function findSourceRoot() {
     const candidates = [];
@@ -56,11 +56,42 @@ async function importSettings(targetRoot, sender) {
         }
 
         sender.send('log', 'Buscando configuración antigua de TLauncher...');
-        const sourceRoot = await findSourceRoot();
+        let sourceRoot = await findSourceRoot();
 
         if (!sourceRoot) {
-            sender.send('log', 'No se encontraron instalaciones previas de Minecraft/TLauncher.');
-            return;
+            sender.send('log', 'No se encontraron instalaciones automáticas.');
+
+            // Ask user manually
+            const win = BrowserWindow.fromWebContents(sender);
+            const { response } = await dialog.showMessageBox(win, {
+                type: 'question',
+                buttons: ['Sí, buscar carpeta', 'No, empezar de cero'],
+                title: 'Importar Configuración',
+                message: 'No se encontró ninguna instalación de Minecraft automáticamente.\n¿Quieres seleccionar la carpeta ".minecraft" manualmente para importar tus configuraciones (options.txt, xaero, etc.)?',
+                defaultId: 0,
+                cancelId: 1
+            });
+
+            if (response === 0) {
+                const { canceled, filePaths } = await dialog.showOpenDialog(win, {
+                    title: 'Selecciona tu carpeta .minecraft (o la carpeta de la instancia)',
+                    properties: ['openDirectory']
+                });
+
+                if (!canceled && filePaths.length > 0) {
+                    sourceRoot = filePaths[0];
+                    // Basic validation
+                    if (!await fs.pathExists(path.join(sourceRoot, 'options.txt'))) {
+                        sender.send('log', '⚠️ La carpeta seleccionada no parece tener un archivo options.txt. Se intentará importar de todas formas.');
+                    }
+                } else {
+                    sender.send('log', 'Selección manual cancelada.');
+                    return;
+                }
+            } else {
+                sender.send('log', 'Iniciando como instalación limpia.');
+                return;
+            }
         }
 
         sender.send('log', `Importando configuración desde: ${sourceRoot}`);
@@ -80,7 +111,6 @@ async function importSettings(targetRoot, sender) {
             if (item.toLowerCase().startsWith('xaero') && !await fs.pathExists(sourcePath)) {
                 // If sourceRoot is inside 'versions', check the parent (.minecraft)
                 if (sourceRoot.includes('versions')) {
-                    const parentRoot = path.dirname(path.dirname(sourceRoot)); // .minecraft/versions/aaa -> .minecraft
                     // Actually, usually it's .minecraft/versions/aaa, so dirname is versions, dirname(dirname) is .minecraft
                     // Let's be safer: check if 'versions' is the parent
                     const upOne = path.dirname(sourceRoot);
@@ -102,7 +132,6 @@ async function importSettings(targetRoot, sender) {
         }
 
         sender.send('log', 'Importación completada con éxito.');
-
     } catch (error) {
         console.error('Error importing settings:', error);
         sender.send('log', `Error importando configuración: ${error.message}`);

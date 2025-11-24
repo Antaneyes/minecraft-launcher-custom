@@ -1,3 +1,4 @@
+/* eslint-env browser */
 const { ipcRenderer } = require('electron');
 
 const launchBtn = document.getElementById('launch-btn');
@@ -27,11 +28,27 @@ const closeSettingsBtn = document.getElementById('close-settings-btn');
 const settingsOverlay = document.getElementById('settings-overlay');
 const ramSlider = document.getElementById('ram-slider');
 const ramValue = document.getElementById('ram-value');
+const channelSelect = document.getElementById('channel-select');
 
 // Load saved RAM
 const savedRam = localStorage.getItem('savedRam') || '4';
 ramSlider.value = savedRam;
 ramValue.textContent = `${savedRam} GB`;
+
+// Load current channel
+ipcRenderer.invoke('get-update-channel').then(channel => {
+    if (channelSelect) {
+        channelSelect.value = channel;
+    }
+});
+
+if (channelSelect) {
+    channelSelect.addEventListener('change', async (e) => {
+        const newChannel = e.target.value;
+        await ipcRenderer.invoke('set-update-channel', newChannel);
+        log(`Canal cambiado a: ${newChannel}. Reinicia para aplicar cambios.`);
+    });
+}
 
 settingsBtn.addEventListener('click', () => {
     settingsOverlay.classList.remove('hidden');
@@ -69,7 +86,7 @@ document.getElementById('copy-logs-btn').addEventListener('click', () => {
         const btn = document.getElementById('copy-logs-btn');
         const originalText = btn.textContent;
         btn.textContent = '¡Copiado!';
-        setTimeout(() => btn.textContent = originalText, 2000);
+        setTimeout(() => { btn.textContent = originalText; }, 2000);
     }).catch(err => {
         console.error('Error al copiar logs:', err);
     });
@@ -166,12 +183,30 @@ ipcRenderer.on('status', (event, status) => {
     }
 });
 
+const retryBtn = document.getElementById('retry-btn');
+
+retryBtn.addEventListener('click', () => {
+    retryBtn.classList.add('hidden');
+    launchBtn.classList.remove('hidden');
+    launchBtn.disabled = true;
+    btnText.textContent = 'ACTUALIZANDO...';
+    statusBadge.textContent = 'Actualizando';
+    log('Reintentando actualización...');
+    ipcRenderer.send('check-updates');
+});
+
 ipcRenderer.on('error', (event, error) => {
     log(`Error: ${error}`);
     statusBadge.textContent = 'Error';
     launchBtn.disabled = false;
     btnText.textContent = 'JUGAR';
     progressBar.style.width = '0%';
+
+    // Show retry button if it's an update error (we can infer from context or message)
+    if (error.includes('Actualización fallida') || error.includes('Manifiesto')) {
+        launchBtn.classList.add('hidden');
+        retryBtn.classList.remove('hidden');
+    }
 });
 
 ipcRenderer.on('launch-close', (event) => {
@@ -185,14 +220,32 @@ ipcRenderer.on('launch-close', (event) => {
 ipcRenderer.on('update-complete', () => {
     launchBtn.disabled = false;
     btnText.textContent = 'JUGAR';
+    retryBtn.classList.add('hidden');
+    launchBtn.classList.remove('hidden');
 });
 
-ipcRenderer.on('launcher-update-available', () => {
+ipcRenderer.on('launcher-update-available', (event, version) => {
     const updateBtn = document.getElementById('update-launcher-btn');
     const btnSpan = updateBtn.querySelector('span');
     updateBtn.classList.remove('hidden');
-    btnSpan.textContent = '⬇️ Descargando actualización...';
-    log('Nueva versión detectada. Iniciando descarga...');
+    btnSpan.textContent = `⚡ Nueva versión v${version} disponible (Clic para descargar)`;
+
+    // Remove previous listeners to avoid duplicates
+    const newBtn = updateBtn.cloneNode(true);
+    updateBtn.parentNode.replaceChild(newBtn, updateBtn);
+
+    newBtn.addEventListener('click', () => {
+        const span = newBtn.querySelector('span');
+        span.textContent = '⬇️ Iniciando descarga...';
+        ipcRenderer.send('start-launcher-update');
+    });
+
+    log('Nueva versión detectada. Esperando confirmación del usuario...');
+});
+
+ipcRenderer.on('launcher-update-not-available', () => {
+    const updateBtn = document.getElementById('update-launcher-btn');
+    updateBtn.classList.add('hidden');
 });
 
 ipcRenderer.on('launcher-download-progress', (event, percent) => {

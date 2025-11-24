@@ -2,13 +2,26 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-// CONFIGURATION
+const { getCurrentBranch } = require('./utils/git-check');
+
 // CONFIGURATION
 const config = require('./launcher_builder_config.json');
 
+const REQUIRED_FIELDS = ['repoUser', 'repoName', 'branch', 'fabricLoaderVersion', 'gameVersion'];
+const missingFields = REQUIRED_FIELDS.filter(field => !config[field]);
+
+if (missingFields.length > 0) {
+    console.error(`Error: Missing required fields in launcher_builder_config.json: ${missingFields.join(', ')}`);
+    process.exit(1);
+}
+
 const REPO_USER = config.repoUser;
 const REPO_NAME = config.repoName;
-const BRANCH = config.branch;
+// Use current branch if available, otherwise fallback to config
+const currentBranch = getCurrentBranch();
+const BRANCH = currentBranch || config.branch;
+console.log(`Using branch for URLs: ${BRANCH}`);
+
 const BASE_URL = `https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/${BRANCH}/update_files`;
 
 const UPDATE_DIR = path.join(__dirname, 'update_files');
@@ -61,14 +74,14 @@ if (!fs.existsSync(UPDATE_DIR)) {
 
 const files = scanDirectory(UPDATE_DIR);
 
-const LAUNCHER_VERSION = "1.0.24";
+const LAUNCHER_VERSION = '1.1.0-beta.1';
 
 const manifest = {
     version: MANIFEST_VERSION,
     gameVersion: GAME_VERSION,
     launcherVersion: LAUNCHER_VERSION,
     launcherUrl: `https://github.com/${REPO_USER}/${REPO_NAME}/releases/download/v${LAUNCHER_VERSION}/OmbiCraft-Launcher-Setup-${LAUNCHER_VERSION}.exe`,
-    files: files
+    files
 };
 
 fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 4));
