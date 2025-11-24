@@ -72,6 +72,15 @@ app.on('activate', () => {
 });
 
 // IPC Handlers
+ipcMain.handle('get-update-channel', async () => {
+    return await gameUpdater.getChannel();
+});
+
+ipcMain.handle('set-update-channel', async (event, channel) => {
+    await gameUpdater.setChannel(channel);
+    return true;
+});
+
 ipcMain.on('check-updates', async (event) => {
     const sender = event.sender;
 
@@ -92,7 +101,8 @@ ipcMain.on('check-updates', async (event) => {
 
     try {
         sender.send('status', 'Buscando Actualizaciones');
-        sender.send('log', 'Buscando actualizaciones...');
+        const currentChannel = await gameUpdater.getChannel();
+        sender.send('log', `Buscando actualizaciones (Canal: ${currentChannel})...`);
 
         // Try to import settings from TLauncher if this is a fresh install
         await importSettings(gameUpdater.gameRoot, sender);

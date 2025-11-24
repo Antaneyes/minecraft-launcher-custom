@@ -11,7 +11,11 @@ class GameUpdater extends EventEmitter {
         super();
         this.gameRoot = GAME_ROOT;
         this.configPath = path.join(this.gameRoot, 'launcher-config.json');
-        this.defaultUpdateUrl = 'https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/manifest.json';
+        this.channels = {
+            master: 'https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/manifest.json',
+            beta: 'https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/dev/manifest.json'
+        };
+        this.defaultChannel = 'master';
         this.concurrencyLimit = 5;
         this.preservedFiles = ['options.txt', 'optionsof.txt', 'optionsshaders.txt', 'servers.dat'];
     }
@@ -29,16 +33,60 @@ class GameUpdater extends EventEmitter {
         return 0;
     }
 
+    async getChannel() {
+        try {
+            if (await fs.pathExists(this.configPath)) {
+                const config = await fs.readJson(this.configPath);
+                if (config.channel && this.channels[config.channel]) {
+                    return config.channel;
+                }
+            }
+        } catch (e) {
+            console.error('Error reading config for channel:', e);
+        }
+        return this.defaultChannel;
+    }
+
+    async setChannel(channel) {
+        if (!this.channels[channel]) {
+            throw new Error(`Canal inválido: ${channel}`);
+        }
+
+        let config = {};
+        try {
+            if (await fs.pathExists(this.configPath)) {
+                config = await fs.readJson(this.configPath);
+            }
+        } catch (e) {
+            // Ignore error, start with empty config
+        }
+
+        config.channel = channel;
+        // Remove explicit updateUrl if setting a standard channel to avoid conflicts
+        delete config.updateUrl;
+
+        await fs.ensureDir(this.gameRoot);
+        await fs.writeJson(this.configPath, config, { spaces: 4 });
+        this.emit('log', `Canal de actualización cambiado a: ${channel}`);
+    }
+
     async getUpdateUrl() {
         try {
             if (await fs.pathExists(this.configPath)) {
                 const config = await fs.readJson(this.configPath);
+
+                // If specific updateUrl is set (legacy or custom), use it
                 if (config.updateUrl) return config.updateUrl;
+
+                // Check for channel
+                if (config.channel && this.channels[config.channel]) {
+                    return this.channels[config.channel];
+                }
             }
         } catch (e) {
             console.error('Error reading config:', e);
         }
-        return this.defaultUpdateUrl;
+        return this.channels[this.defaultChannel];
     }
 
     async calculateHash(filePath) {
