@@ -69,9 +69,6 @@ function main() {
     // 3. Run Unit Tests
     if (!runCommand('npm test', 'Unit Tests')) success = false;
 
-    // 4. Run Integration Test (Basic)
-    if (!runCommand('node tests/integration_update_flow.js', 'Integration Test (Basic)')) success = false;
-
     log('\n-----------------------------------');
     if (success) {
         log('🎉 PROJECT HEALTHY', GREEN);

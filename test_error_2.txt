@@ -1,0 +1,4 @@
+Error: Fallo al instalar/parchear Fabric: Versión Vanilla 1.21.9 no encontrada.
+Error: Fallo al instalar/parchear Fabric: Versión Vanilla 1.21.9 no encontrada.
+    at GameUpdater.checkAndDownloadUpdates (C:\Users\joshu\Documents\launcher minecraft\utils\GameUpdater.js:124:23)
+    at Object.<anonymous> (C:\Users\joshu\Documents\launcher minecraft\tests\integration_update_flow.test.js:117:13)

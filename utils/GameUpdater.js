@@ -14,6 +14,7 @@ class GameUpdater extends EventEmitter {
         this.defaultUpdateUrl = 'https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/manifest.json';
         this.concurrencyLimit = 5;
         this.preservedFiles = ['options.txt', 'optionsof.txt', 'optionsshaders.txt', 'servers.dat'];
+        this.configCache = null;
     }
 
     static compareVersions(v1, v2) {
@@ -30,14 +31,20 @@ class GameUpdater extends EventEmitter {
     }
 
     async getUpdateUrl() {
+        if (this.configCache) return this.configCache;
+
         try {
             if (await fs.pathExists(this.configPath)) {
                 const config = await fs.readJson(this.configPath);
-                if (config.updateUrl) return config.updateUrl;
+                if (config.updateUrl) {
+                    this.configCache = config.updateUrl;
+                    return config.updateUrl;
+                }
             }
         } catch (e) {
             console.error('Error reading config:', e);
         }
+        this.configCache = this.defaultUpdateUrl;
         return this.defaultUpdateUrl;
     }
 
@@ -125,18 +132,6 @@ class GameUpdater extends EventEmitter {
             }
 
             this.emit('log', 'Todas las actualizaciones descargadas.');
-
-            try {
-                await fs.writeJson(path.join(this.gameRoot, 'client-manifest.json'), manifest);
-            } catch (e) {
-                this.emit('log', `Advertencia: No se pudo guardar client-manifest.json: ${e.message}`);
-            }
-        }
-    }
-
-    async cleanupOldMods(manifest) {
-        const adminFile = path.join(this.gameRoot, '.admin');
-        if (await fs.pathExists(adminFile)) {
             this.emit('log', 'MODO ADMIN DETECTADO: Saltando limpieza de mods antiguos.');
             return;
         }
@@ -341,6 +336,7 @@ class GameUpdater extends EventEmitter {
             }
         }
     }
+
 }
 
 module.exports = GameUpdater;

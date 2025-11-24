@@ -4,6 +4,7 @@ const { execSync } = require('child_process');
 const generateManifestPath = path.join(__dirname, 'generate_manifest.js');
 
 const args = process.argv.slice(2);
+console.log('DEBUG ARGS:', args);
 const DRY_RUN = args.includes('--dry-run');
 
 // Helper to run commands
@@ -63,7 +64,32 @@ async function main() {
 
     // 4. Build
     console.log('🔨 Building application...');
-    run('npm run dist');
+    const gameUpdaterPath = path.join(__dirname, '..', 'utils', 'GameUpdater.js');
+    let originalGameUpdaterContent = '';
+
+    if (!DRY_RUN) {
+        // Inject Branch URL
+        console.log(`   Injecting update URL for branch: ${config.branch}`);
+        originalGameUpdaterContent = await fs.readFile(gameUpdaterPath, 'utf8');
+        const newUrl = `https://raw.githubusercontent.com/${config.repoUser}/${config.repoName}/${config.branch}/manifest.json`;
+        const modifiedContent = originalGameUpdaterContent.replace(
+            /this\.defaultUpdateUrl = '.*';/,
+            `this.defaultUpdateUrl = '${newUrl}';`
+        );
+        await fs.writeFile(gameUpdaterPath, modifiedContent);
+    } else {
+        console.log(`   [DRY-RUN] Would inject update URL for branch: ${config.branch}`);
+    }
+
+    try {
+        run('npm run dist');
+    } finally {
+        // Revert GameUpdater.js
+        if (!DRY_RUN && originalGameUpdaterContent) {
+            console.log('   Reverting GameUpdater.js...');
+            await fs.writeFile(gameUpdaterPath, originalGameUpdaterContent);
+        }
+    }
 
     // 5. Git Operations
     console.log('Git: Adding changes...');

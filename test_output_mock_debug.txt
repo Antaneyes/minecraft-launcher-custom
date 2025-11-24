@@ -1,0 +1,94 @@
+  console.log
+    LOG SPY: Buscando actualizaciones en: https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/manifest.json
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:116:49)
+
+  console.log
+    MOCK AXIOS GET: https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/manifest.json?t=1763998594175
+
+      at Function.log (tests/integration_update_flow.test.js:84:21)
+
+  console.log
+    LOG SPY: Versión remota: 1.0.0
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:116:49)
+
+  console.log
+    LOG SPY: Advertencia: Fallo al limpiar mods antiguos: this.cleanupOldMods is not a function
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:116:49)
+
+  console.log
+    LOG SPY: Descargando: mods/test-mod.jar
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:116:49)
+          at async Promise.all (index 0)
+
+  console.log
+    MOCK AXIOS REQUEST: http://example.com/mods/test-mod.jar
+
+      at log (tests/integration_update_flow.test.js:103:21)
+          at async Promise.all (index 0)
+
+  console.log
+    LOG SPY: Versión fabric-loader-0.14.22-1.20.1 no detectada. Instalando...
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:116:49)
+
+  console.log
+    MOCK AXIOS GET: https://meta.fabricmc.net/v2/versions/loader/1.20.1/0.14.22/profile/json
+
+      at Function.log (tests/integration_update_flow.test.js:84:21)
+
+  console.log
+    MOCK AXIOS GET: https://piston-meta.mojang.com/mc/game/version_manifest_v2.json
+
+      at Function.log (tests/integration_update_flow.test.js:84:21)
+
+  console.log
+    MOCK AXIOS GET: http://mojang.com/1.20.1.json
+
+      at Function.log (tests/integration_update_flow.test.js:84:21)
+
+  console.log
+    LOG SPY: Instalación de fabric-loader-0.14.22-1.20.1 completada.
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:116:49)
+
+  console.log
+    LOG SPY: Todas las actualizaciones descargadas.
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:116:49)
+
+  console.log
+    LOG SPY: MODO ADMIN DETECTADO: Saltando limpieza de mods antiguos.
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:116:49)
+
+FAIL tests/integration_update_flow.test.js
+  Integration: Update Flow
+    √ should initialize GameUpdater with correct root (86 ms)
+    × should download updates successfully (58 ms)
+
+  ● Integration: Update Flow › should download updates successfully
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    [0m [90m 132 |[39m         [90m// Verify client-manifest.json[39m
+     [90m 133 |[39m         [36mconst[39m clientManifestPath [33m=[39m path[33m.[39mjoin(testDir[33m,[39m [32m'client-manifest.json'[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 134 |[39m         expect([36mawait[39m fs[33m.[39mpathExists(clientManifestPath))[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m     |[39m                                                         [31m[1m^[22m[39m
+     [90m 135 |[39m     })[33m;[39m
+     [90m 136 |[39m })[33m;[39m
+     [90m 137 |[39m[0m
+
+      at Object.toBe (tests/integration_update_flow.test.js:134:57)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 passed, 2 total
+Snapshots:   0 total
+Time:        0.701 s, estimated 1 s
+Ran all test suites matching tests/integration_update_flow.test.js.

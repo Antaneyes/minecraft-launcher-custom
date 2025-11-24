@@ -44,4 +44,31 @@ describe('Updater Utils', () => {
             expect(hash).toBe(expectedHash);
         });
     });
+    describe('getUpdateUrl', () => {
+        const updater = new GameUpdater();
+        const mockConfigPath = path.join(updater.gameRoot, 'launcher-config.json');
+
+        beforeEach(() => {
+            updater.configCache = null; // Reset cache
+            jest.clearAllMocks();
+        });
+
+        test('should cache updateUrl after first read', async () => {
+            const mockConfig = { updateUrl: 'http://cached-url.com' };
+
+            // Mock fs.pathExists and fs.readJson
+            const pathExistsSpy = jest.spyOn(fs, 'pathExists').mockResolvedValue(true);
+            const readJsonSpy = jest.spyOn(fs, 'readJson').mockResolvedValue(mockConfig);
+
+            // First call - should read from file
+            const url1 = await updater.getUpdateUrl();
+            expect(url1).toBe(mockConfig.updateUrl);
+            expect(readJsonSpy).toHaveBeenCalledTimes(1);
+
+            // Second call - should return cached value without reading file
+            const url2 = await updater.getUpdateUrl();
+            expect(url2).toBe(mockConfig.updateUrl);
+            expect(readJsonSpy).toHaveBeenCalledTimes(1); // Still 1
+        });
+    });
 });

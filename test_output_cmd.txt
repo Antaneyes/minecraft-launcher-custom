@@ -1,0 +1,27 @@
+FAIL tests/integration_update_flow.test.js
+  Integration: Update Flow
+    √ should initialize GameUpdater with correct root (94 ms)
+    × should download updates successfully (34 ms)
+
+  ● Integration: Update Flow › should download updates successfully
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    [0m [90m 131 |[39m         [90m// Verify client-manifest.json[39m
+     [90m 132 |[39m         [36mconst[39m clientManifestPath [33m=[39m path[33m.[39mjoin(testDir[33m,[39m [32m'client-manifest.json'[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 133 |[39m         expect([36mawait[39m fs[33m.[39mpathExists(clientManifestPath))[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m     |[39m                                                         [31m[1m^[22m[39m
+     [90m 134 |[39m     })[33m;[39m
+     [90m 135 |[39m })[33m;[39m
+     [90m 136 |[39m[0m
+
+      at Object.toBe (tests/integration_update_flow.test.js:133:57)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 passed, 2 total
+Snapshots:   0 total
+Time:        0.487 s, estimated 1 s
+Ran all test suites matching tests/integration_update_flow.test.js.

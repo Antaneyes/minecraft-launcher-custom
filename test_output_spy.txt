@@ -1,0 +1,125 @@
+  console.log
+    DEBUG: Calling getUpdateUrl
+
+      at GameUpdater.log [as checkAndDownloadUpdates] (utils/GameUpdater.js:80:21)
+
+  console.log
+    DEBUG: Inside getUpdateUrl
+
+      at GameUpdater.log [as getUpdateUrl] (utils/GameUpdater.js:34:17)
+
+  console.log
+    DEBUG: configPath: C:\Users\joshu\Documents\launcher minecraft\tests\temp_test_env_jest\launcher-config.json
+
+      at GameUpdater.log [as getUpdateUrl] (utils/GameUpdater.js:35:17)
+
+  console.log
+    DEBUG: Checking path exists
+
+      at GameUpdater.log [as getUpdateUrl] (utils/GameUpdater.js:42:21)
+
+  console.log
+    DEBUG: Path does not exist
+
+      at GameUpdater.log [as getUpdateUrl] (utils/GameUpdater.js:51:25)
+
+  console.log
+    DEBUG: Returning default URL
+
+      at GameUpdater.log [as getUpdateUrl] (utils/GameUpdater.js:56:17)
+
+  console.log
+    DEBUG: updateUrl: https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/manifest.json
+
+      at GameUpdater.log [as checkAndDownloadUpdates] (utils/GameUpdater.js:82:21)
+
+  console.log
+    [UPDATER LOG]: Buscando actualizaciones en: https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/manifest.json
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:122:49)
+
+  console.log
+    [UPDATER LOG]: Versión remota: 1.0.0
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:122:49)
+
+  console.log
+    [UPDATER LOG]: Advertencia: Fallo al limpiar mods antiguos: this.cleanupOldMods is not a function
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:122:49)
+
+  console.log
+    [UPDATER LOG]: Descargando: mods/test-mod.jar
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:122:49)
+          at async Promise.all (index 0)
+
+  console.log
+    [UPDATER LOG]: Versión fabric-loader-0.14.22-1.20.1 no detectada. Instalando...
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:122:49)
+
+  console.log
+    [UPDATER LOG]: Instalación de fabric-loader-0.14.22-1.20.1 completada.
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:122:49)
+
+  console.log
+    [UPDATER LOG]: Todas las actualizaciones descargadas.
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:122:49)
+
+  console.log
+    [UPDATER LOG]: MODO ADMIN DETECTADO: Saltando limpieza de mods antiguos.
+
+      at GameUpdater.log (tests/integration_update_flow.test.js:122:49)
+
+FAIL tests/integration_update_flow.test.js
+  Integration: Update Flow
+    √ should initialize GameUpdater with correct root (95 ms)
+    × should download updates successfully (64 ms)
+
+  ● Integration: Update Flow › should download updates successfully
+
+    RangeError: Maximum call stack size exceeded
+        at Array.at (<anonymous>)
+
+    [0m [90m 85 |[39m         jest[33m.[39mspyOn(fs[33m,[39m [32m'pathExists'[39m)[33m.[39mmockImplementation((p) [33m=>[39m {
+     [90m 86 |[39m             [36mif[39m ([36mtypeof[39m p [33m===[39m [32m'string'[39m [33m&&[39m p[33m.[39mendsWith([32m'launcher-config.json'[39m)) [36mreturn[39m [33mPromise[39m[33m.[39mresolve([36mfalse[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 87 |[39m             [36mreturn[39m originalPathExists(p)[33m;[39m
+     [90m    |[39m                    [31m[1m^[22m[39m
+     [90m 88 |[39m         })[33m;[39m
+     [90m 89 |[39m
+     [90m 90 |[39m         [90m// Mock Axios Responses[39m[0m
+
+      at ModuleMocker._ensureMockState (node_modules/jest-mock/build/index.js:208:36)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+      at originalPathExists (tests/integration_update_flow.test.js:87:20)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 passed, 2 total
+Snapshots:   0 total
+Time:        0.753 s, estimated 1 s
+Ran all test suites matching tests/integration_update_flow.test.js.
