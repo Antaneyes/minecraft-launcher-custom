@@ -16,8 +16,14 @@ function run(command) {
     }
 }
 
+const config = require('./launcher_builder_config.json');
+const { ensureBranch } = require('./utils/git-check');
+
 async function main() {
     console.log('🚀 Starting Automated Release Process...');
+
+    // 0. Safety Check
+    ensureBranch(config.branch);
 
     // 1. Bump Version using npm (updates package.json AND package-lock.json)
     console.log('ℹ️  Bumping version...');
@@ -51,7 +57,8 @@ async function main() {
     run(`git commit -m "chore: release v${newVersion}"`);
 
     console.log('Git: Pushing to remote...');
-    run('git push origin master');
+    run(`git push origin ${config.branch}`);
+
 
     // 6. GitHub Release
     console.log(`☁️  Creating GitHub Release v${newVersion}...`);

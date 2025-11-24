@@ -15,8 +15,15 @@ function run(command) {
     }
 }
 
+const config = require('./launcher_builder_config.json');
+const { ensureBranch } = require('./utils/git-check');
+
 async function main() {
     console.log('🚀 Starting Server Content Update...');
+
+    // 0. Safety Check
+    ensureBranch(config.branch);
+
     console.log('   (This will update mods/configs/versions, NOT the launcher itself)');
 
     // 1. Regenerate Manifest
@@ -43,7 +50,8 @@ async function main() {
     run(`git commit -m "content: update game files ${timestamp}"`);
 
     console.log('Git: Pushing to remote...');
-    run('git push origin master');
+    run(`git push origin ${config.branch}`);
+
 
     console.log('\n✅ Server update published successfully!');
     console.log('   Players will receive the new files next time they open the launcher.');
