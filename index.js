@@ -88,6 +88,12 @@ ipcMain.handle('get-update-channel', async () => {
 
 ipcMain.handle('set-update-channel', async (event, channel) => {
     await gameUpdater.setChannel(channel);
+
+    // Reconfigure and check for updates immediately
+    autoUpdater.allowPrerelease = (channel === 'beta');
+    log.info(`Canal cambiado a ${channel}. Re-comprobando actualizaciones...`);
+    autoUpdater.checkForUpdates();
+
     return true;
 });
 
