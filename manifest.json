@@ -1,13 +1,8 @@
 {
     "version": "2025.11.24",
     "gameVersion": "fabric-loader-0.17.2-1.21.9",
-<<<<<<< HEAD
-    "launcherVersion": "1.0.21-beta.7",
-    "launcherUrl": "https://github.com/Antaneyes/minecraft-launcher-custom/releases/download/v1.0.21-beta.7/OmbiCraft-Launcher-Setup-1.0.21-beta.7.exe",
-=======
-    "launcherVersion": "1.0.23",
-    "launcherUrl": "https://github.com/Antaneyes/minecraft-launcher-custom/releases/download/v1.0.23/OmbiCraft-Launcher-Setup-1.0.23.exe",
->>>>>>> master
+    "launcherVersion": "1.0.24-beta.0",
+    "launcherUrl": "https://github.com/Antaneyes/minecraft-launcher-custom/releases/download/v1.0.24-beta.0/OmbiCraft-Launcher-Setup-1.0.24-beta.0.exe",
     "files": [
         {
             "path": "mods/architectury-18.0.5-fabric.jar",
@@ -35,7 +30,7 @@
         },
         {
             "path": "mods/EasyShulkerBoxes-v21.9.0+mc1.21.9-Fabric.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/EasyShulkerBoxes-v21.9.0+mc1.21.9-Fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/dev/update_files/mods/EasyShulkerBoxes-v21.9.0+mc1.21.9-Fabric.jar",
             "sha1": "e8c387909c6bcc03d033744a66fa0fdfea1ec999",
             "size": 203575
         },
@@ -53,7 +48,7 @@
         },
         {
             "path": "mods/ForgeConfigAPIPort-v21.9.8+mc1.21.9-Fabric.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/ForgeConfigAPIPort-v21.9.8+mc1.21.9-Fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/dev/update_files/mods/ForgeConfigAPIPort-v21.9.8+mc1.21.9-Fabric.jar",
             "sha1": "f1031ee5f1a6f978a886277f4c0e34063426aebd",
             "size": 615421
         },
@@ -76,17 +71,10 @@
             "size": 830020
         },
         {
-<<<<<<< HEAD
-            "path": "mods/malilib-fabric-1.21.10-0.26.3.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/dev/update_files/mods/malilib-fabric-1.21.10-0.26.3.jar",
-            "sha1": "11488594330f0e83fa4368739e4bbdb5ba792baa",
-            "size": 1467389
-=======
             "path": "mods/malilib-fabric-1.21.10-0.26.6.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/malilib-fabric-1.21.10-0.26.6.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/dev/update_files/mods/malilib-fabric-1.21.10-0.26.6.jar",
             "sha1": "e419a4895ec2e547f345495fcc3be56a853b09ea",
             "size": 1509212
->>>>>>> master
         },
         {
             "path": "mods/modmenu-16.0.0-rc.1.jar",
@@ -96,7 +84,7 @@
         },
         {
             "path": "mods/PuzzlesLib-v21.9.5+mc1.21.9-Fabric.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/PuzzlesLib-v21.9.5+mc1.21.9-Fabric.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/dev/update_files/mods/PuzzlesLib-v21.9.5+mc1.21.9-Fabric.jar",
             "sha1": "e52149f737f545f3d6ff195f3ea3c47f6760ed8d",
             "size": 1075938
         },
@@ -107,23 +95,10 @@
             "size": 2463650
         },
         {
-<<<<<<< HEAD
-            "path": "mods/shulkerboxtooltip-fabric-5.2.11+1.21.9.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/dev/update_files/mods/shulkerboxtooltip-fabric-5.2.11+1.21.9.jar",
-            "sha1": "7e67065f03e54ea574b6e6dd41c8bc9927a2a35b",
-            "size": 389374
-        },
-        {
-            "path": "mods/sodium-fabric-0.7.2+mc1.21.10.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/dev/update_files/mods/sodium-fabric-0.7.2+mc1.21.10.jar",
-            "sha1": "3ade491ca5fc3074d332ff8eba2dbf0e294cc04e",
-            "size": 1675639
-=======
             "path": "mods/sodium-fabric-0.7.3+mc1.21.10.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/sodium-fabric-0.7.3+mc1.21.10.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/dev/update_files/mods/sodium-fabric-0.7.3+mc1.21.10.jar",
             "sha1": "1c3ffa862d9fa4479abf67a88527907d60237248",
             "size": 1676903
->>>>>>> master
         },
         {
             "path": "mods/treeharvester-1.21.9-9.3.jar",
@@ -132,17 +107,10 @@
             "size": 120515
         },
         {
-<<<<<<< HEAD
-            "path": "mods/tweakeroo-fabric-1.21.10-0.26.2.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/dev/update_files/mods/tweakeroo-fabric-1.21.10-0.26.2.jar",
-            "sha1": "12b1c41872fea2287793bbcae3b1f73c212d76eb",
-            "size": 594129
-=======
             "path": "mods/tweakeroo-fabric-1.21.10-0.26.3.jar",
-            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/master/update_files/mods/tweakeroo-fabric-1.21.10-0.26.3.jar",
+            "url": "https://raw.githubusercontent.com/Antaneyes/minecraft-launcher-custom/dev/update_files/mods/tweakeroo-fabric-1.21.10-0.26.3.jar",
             "sha1": "f975b05492e6c5c24f5b0d9c19187217bb36ae34",
             "size": 584516
->>>>>>> master
         },
         {
             "path": "mods/waystones-fabric-1.21.9-21.9.2.jar",
