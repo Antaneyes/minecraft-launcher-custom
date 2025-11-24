@@ -11,7 +11,7 @@ function getCurrentBranch() {
 function ensureBranch(requiredBranch, dryRun = false) {
     const current = getCurrentBranch();
     if (current !== requiredBranch) {
-        console.error(`\n❌ Error: Incorrect Branch!`);
+        console.error('\n❌ Error: Incorrect Branch!');
         console.error(`   Current branch: '${current}'`);
         console.error(`   Required branch: '${requiredBranch}' (from launcher_builder_config.json)`);
 

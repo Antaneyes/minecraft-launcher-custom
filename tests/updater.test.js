@@ -3,7 +3,6 @@ const fs = require('fs-extra');
 const path = require('path');
 
 describe('Updater Utils', () => {
-
     describe('compareVersions', () => {
         test('should return 1 when v1 > v2', () => {
             expect(GameUpdater.compareVersions('1.0.1', '1.0.0')).toBe(1);

@@ -226,7 +226,6 @@ class GameUpdater extends EventEmitter {
 
                 processed++;
                 this.emit('progress', { current: processed, total, type: 'update' });
-
             } catch (fileErr) {
                 if (fileErr.response && fileErr.response.status === 404) {
                     this.emit('log', `ADVERTENCIA: Archivo no encontrado (404): ${file.path}. Saltando...`);
@@ -322,7 +321,7 @@ class GameUpdater extends EventEmitter {
                             }
 
                             lib.downloads.artifact = {
-                                path: path,
+                                path,
                                 url: baseUrl + path,
                                 size: 0
                             };
@@ -336,7 +335,6 @@ class GameUpdater extends EventEmitter {
 
                 await fs.writeJson(targetJsonPath, fabricJson, { spaces: 4 });
                 this.emit('log', `Instalación de ${targetVersion} completada.`);
-
             } catch (e) {
                 this.emit('log', `ERROR CRÍTICO instalando versión: ${e.message}`);
                 throw e;
