@@ -1,7 +1,7 @@
 {
   "name": "ombicraft-launcher",
   "productName": "OmbiCraft Launcher",
-  "version": "1.1-beta",
+  "version": "1.0.20",
   "description": "OmbiCraft Launcher",
   "author": "josalro",
   "scripts": {
