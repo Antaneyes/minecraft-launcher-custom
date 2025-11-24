@@ -4,6 +4,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const crypto = require('crypto');
 const { GAME_ROOT } = require('./constants');
+const { app } = require('electron');
 
 class GameUpdater extends EventEmitter {
     constructor() {
@@ -53,44 +54,78 @@ class GameUpdater extends EventEmitter {
     async checkAndDownloadUpdates() {
         try {
             await fs.ensureDir(this.gameRoot);
-            const updateUrl = await this.getUpdateUrl();
+        } catch (e) {
+            throw new Error(`No se pudo crear el directorio del juego: ${e.message}`);
+        }
+
+        let updateUrl;
+        try {
+            updateUrl = await this.getUpdateUrl();
             this.emit('log', `Buscando actualizaciones en: ${updateUrl}`);
+        } catch (e) {
+            this.emit('log', 'Error obteniendo URL de actualización. Usando predeterminada.');
+            updateUrl = this.defaultUpdateUrl;
+        }
 
-            let manifest;
+        let manifest;
 
-            // DEV MODE: Read local manifest
-            if (!app.isPackaged) {
-                const localManifestPath = path.join(__dirname, '..', 'manifest.json');
-                if (await fs.pathExists(localManifestPath)) {
-                    this.emit('log', 'MODO DEV: Usando manifest.json local.');
-                    manifest = await fs.readJson(localManifestPath);
-                }
-            }
-
-            if (!manifest) {
+        // DEV MODE: Read local manifest
+        if (!app.isPackaged) {
+            const localManifestPath = path.join(__dirname, '..', 'manifest.json');
+            if (await fs.pathExists(localManifestPath)) {
+                this.emit('log', 'MODO DEV: Usando manifest.json local.');
                 try {
-                    const response = await axios.get(`${updateUrl}?t=${Date.now()}`);
-                    manifest = response.data;
+                    manifest = await fs.readJson(localManifestPath);
                 } catch (e) {
-                    this.emit('log', 'No se pudo obtener el manifiesto de actualización. Saltando actualización (¿Modo Offline?).');
+                    this.emit('error', `Error leyendo manifest local: ${e.message}`);
                     return;
                 }
             }
+        }
 
-            this.emit('log', `Versión remota: ${manifest.version}`);
+        if (!manifest) {
+            try {
+                const response = await axios.get(`${updateUrl}?t=${Date.now()}`);
+                manifest = response.data;
+            } catch (e) {
+                if (e.code === 'ENOTFOUND' || e.code === 'ETIMEDOUT') {
+                    this.emit('log', 'No se pudo conectar al servidor de actualizaciones (Sin internet o servidor caído).');
+                } else {
+                    this.emit('log', `Error descargando manifiesto: ${e.message}`);
+                }
+                this.emit('log', 'Saltando actualización...');
+                return;
+            }
+        }
 
-            if (manifest.files && Array.isArray(manifest.files)) {
+        this.emit('log', `Versión remota: ${manifest.version}`);
+
+        if (manifest.files && Array.isArray(manifest.files)) {
+            try {
                 await this.cleanupOldMods(manifest);
-                await this.downloadFiles(manifest);
-                await this.patchFabric(manifest);
-
-                this.emit('log', 'Todas las actualizaciones descargadas.');
-                await fs.writeJson(path.join(this.gameRoot, 'client-manifest.json'), manifest);
+            } catch (e) {
+                this.emit('log', `Advertencia: Fallo al limpiar mods antiguos: ${e.message}`);
             }
 
-        } catch (error) {
-            this.emit('error', `Actualización fallida: ${error.message}`);
-            throw error;
+            try {
+                await this.downloadFiles(manifest);
+            } catch (e) {
+                throw new Error(`Fallo durante la descarga de archivos: ${e.message}`);
+            }
+
+            try {
+                await this.patchFabric(manifest);
+            } catch (e) {
+                throw new Error(`Fallo al instalar/parchear Fabric: ${e.message}`);
+            }
+
+            this.emit('log', 'Todas las actualizaciones descargadas.');
+
+            try {
+                await fs.writeJson(path.join(this.gameRoot, 'client-manifest.json'), manifest);
+            } catch (e) {
+                this.emit('log', `Advertencia: No se pudo guardar client-manifest.json: ${e.message}`);
+            }
         }
     }
 
