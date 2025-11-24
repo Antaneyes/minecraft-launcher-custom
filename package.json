@@ -8,7 +8,9 @@
     "start": "electron .",
     "dist": "electron-builder",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "release": "node maintenance/release.js",
+    "update-server": "node maintenance/update_server.js"
   },
   "build": {
     "appId": "com.ombicraft.launcher",

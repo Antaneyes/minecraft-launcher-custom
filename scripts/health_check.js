@@ -33,7 +33,10 @@ function checkFiles() {
         'ui/styles.css',
         'ui/renderer.js',
         'utils/GameUpdater.js',
-        'utils/launcher.js'
+        'utils/launcher.js',
+        'maintenance/generate_manifest.js',
+        'maintenance/release.js',
+        'maintenance/update_server.js'
     ];
 
     let allFound = true;
@@ -61,11 +64,6 @@ function main() {
     if (!checkFiles()) success = false;
 
     // 2. Run Lint
-    // We use npx eslint to ensure we use the local version. 
-    // We add --fix to try and fix simple things, but if it fails (exit code 1), we count it as failure.
-    // Actually, let's just run lint without fix for the check, or with fix? 
-    // Let's run without fix to see true state, or with fix to be helpful?
-    // The user wants to "check deeply". Let's run standard lint.
     if (!runCommand('npx eslint .', 'Linting')) success = false;
 
     // 3. Run Unit Tests

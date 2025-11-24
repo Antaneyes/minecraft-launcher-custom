@@ -12,11 +12,9 @@ const appProcess = spawn(electronPath, [appPath], {
     env: { ...process.env, NODE_ENV: 'test' }
 });
 
-let output = '';
 let errorOutput = '';
 
 appProcess.stdout.on('data', (data) => {
-    output += data.toString();
     console.log(`[APP]: ${data}`);
 });
 

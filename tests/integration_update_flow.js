@@ -1,15 +1,6 @@
 const path = require('path');
 const fs = require('fs-extra');
 
-// Mock config
-const mockConfig = {
-    gameVersion: '1.21.1',
-    fabricLoaderVersion: '0.16.9',
-    repoUser: 'Antaneyes',
-    repoName: 'minecraft-launcher-custom',
-    branch: 'dev'
-};
-
 async function runTest() {
     console.log('🧪 Starting Integration Test: Update Flow');
 

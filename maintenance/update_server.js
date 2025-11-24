@@ -1,5 +1,5 @@
-const fs = require('fs-extra');
 const { execSync } = require('child_process');
+const path = require('path');
 
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');
@@ -12,7 +12,7 @@ function run(command) {
         return '';
     }
     try {
-        return execSync(command, { cwd: __dirname, encoding: 'utf8' }).trim();
+        return execSync(command, { cwd: path.join(__dirname, '..'), encoding: 'utf8' }).trim();
     } catch (e) {
         console.error(`Command failed: ${command}`);
         console.error(e.stdout);
@@ -21,9 +21,9 @@ function run(command) {
     }
 }
 
-const config = require('./launcher_builder_config.json');
-const { ensureBranch } = require('./utils/git-check');
-const { validateConfig } = require('./utils/config-validator');
+const config = require('../launcher_builder_config.json');
+const { ensureBranch } = require('./git-check');
+const { validateConfig } = require('../utils/config-validator');
 
 async function main() {
     console.log('🚀 Starting Server Content Update...');
@@ -37,7 +37,7 @@ async function main() {
 
     // 1. Regenerate Manifest
     console.log('📦 Regenerating manifest...');
-    run('node generate_manifest.js');
+    run('node maintenance/generate_manifest.js');
 
     // 2. Git Operations
     console.log('Git: Adding changes...');

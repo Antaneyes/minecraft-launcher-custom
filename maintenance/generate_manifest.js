@@ -3,7 +3,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 // CONFIGURATION
-const config = require('./launcher_builder_config.json');
+const config = require('../launcher_builder_config.json');
 
 const REQUIRED_FIELDS = ['repoUser', 'repoName', 'branch', 'fabricLoaderVersion', 'gameVersion'];
 const missingFields = REQUIRED_FIELDS.filter(field => !config[field]);
@@ -18,8 +18,8 @@ const REPO_NAME = config.repoName;
 const BRANCH = config.branch;
 const BASE_URL = `https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/${BRANCH}/update_files`;
 
-const UPDATE_DIR = path.join(__dirname, 'update_files');
-const MANIFEST_PATH = path.join(__dirname, 'manifest.json');
+const UPDATE_DIR = path.join(__dirname, '..', 'update_files');
+const MANIFEST_PATH = path.join(__dirname, '..', 'manifest.json');
 
 // Game version to enforce
 const GAME_VERSION = `fabric-loader-${config.fabricLoaderVersion}-${config.gameVersion}`;
