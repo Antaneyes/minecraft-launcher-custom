@@ -59,7 +59,7 @@ async function main() {
     if (!DRY_RUN) {
         let genManifestContent = await fs.readFile(generateManifestPath, 'utf8');
         genManifestContent = genManifestContent.replace(
-            /const LAUNCHER_VERSION = ".*";/,
+            /const LAUNCHER_VERSION = ['"].*['"];/,
             `const LAUNCHER_VERSION = '${newVersion}';`
         );
         await fs.writeFile(generateManifestPath, genManifestContent);
