@@ -36,7 +36,7 @@ class GameUpdater extends EventEmitter {
                 if (config.updateUrl) return config.updateUrl;
             }
         } catch (e) {
-            console.error("Error reading config:", e);
+            console.error('Error reading config:', e);
         }
         return this.defaultUpdateUrl;
     }
@@ -315,10 +315,10 @@ class GameUpdater extends EventEmitter {
                             const version = parts[2];
                             const path = `${domain}/${name}/${version}/${name}-${version}.jar`;
 
-                            let baseUrl = "https://libraries.minecraft.net/";
+                            let baseUrl = 'https://libraries.minecraft.net/';
                             if (lib.url) baseUrl = lib.url;
                             else if (parts[0].includes('fabricmc') || parts[0].includes('ow2') || parts[0].includes('jetbrains')) {
-                                baseUrl = "https://maven.fabricmc.net/";
+                                baseUrl = 'https://maven.fabricmc.net/';
                             }
 
                             lib.downloads.artifact = {

@@ -1,10 +1,16 @@
 const fs = require('fs-extra');
-const path = require('path');
 const { execSync } = require('child_process');
+
+const args = process.argv.slice(2);
+const DRY_RUN = args.includes('--dry-run');
 
 // Helper to run commands
 function run(command) {
     console.log(`\n> ${command}`);
+    if (DRY_RUN) {
+        console.log('   [DRY-RUN] Command skipped.');
+        return '';
+    }
     try {
         return execSync(command, { cwd: __dirname, encoding: 'utf8' }).trim();
     } catch (e) {
@@ -17,12 +23,15 @@ function run(command) {
 
 const config = require('./launcher_builder_config.json');
 const { ensureBranch } = require('./utils/git-check');
+const { validateConfig } = require('./utils/config-validator');
 
 async function main() {
     console.log('🚀 Starting Server Content Update...');
+    if (DRY_RUN) console.log('⚠️  DRY RUN MODE ENABLED: No changes will be made.');
 
     // 0. Safety Check
-    ensureBranch(config.branch);
+    validateConfig();
+    ensureBranch(config.branch, DRY_RUN);
 
     console.log('   (This will update mods/configs/versions, NOT the launcher itself)');
 
@@ -37,9 +46,11 @@ async function main() {
     // Check if there are changes to commit
     try {
         const status = run('git status --porcelain');
-        if (!status) {
+        if (!DRY_RUN && !status) {
             console.log('✨ No changes to commit. Everything is up to date.');
             return;
+        } else if (DRY_RUN) {
+            console.log('   [DRY-RUN] Skipping status check.');
         }
     } catch (e) {
         // Ignore error
@@ -51,7 +62,6 @@ async function main() {
 
     console.log('Git: Pushing to remote...');
     run(`git push origin ${config.branch}`);
-
 
     console.log('\n✅ Server update published successfully!');
     console.log('   Players will receive the new files next time they open the launcher.');

@@ -1,7 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { autoUpdater } = require('electron-updater');
-const fs = require('fs-extra');
 
 // Parse command line arguments
 const args = process.argv.slice(1);
@@ -13,27 +12,16 @@ if (gameDirArgIndex !== -1 && args[gameDirArgIndex + 1]) {
 
 // Configure autoUpdater
 autoUpdater.autoDownload = true;
-const log = require("electron-log");
+const { log, consoleLog, clearLogs } = require('./utils/logger');
 autoUpdater.logger = log;
-autoUpdater.logger.transports.file.level = "info";
-
-// Configure Console Logger (Game Logs)
-const consoleLog = log.create('console');
-consoleLog.transports.file.level = 'info';
-consoleLog.transports.file.resolvePathFn = () => path.join(__dirname, 'logs', 'console.log');
-consoleLog.transports.console.level = false; // Don't print to stdout again
 
 // Ensure we start with a fresh log file each time
-try {
-    const logPath = path.join(__dirname, 'logs', 'console.log');
-    fs.removeSync(logPath);
-} catch (e) {
-    console.error('Failed to clear console log:', e);
-}
+clearLogs();
 
 // In development, write logs to project directory for easier access
 if (!app.isPackaged) {
-    log.transports.file.resolvePathFn = () => path.join(__dirname, 'logs', 'main.log');
+    // Already handled in logger.js default config, but we can override if needed
+    // log.transports.file.resolvePathFn = ...
 }
 
 const GameUpdater = require('./utils/GameUpdater');
@@ -147,13 +135,12 @@ ipcMain.on('launch-game', async (event, { username, mode, memory }) => {
         logToConsole('Iniciando juego...');
 
         // Launch Game (updates are assumed to be done)
-        // We pass a custom logger object to capture internal launcher logs if possible, 
-        // but launchGame mainly uses sender.send. 
+        // We pass a custom logger object to capture internal launcher logs if possible,
+        // but launchGame mainly uses sender.send.
         // For now, we just log the high-level steps here.
         await launchGame(username, sender, auth, memory, (msg) => consoleLog.info(msg));
 
         sender.send('status', 'Jugando');
-
     } catch (error) {
         console.error(error);
         sender.send('error', error.message);
@@ -203,4 +190,3 @@ ipcMain.on('start-launcher-update', () => {
 ipcMain.on('install-launcher-update', () => {
     autoUpdater.quitAndInstall();
 });
-

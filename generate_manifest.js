@@ -3,7 +3,6 @@ const path = require('path');
 const crypto = require('crypto');
 
 // CONFIGURATION
-// CONFIGURATION
 const config = require('./launcher_builder_config.json');
 
 const REQUIRED_FIELDS = ['repoUser', 'repoName', 'branch', 'fabricLoaderVersion', 'gameVersion'];
@@ -69,14 +68,14 @@ if (!fs.existsSync(UPDATE_DIR)) {
 
 const files = scanDirectory(UPDATE_DIR);
 
-const LAUNCHER_VERSION = "1.0.20";
+const LAUNCHER_VERSION = '1.0.20';
 
 const manifest = {
     version: MANIFEST_VERSION,
     gameVersion: GAME_VERSION,
     launcherVersion: LAUNCHER_VERSION,
     launcherUrl: `https://github.com/${REPO_USER}/${REPO_NAME}/releases/download/v${LAUNCHER_VERSION}/OmbiCraft-Launcher-Setup-${LAUNCHER_VERSION}.exe`,
-    files: files
+    files
 };
 
 fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 4));

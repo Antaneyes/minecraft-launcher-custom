@@ -8,22 +8,23 @@ function getCurrentBranch() {
     }
 }
 
-function ensureBranch(requiredBranch) {
+function ensureBranch(requiredBranch, dryRun = false) {
     const current = getCurrentBranch();
-    if (!current) {
-        throw new Error('Could not determine current git branch. Are you in a git repository?');
-    }
-
     if (current !== requiredBranch) {
-        console.error(`\n❌ ERROR: Branch Mismatch!`);
+        console.error(`\n❌ Error: Incorrect Branch!`);
         console.error(`   Current branch: '${current}'`);
         console.error(`   Required branch: '${requiredBranch}' (from launcher_builder_config.json)`);
+
+        if (dryRun) {
+            console.warn('⚠️  [DRY-RUN] Ignoring branch check mismatch.');
+            return;
+        }
+
         console.error(`\n   Please switch to '${requiredBranch}' before running this script.`);
         console.error(`   > git checkout ${requiredBranch}\n`);
         process.exit(1);
     }
-
-    console.log(`✅ Branch check passed: Running on '${current}'`);
+    console.log(`✅ Branch check passed: '${current}'`);
 }
 
-module.exports = { ensureBranch, getCurrentBranch };
+module.exports = { getCurrentBranch, ensureBranch };

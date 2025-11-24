@@ -1,3 +1,4 @@
+/* eslint-env browser */
 const { ipcRenderer } = require('electron');
 
 const launchBtn = document.getElementById('launch-btn');
@@ -69,7 +70,7 @@ document.getElementById('copy-logs-btn').addEventListener('click', () => {
         const btn = document.getElementById('copy-logs-btn');
         const originalText = btn.textContent;
         btn.textContent = '¡Copiado!';
-        setTimeout(() => btn.textContent = originalText, 2000);
+        setTimeout(() => { btn.textContent = originalText; }, 2000);
     }).catch(err => {
         console.error('Error al copiar logs:', err);
     });

@@ -3,9 +3,18 @@ const path = require('path');
 const { execSync } = require('child_process');
 const generateManifestPath = path.join(__dirname, 'generate_manifest.js');
 
+const args = process.argv.slice(2);
+const DRY_RUN = args.includes('--dry-run');
+
 // Helper to run commands
 function run(command) {
     console.log(`\n> ${command}`);
+    if (DRY_RUN) {
+        console.log('   [DRY-RUN] Command skipped.');
+        // Return mock values for commands that return output
+        if (command.startsWith('npm version')) return 'v1.0.0-dryrun';
+        return '';
+    }
     try {
         return execSync(command, { cwd: __dirname, encoding: 'utf8' }).trim();
     } catch (e) {
@@ -18,12 +27,15 @@ function run(command) {
 
 const config = require('./launcher_builder_config.json');
 const { ensureBranch } = require('./utils/git-check');
+const { validateConfig } = require('./utils/config-validator');
 
 async function main() {
     console.log('🚀 Starting Automated Release Process...');
+    if (DRY_RUN) console.log('⚠️  DRY RUN MODE ENABLED: No changes will be made.');
 
     // 0. Safety Check
-    ensureBranch(config.branch);
+    validateConfig();
+    ensureBranch(config.branch, DRY_RUN);
 
     // 1. Bump Version using npm (updates package.json AND package-lock.json)
     console.log('ℹ️  Bumping version...');
@@ -34,12 +46,16 @@ async function main() {
     console.log(`✅ Version bumped to ${newVersion}`);
 
     // 2. Update generate_manifest.js
-    let genManifestContent = await fs.readFile(generateManifestPath, 'utf8');
-    genManifestContent = genManifestContent.replace(
-        /const LAUNCHER_VERSION = ".*";/,
-        `const LAUNCHER_VERSION = "${newVersion}";`
-    );
-    await fs.writeFile(generateManifestPath, genManifestContent);
+    if (!DRY_RUN) {
+        let genManifestContent = await fs.readFile(generateManifestPath, 'utf8');
+        genManifestContent = genManifestContent.replace(
+            /const LAUNCHER_VERSION = ".*";/,
+            `const LAUNCHER_VERSION = '${newVersion}';`
+        );
+        await fs.writeFile(generateManifestPath, genManifestContent);
+    } else {
+        console.log('   [DRY-RUN] Skipping generate_manifest.js update.');
+    }
 
     // 3. Regenerate Manifest
     console.log('📦 Regenerating manifest...');
@@ -59,7 +75,6 @@ async function main() {
     console.log('Git: Pushing to remote...');
     run(`git push origin ${config.branch}`);
 
-
     // 6. GitHub Release
     console.log(`☁️  Creating GitHub Release v${newVersion}...`);
 
@@ -69,11 +84,15 @@ async function main() {
     const latestYmlPath = path.join(distDir, 'latest.yml');
     const blockmapPath = `${exePath}.blockmap`;
 
-    // Verify files exist
-    if (!fs.existsSync(exePath) || !fs.existsSync(latestYmlPath) || !fs.existsSync(blockmapPath)) {
-        console.error('❌ Error: Missing build artifacts. Cannot release.');
-        console.error(`Checked: \n - ${exePath}\n - ${latestYmlPath}\n - ${blockmapPath}`);
-        process.exit(1);
+    // Verify files exist (Skip in dry-run as build is skipped)
+    if (!DRY_RUN) {
+        if (!fs.existsSync(exePath) || !fs.existsSync(latestYmlPath) || !fs.existsSync(blockmapPath)) {
+            console.error('❌ Error: Missing build artifacts. Cannot release.');
+            console.error(`Checked: \n - ${exePath}\n - ${latestYmlPath}\n - ${blockmapPath}`);
+            process.exit(1);
+        }
+    } else {
+        console.log('   [DRY-RUN] Skipping artifact verification.');
     }
 
     const notes = `Release v${newVersion}`;

@@ -7,7 +7,8 @@
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint ."
   },
   "build": {
     "appId": "com.ombicraft.launcher",
@@ -43,6 +44,11 @@
   "devDependencies": {
     "electron": "^39.2.3",
     "electron-builder": "^26.0.12",
+    "eslint": "^8.57.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.6.0",
     "jest": "^30.2.0"
   }
 }

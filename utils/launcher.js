@@ -1,10 +1,10 @@
 const fs = require('fs-extra');
 const path = require('path');
-const { Client, Authenticator } = require('minecraft-launcher-core');
+const { Client } = require('minecraft-launcher-core');
 const { GAME_ROOT } = require('./constants');
 const launcher = new Client();
 
-async function launchGame(username, sender, auth = null, memory = "4G", logCallback = null) {
+async function launchGame(username, sender, auth = null, memory = '4G', logCallback = null) {
     // Load configuration from the manifest we just downloaded
     let manifest = {};
     try {
@@ -16,20 +16,20 @@ async function launchGame(username, sender, auth = null, memory = "4G", logCallb
     }
 
     // Default to 1.20.1 if not specified
-    const gameVersion = manifest.gameVersion || "1.20.1";
-    const versionType = manifest.versionType || "release"; // 'release' or 'custom'
-    const maxMemory = memory || manifest.maxMemory || "4G";
-    const minMemory = manifest.minMemory || "2G";
+    const gameVersion = manifest.gameVersion || '1.20.1';
+    const versionType = manifest.versionType || 'release'; // 'release' or 'custom'
+    const maxMemory = memory || manifest.maxMemory || '4G';
+    const minMemory = manifest.minMemory || '2G';
 
     // Authorization (offline mode for now, or passed username)
     const token = {
-        access_token: "token",
-        client_token: "token",
-        uuid: "uuid",
+        access_token: 'token',
+        client_token: 'token',
+        uuid: 'uuid',
         name: username,
-        user_properties: "{}",
+        user_properties: '{}',
         meta: {
-            type: "mojang",
+            type: 'mojang',
             demo: false
         }
     };
@@ -62,7 +62,7 @@ async function launchGame(username, sender, auth = null, memory = "4G", logCallb
         if (logCallback) logCallback(msg1);
 
         if (fs.existsSync(standardPath)) {
-            const msg2 = `Archivo existe: true. Dejando que MCLC lo encuentre automáticamente.`;
+            const msg2 = 'Archivo existe: true. Dejando que MCLC lo encuentre automáticamente.';
             sender.send('log', msg2);
             if (logCallback) logCallback(msg2);
             // We do NOT set opts.version.custom here.
