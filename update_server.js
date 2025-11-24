@@ -3,6 +3,7 @@ const { execSync } = require('child_process');
 
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');
+const BETA_RELEASE = args.includes('--beta');
 
 // Helper to run commands
 function run(command) {
@@ -28,10 +29,14 @@ const { validateConfig } = require('./utils/config-validator');
 async function main() {
     console.log('🚀 Starting Server Content Update...');
     if (DRY_RUN) console.log('⚠️  DRY RUN MODE ENABLED: No changes will be made.');
+    if (BETA_RELEASE) console.log('🧪 BETA MODE: Targeting DEV branch.');
+
+    // Override config branch if beta
+    const targetBranch = BETA_RELEASE ? 'dev' : config.branch;
 
     // 0. Safety Check
     validateConfig();
-    ensureBranch(config.branch, DRY_RUN);
+    ensureBranch(targetBranch, DRY_RUN);
 
     console.log('   (This will update mods/configs/versions, NOT the launcher itself)');
 
@@ -61,7 +66,7 @@ async function main() {
     run(`git commit -m "content: update game files ${timestamp}"`);
 
     console.log('Git: Pushing to remote...');
-    run(`git push origin ${config.branch}`);
+    run(`git push origin ${targetBranch}`);
 
     console.log('\n✅ Server update published successfully!');
     console.log('   Players will receive the new files next time they open the launcher.');

@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
+const { getCurrentBranch } = require('./utils/git-check');
+
 // CONFIGURATION
 const config = require('./launcher_builder_config.json');
 
@@ -15,7 +17,11 @@ if (missingFields.length > 0) {
 
 const REPO_USER = config.repoUser;
 const REPO_NAME = config.repoName;
-const BRANCH = config.branch;
+// Use current branch if available, otherwise fallback to config
+const currentBranch = getCurrentBranch();
+const BRANCH = currentBranch || config.branch;
+console.log(`Using branch for URLs: ${BRANCH}`);
+
 const BASE_URL = `https://raw.githubusercontent.com/${REPO_USER}/${REPO_NAME}/${BRANCH}/update_files`;
 
 const UPDATE_DIR = path.join(__dirname, 'update_files');
