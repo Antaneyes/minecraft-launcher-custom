@@ -11,9 +11,16 @@ if (gameDirArgIndex !== -1 && args[gameDirArgIndex + 1]) {
 }
 
 // Configure autoUpdater
-autoUpdater.autoDownload = true;
+autoUpdater.autoDownload = false;
 const { log, consoleLog, clearLogs } = require('./utils/logger');
 autoUpdater.logger = log;
+
+// ... (existing code) ...
+
+ipcMain.on('start-launcher-update', () => {
+    if (mainWindow) mainWindow.webContents.send('log', 'Iniciando descarga de actualización...');
+    autoUpdater.downloadUpdate();
+});
 
 // Ensure we start with a fresh log file each time
 clearLogs();
@@ -191,11 +198,7 @@ autoUpdater.on('update-downloaded', () => {
     }
 });
 
-ipcMain.on('start-launcher-update', () => {
-    // Auto-download is enabled, so we don't need to manually trigger it.
-    // But we can log that the UI requested it (though it should be automatic now)
-    if (mainWindow) mainWindow.webContents.send('log', 'Descarga automática en progreso...');
-});
+
 
 ipcMain.on('install-launcher-update', () => {
     autoUpdater.quitAndInstall();

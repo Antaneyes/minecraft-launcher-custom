@@ -228,8 +228,19 @@ ipcRenderer.on('launcher-update-available', () => {
     const updateBtn = document.getElementById('update-launcher-btn');
     const btnSpan = updateBtn.querySelector('span');
     updateBtn.classList.remove('hidden');
-    btnSpan.textContent = '⬇️ Descargando actualización...';
-    log('Nueva versión detectada. Iniciando descarga...');
+    btnSpan.textContent = '⚡ Nueva versión disponible (Clic para descargar)';
+
+    // Remove previous listeners to avoid duplicates
+    const newBtn = updateBtn.cloneNode(true);
+    updateBtn.parentNode.replaceChild(newBtn, updateBtn);
+
+    newBtn.addEventListener('click', () => {
+        const span = newBtn.querySelector('span');
+        span.textContent = '⬇️ Iniciando descarga...';
+        ipcRenderer.send('start-launcher-update');
+    });
+
+    log('Nueva versión detectada. Esperando confirmación del usuario...');
 });
 
 ipcRenderer.on('launcher-download-progress', (event, percent) => {
