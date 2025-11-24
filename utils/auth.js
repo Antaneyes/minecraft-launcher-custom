@@ -1,7 +1,7 @@
 const msmc = require('msmc');
 const path = require('path');
 const fs = require('fs-extra');
-const { GAME_ROOT } = require('./updater');
+const { GAME_ROOT } = require('./constants');
 
 const AUTH_CACHE = path.join(GAME_ROOT, 'auth_cache.json');
 
