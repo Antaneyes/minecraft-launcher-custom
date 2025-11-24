@@ -4,13 +4,15 @@ const { Client, Authenticator } = require('minecraft-launcher-core');
 const { GAME_ROOT } = require('./constants');
 const launcher = new Client();
 
-async function launchGame(username, sender, auth = null, memory = "4G") {
+async function launchGame(username, sender, auth = null, memory = "4G", logCallback = null) {
     // Load configuration from the manifest we just downloaded
     let manifest = {};
     try {
         manifest = await fs.readJson(path.join(GAME_ROOT, 'client-manifest.json'));
     } catch (e) {
-        sender.send('log', 'Warning: No manifest found. Using defaults.');
+        const msg = 'Warning: No manifest found. Using defaults.';
+        sender.send('log', msg);
+        if (logCallback) logCallback(msg);
     }
 
     // Default to 1.20.1 if not specified
@@ -55,25 +57,38 @@ async function launchGame(username, sender, auth = null, memory = "4G") {
     // MCLC should find it automatically at versions/{number}/{number}.json
     if (versionType === 'custom') {
         const standardPath = path.join(GAME_ROOT, 'versions', gameVersion, `${gameVersion}.json`);
-        sender.send('log', `Buscando JSON personalizado en ruta estándar: ${standardPath}`);
+        const msg1 = `Buscando JSON personalizado en ruta estándar: ${standardPath}`;
+        sender.send('log', msg1);
+        if (logCallback) logCallback(msg1);
 
         if (fs.existsSync(standardPath)) {
-            sender.send('log', `Archivo existe: true. Dejando que MCLC lo encuentre automáticamente.`);
+            const msg2 = `Archivo existe: true. Dejando que MCLC lo encuentre automáticamente.`;
+            sender.send('log', msg2);
+            if (logCallback) logCallback(msg2);
             // We do NOT set opts.version.custom here.
         } else {
-            sender.send('log', `ADVERTENCIA: Archivo JSON personalizado NO encontrado en: ${standardPath}`);
+            const msg3 = `ADVERTENCIA: Archivo JSON personalizado NO encontrado en: ${standardPath}`;
+            sender.send('log', msg3);
+            if (logCallback) logCallback(msg3);
         }
     }
 
-    // Helper to safely send IPC messages
+    // Helper to safely send IPC messages and log to console
+    const safeLog = (msg) => {
+        if (!sender.isDestroyed()) {
+            sender.send('log', msg);
+        }
+        if (logCallback) logCallback(msg);
+    };
+
     const safeSend = (channel, ...args) => {
         if (!sender.isDestroyed()) {
             sender.send(channel, ...args);
         }
     };
 
-    sender.send('log', `Lanzando Minecraft ${gameVersion} (${versionType})...`);
-    sender.send('log', `Opciones de lanzamiento: ${JSON.stringify(opts, null, 2)}`);
+    safeLog(`Lanzando Minecraft ${gameVersion} (${versionType})...`);
+    safeLog(`Opciones de lanzamiento: ${JSON.stringify(opts, null, 2)}`);
 
     // Progress of game files downloading (assets, jar, etc.)
     launcher.on('progress', (e) => {
@@ -81,19 +96,19 @@ async function launchGame(username, sender, auth = null, memory = "4G") {
     });
 
     launcher.on('debug', (e) => {
-        safeSend('log', `[MC Debug] ${e}`);
+        safeLog(`[MC Debug] ${e}`);
         fs.appendFileSync(path.join(GAME_ROOT, 'debug_log.txt'), e + '\n');
         if (e.includes('Launching with arguments')) {
             fs.writeFileSync(path.join(GAME_ROOT, 'launch_cmd.txt'), e);
         }
     });
-    launcher.on('data', (e) => safeSend('log', `[MC Salida] ${e}`));
+    launcher.on('data', (e) => safeLog(`[MC Salida] ${e}`));
     launcher.on('error', (e) => {
-        safeSend('log', `[MC Error] ${e}`);
+        safeLog(`[MC Error] ${e}`);
         safeSend('launch-error', e.message);
     });
     launcher.on('close', (e) => {
-        safeSend('log', `[MC Cerrado] ${e}`);
+        safeLog(`[MC Cerrado] ${e}`);
         safeSend('launch-close', e);
     });
 

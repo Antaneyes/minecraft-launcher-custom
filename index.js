@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { autoUpdater } = require('electron-updater');
+const fs = require('fs-extra');
 
 // Parse command line arguments
 const args = process.argv.slice(1);
@@ -15,6 +16,20 @@ autoUpdater.autoDownload = true;
 const log = require("electron-log");
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = "info";
+
+// Configure Console Logger (Game Logs)
+const consoleLog = log.create('console');
+consoleLog.transports.file.level = 'info';
+consoleLog.transports.file.resolvePathFn = () => path.join(__dirname, 'logs', 'console.log');
+consoleLog.transports.console.level = false; // Don't print to stdout again
+
+// Ensure we start with a fresh log file each time
+try {
+    const logPath = path.join(__dirname, 'logs', 'console.log');
+    fs.removeSync(logPath);
+} catch (e) {
+    console.error('Failed to clear console log:', e);
+}
 
 // In development, write logs to project directory for easier access
 if (!app.isPackaged) {
@@ -73,9 +88,15 @@ ipcMain.on('check-updates', async (event) => {
     const sender = event.sender;
 
     // Setup listeners for this update session
-    const onLog = (msg) => sender.send('log', msg);
+    const onLog = (msg) => {
+        sender.send('log', msg);
+        consoleLog.info(msg);
+    };
     const onProgress = (data) => sender.send('progress', data);
-    const onError = (msg) => sender.send('error', msg);
+    const onError = (msg) => {
+        sender.send('error', msg);
+        consoleLog.error(msg);
+    };
 
     gameUpdater.on('log', onLog);
     gameUpdater.on('progress', onProgress);
@@ -106,27 +127,37 @@ ipcMain.on('check-updates', async (event) => {
 ipcMain.on('launch-game', async (event, { username, mode, memory }) => {
     const sender = event.sender;
 
+    // Helper for logging
+    const logToConsole = (msg) => {
+        sender.send('log', msg);
+        consoleLog.info(msg);
+    };
+
     try {
         let auth = null;
 
         if (mode === 'microsoft') {
             sender.send('status', 'Iniciando Sesión');
-            sender.send('log', 'Iniciando sesión con Microsoft...');
+            logToConsole('Iniciando sesión con Microsoft...');
             auth = await loginMicrosoft(sender);
-            sender.send('log', `Sesión iniciada como: ${auth.name}`);
+            logToConsole(`Sesión iniciada como: ${auth.name}`);
         }
 
         sender.send('status', 'Iniciando');
-        sender.send('log', 'Iniciando juego...');
+        logToConsole('Iniciando juego...');
 
         // Launch Game (updates are assumed to be done)
-        await launchGame(username, sender, auth, memory);
+        // We pass a custom logger object to capture internal launcher logs if possible, 
+        // but launchGame mainly uses sender.send. 
+        // For now, we just log the high-level steps here.
+        await launchGame(username, sender, auth, memory, (msg) => consoleLog.info(msg));
 
         sender.send('status', 'Jugando');
 
     } catch (error) {
         console.error(error);
         sender.send('error', error.message);
+        consoleLog.error(error.message);
     }
 });
 
