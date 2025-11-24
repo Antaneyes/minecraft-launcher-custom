@@ -2,6 +2,14 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { autoUpdater } = require('electron-updater');
 
+// Parse command line arguments
+const args = process.argv.slice(1);
+const gameDirArgIndex = args.indexOf('--game-dir');
+if (gameDirArgIndex !== -1 && args[gameDirArgIndex + 1]) {
+    process.env.OMBICRAFT_GAME_ROOT = args[gameDirArgIndex + 1];
+    console.log(`Custom game directory set to: ${process.env.OMBICRAFT_GAME_ROOT}`);
+}
+
 // Configure autoUpdater
 autoUpdater.autoDownload = true;
 const log = require("electron-log");

@@ -6,6 +6,14 @@ const crypto = require('crypto');
 // CONFIGURATION
 const config = require('./launcher_builder_config.json');
 
+const REQUIRED_FIELDS = ['repoUser', 'repoName', 'branch', 'fabricLoaderVersion', 'gameVersion'];
+const missingFields = REQUIRED_FIELDS.filter(field => !config[field]);
+
+if (missingFields.length > 0) {
+    console.error(`Error: Missing required fields in launcher_builder_config.json: ${missingFields.join(', ')}`);
+    process.exit(1);
+}
+
 const REPO_USER = config.repoUser;
 const REPO_NAME = config.repoName;
 const BRANCH = config.branch;

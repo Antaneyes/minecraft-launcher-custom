@@ -100,6 +100,11 @@ class GameUpdater extends EventEmitter {
 
         this.emit('log', `Versión remota: ${manifest.version}`);
 
+        // Validate Manifest
+        if (!manifest.gameVersion || !manifest.files) {
+            throw new Error("Manifiesto inválido: Falta 'gameVersion' o 'files'.");
+        }
+
         if (manifest.files && Array.isArray(manifest.files)) {
             try {
                 await this.cleanupOldMods(manifest);

@@ -166,12 +166,30 @@ ipcRenderer.on('status', (event, status) => {
     }
 });
 
+const retryBtn = document.getElementById('retry-btn');
+
+retryBtn.addEventListener('click', () => {
+    retryBtn.classList.add('hidden');
+    launchBtn.classList.remove('hidden');
+    launchBtn.disabled = true;
+    btnText.textContent = 'ACTUALIZANDO...';
+    statusBadge.textContent = 'Actualizando';
+    log('Reintentando actualización...');
+    ipcRenderer.send('check-updates');
+});
+
 ipcRenderer.on('error', (event, error) => {
     log(`Error: ${error}`);
     statusBadge.textContent = 'Error';
     launchBtn.disabled = false;
     btnText.textContent = 'JUGAR';
     progressBar.style.width = '0%';
+
+    // Show retry button if it's an update error (we can infer from context or message)
+    if (error.includes('Actualización fallida') || error.includes('Manifiesto')) {
+        launchBtn.classList.add('hidden');
+        retryBtn.classList.remove('hidden');
+    }
 });
 
 ipcRenderer.on('launch-close', (event) => {
@@ -185,6 +203,8 @@ ipcRenderer.on('launch-close', (event) => {
 ipcRenderer.on('update-complete', () => {
     launchBtn.disabled = false;
     btnText.textContent = 'JUGAR';
+    retryBtn.classList.add('hidden');
+    launchBtn.classList.remove('hidden');
 });
 
 ipcRenderer.on('launcher-update-available', () => {
