@@ -62,7 +62,7 @@ function createWindow() {
     mainWindow.once('ready-to-show', async () => {
         const channel = await gameUpdater.getChannel();
         autoUpdater.allowPrerelease = (channel === 'beta');
-        log(`Configurando AutoUpdater: Canal=${channel}, AllowPrerelease=${autoUpdater.allowPrerelease}`);
+        log.info(`Configurando AutoUpdater: Canal=${channel}, AllowPrerelease=${autoUpdater.allowPrerelease}`);
         autoUpdater.checkForUpdates();
     });
 }
