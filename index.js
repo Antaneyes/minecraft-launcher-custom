@@ -178,7 +178,10 @@ autoUpdater.on('update-available', (info) => {
 });
 
 autoUpdater.on('update-not-available', () => {
-    if (mainWindow) mainWindow.webContents.send('log', 'El launcher está actualizado.');
+    if (mainWindow) {
+        mainWindow.webContents.send('log', 'El launcher está actualizado.');
+        mainWindow.webContents.send('launcher-update-not-available');
+    }
 });
 
 autoUpdater.on('error', (err) => {
@@ -197,8 +200,6 @@ autoUpdater.on('update-downloaded', () => {
         mainWindow.webContents.send('launcher-update-ready');
     }
 });
-
-
 
 ipcMain.on('install-launcher-update', () => {
     autoUpdater.quitAndInstall();

@@ -243,6 +243,11 @@ ipcRenderer.on('launcher-update-available', (event, version) => {
     log('Nueva versión detectada. Esperando confirmación del usuario...');
 });
 
+ipcRenderer.on('launcher-update-not-available', () => {
+    const updateBtn = document.getElementById('update-launcher-btn');
+    updateBtn.classList.add('hidden');
+});
+
 ipcRenderer.on('launcher-download-progress', (event, percent) => {
     const updateBtn = document.getElementById('update-launcher-btn');
     const btnSpan = updateBtn.querySelector('span');
