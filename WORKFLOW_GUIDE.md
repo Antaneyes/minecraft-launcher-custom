@@ -127,3 +127,31 @@ Aquí tienes una lista rápida de comandos comunes que necesitarás:
     ```powershell
     git status
     ```
+
+## 7. Ciclo de Versionado (CRÍTICO)
+
+Para evitar problemas donde la versión estable (`master`) sea "más nueva" que la beta (`dev`), sigue esta **REGLA DE ORO**:
+
+**Cada vez que lances una versión estable en `master`, debes fusionarla de vuelta a `dev`.**
+
+### ¿Por qué?
+1.  Si lanzas la `1.1.0` en `master`.
+2.  Y `dev` se queda en `1.0.99-beta`.
+3.  El launcher pensará que la estable es más nueva y forzará a los usuarios beta a bajar de versión.
+
+### ¿Cómo hacerlo?
+Justo después de lanzar una estable:
+
+```powershell
+# 1. Estás en master tras el release
+# 2. Vuelve a dev
+git checkout dev
+
+# 3. Trae los cambios de master (incluyendo la nueva versión 1.1.0)
+git merge master
+
+# 4. Sube los cambios a la nube
+git push origin dev
+```
+
+Al hacer esto, la próxima vez que lances una beta desde `dev`, el sistema calculará automáticamente la siguiente versión superior (ej. `1.1.1-beta.0`), manteniendo el orden correcto.
