@@ -34,10 +34,26 @@ async function launchGame(username, sender, auth = null, memory = '4G', logCallb
         }
     };
 
+    // Ensure Java 21 is available
+    const JavaManager = require('./JavaManager');
+    const javaManager = new JavaManager(sender);
+    let javaPath;
+
+    try {
+        sender.send('status', 'Verificando Java');
+        javaPath = await javaManager.ensureJava();
+    } catch (e) {
+        const msg = `Error preparando Java: ${e.message}`;
+        sender.send('error', msg);
+        if (logCallback) logCallback(msg);
+        throw e; // Stop launch
+    }
+
     const opts = {
         clientPackage: null,
         authorization: auth || Promise.resolve(token),
         root: GAME_ROOT,
+        javaPath: javaPath,
         version: {
             number: gameVersion,
             type: versionType
@@ -88,6 +104,7 @@ async function launchGame(username, sender, auth = null, memory = '4G', logCallb
     };
 
     safeLog(`Lanzando Minecraft ${gameVersion} (${versionType})...`);
+    safeLog(`Usando Java en: ${javaPath}`);
     safeLog(`Opciones de lanzamiento: ${JSON.stringify(opts, null, 2)}`);
 
     // Progress of game files downloading (assets, jar, etc.)
